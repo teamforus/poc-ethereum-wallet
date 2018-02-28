@@ -8,6 +8,12 @@ import { NewidentityComponent } from './newidentity/newidentity.component';
 import { IdentityComponent } from './identity/identity.component';
 import { KeysComponent } from './keys/keys.component';
 import { AppRoutingModule } from './/app-routing.module';
+import { VaultService } from './vault/vault.service';
+import { FormsModule } from '@angular/forms';
+import { Web3Service } from './web3.service';
+import { IdentitykeysComponent } from './identitykeys/identitykeys.component';
+import { ImportkeyComponent } from './importkey/importkey.component';
+import { NewkeyComponent } from './newkey/newkey.component';
 
 
 @NgModule({
@@ -16,13 +22,17 @@ import { AppRoutingModule } from './/app-routing.module';
     IdentitiesComponent,
     NewidentityComponent,
     IdentityComponent,
-    KeysComponent
+    KeysComponent,
+    IdentitykeysComponent,
+    ImportkeyComponent,
+    NewkeyComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [VaultService, Web3Service],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

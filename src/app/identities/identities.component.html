@@ -1,1 +1,5 @@
 <h2>Identities</h2>
+<ul>
+  <li *ngFor="let identity of identities"><a routerLink="/identities/{{identity.address}}">{{identity.name}}</a></li>
+</ul>
+<a routerLink="/identities/new">Add new identity</a>

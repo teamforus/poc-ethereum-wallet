@@ -1,1 +1,16 @@
 <h2>New identity</h2>
+<label>Name:
+  <input [(ngModel)]="name" placeholder="name">
+</label>
+
+<br/>
+
+<label>Management key:
+  <select [(ngModel)]="managementkey">
+    <option *ngFor="let key of keys">{{key.key}}</option>
+  </select>
+</label>
+
+<br/>
+<button (click)="save()">save</button>
+<a class="button" routerLink="/identities">Cancel</a>
