@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/identities', pathMatch: 'full' },
   { path: 'identities', component: IdentitiesComponent },
   { path: 'identities/new', component: NewidentityComponent },
-  { path: 'identities/:address/keys', component: IdentitykeysComponent },
+  { path: 'identities/:address/newkey', component: IdentitykeysComponent },
   { path: 'identities/:address', component: IdentityComponent },
   { path: 'keys', component: KeysComponent },
   { path: 'keys/new', component: NewkeyComponent }

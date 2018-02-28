@@ -1,1 +1,9 @@
-<h2>Identity {{address}}</h2>
+<h2>Identity {{identity.name}}</h2>
+<p>
+  Contract address: {{identity.address}}
+</p>
+<h3>Management keys</h3>
+<ul>
+  <li *ngFor="let key of identity.keys">{{key.key}} ({{key.purpose}})</li>
+</ul>
+<a routerLink="/identities/{{identity.address}}/newkey">New key</a>
