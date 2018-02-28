@@ -11,7 +11,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { VaultService } from './vault/vault.service';
 import { FormsModule } from '@angular/forms';
 import { Web3Service } from './web3.service';
-import { IdentitykeysComponent } from './identitykeys/identitykeys.component';
+import { IdentityaddkeyComponent } from './identityaddkey/identityaddkey.component';
 import { ImportkeyComponent } from './importkey/importkey.component';
 import { NewkeyComponent } from './newkey/newkey.component';
 
@@ -23,7 +23,7 @@ import { NewkeyComponent } from './newkey/newkey.component';
     NewidentityComponent,
     IdentityComponent,
     KeysComponent,
-    IdentitykeysComponent,
+    IdentityaddkeyComponent,
     ImportkeyComponent,
     NewkeyComponent
   ],
