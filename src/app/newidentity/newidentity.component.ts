@@ -27,9 +27,8 @@ export class NewidentityComponent implements OnInit {
 
   async save() {
     const keyAccount = this.web3Service.web3.eth.accounts.privateKeyToAccount(this.managementkey);
-    const newAccount = this.web3Service.web3.eth.accounts.create();
     const identityAddress = await this.deployIdentityContract(keyAccount);
-    this.vault.addIdentity(this.name, identityAddress, newAccount.privateKey);
+    this.vault.addIdentity(this.name, identityAddress, keyAccount.privateKey);
     this.router.navigate(['/identities']);
   }
 
@@ -46,7 +45,7 @@ export class NewidentityComponent implements OnInit {
   );
 
   const trx = {
-    nonce: this.vault.getNonce(),
+    // nonce: this.vault.getNonce(),
     chainId: 4385,
     gas: 2000000,
     data: deploy._deployData
