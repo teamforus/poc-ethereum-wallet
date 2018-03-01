@@ -1,1 +1,40 @@
-<h2>Identity {{address}} : Keys</h2>
+<h2>Identity {{identity.name}} : Add key</h2>
+
+<label>Key:
+  <select [(ngModel)]="newkey">
+    <option>Generate new</option>
+    <option>Import</option>
+    <optgroup label="Use existing">
+      <option *ngFor="let key of keys">{{key.key}}</option>
+    </optgroup>
+  </select>
+</label>
+
+<br/>
+
+<label>Key to import:
+  <input [(ngModel)]="importkey" placeholder="private key">
+</label>
+
+
+<br/>
+<label>New key purpose:
+  <select [(ngModel)]="purpose">
+      <option value="1">Management</option>
+      <option value="2">Action</option>
+      <option value="3">Claim</option>
+      <option value="4">Encryption</option>
+  </select>
+</label>
+
+<br/>
+<label>Management key to use:
+  <select [(ngModel)]="managementkey">
+      <option *ngFor="let key of managementkeys">{{key.key}}</option>
+  </select>
+</label>
+
+<br/>
+
+<button (click)="addKey()">save</button>
+<a class="button" routerLink="/identities/{{identity.address}}">Cancel</a>

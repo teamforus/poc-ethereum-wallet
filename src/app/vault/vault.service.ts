@@ -77,6 +77,7 @@ export class VaultService {
         }
         identity.keys.push({key: key, purpose: purpose});
         this.saveIdentities();
+        return;
       }
     }
 
@@ -91,6 +92,17 @@ export class VaultService {
     }
 
     return null;
+  }
+
+  getManagementKeys(identityAddress: string): Key[] {
+    const result = new Array<Key>();
+    const identity = this.getIdentity(identityAddress);
+    for (const key of identity.keys) {
+      if (1 === key.purpose) {
+        result.push(key);
+      }
+    }
+    return result;
   }
 
   addKey(privateKey: string) {
