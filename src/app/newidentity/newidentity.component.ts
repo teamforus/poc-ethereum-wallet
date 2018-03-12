@@ -4,6 +4,7 @@ import { VaultService } from './../vault/vault.service';
 import { Web3Service } from './../web3.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import * as IdentityContractData from './../../contracts/identity.js';
 
 @Component({
   selector: 'app-newidentity',
@@ -34,15 +35,19 @@ export class NewidentityComponent implements OnInit {
 
   private async deployIdentityContract(senderAccount) {
 
-    const IdentityContract = this.web3Service.getIdentityContract();
+    const IdentityContract = new this.web3Service.web3.eth.Contract(
+      IdentityContractData.abi,
+      null,
+      null
+    );
 
     const deploy = IdentityContract.deploy(
-      { data: this.web3Service.getIdentityContractBinary }
+      { data: IdentityContractData.bin }
     );
 
     const trx = {
       // nonce: this.vault.getNonce(),
-      chainId: 4385,
+      chainId: this.web3Service.chanId,
       gas: 2000000,
       data: deploy._deployData
     };

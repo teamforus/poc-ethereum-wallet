@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { Identity } from './../vault/identity';
+import * as IdentityContractData from './../../contracts/identity.js';
 
 @Component({
   selector: 'app-identityaddkey',
@@ -45,7 +46,11 @@ export class IdentityaddkeyComponent implements OnInit {
 
     const managmentAccount = this.web3Service.web3.eth.accounts.privateKeyToAccount(this.managementkey);
 
-    const IdentityContract = this.web3Service.getIdentityContract(this.identity.address);
+    const IdentityContract = new this.web3Service.web3.eth.Contract(
+      IdentityContractData.abi,
+      this.identity.address,
+      null
+    );
 
     let keyAdded = false;
     try {
@@ -82,7 +87,7 @@ export class IdentityaddkeyComponent implements OnInit {
       // nonce: this.vault.getNonce(),
       from: managmentAccount.address,
       to: this.identity.address,
-      chainId: 4385,
+      chainId: this.web3Service.chanId,
       gas: 2000000,
       data: IdentityContract.methods.addKey(
         toAdd.address,
