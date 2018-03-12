@@ -54,8 +54,9 @@ export class IdentityaddkeyComponent implements OnInit {
 
     let keyAdded = false;
     try {
-      keyAdded = await this.addKeyToIdentity(IdentityContract, managmentAccount, toAdd);
+      keyAdded = await this.addKeyToIdentity(IdentityContract, managmentAccount, toAdd, this.purpose);
     } catch (error) {
+      console.log(error);
       keyAdded = false;
     }
 
@@ -66,7 +67,7 @@ export class IdentityaddkeyComponent implements OnInit {
 
   }
 
-  async addKeyToIdentity(IdentityContract, managmentAccount, toAdd) {
+  async addKeyToIdentity(IdentityContract, managmentAccount, toAdd, purpose) {
     /*
     IdentityContract.events.KeyAdded()
     .on('data', (event) => {
@@ -91,7 +92,7 @@ export class IdentityaddkeyComponent implements OnInit {
       gas: 2000000,
       data: IdentityContract.methods.addKey(
         toAdd.address,
-        this.purpose,
+        purpose,
         1
       ).encodeABI()
     };
