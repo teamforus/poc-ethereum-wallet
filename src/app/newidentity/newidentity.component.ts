@@ -48,7 +48,7 @@ export class NewidentityComponent implements OnInit {
     const trx = {
       // nonce: this.vault.getNonce(),
       chainId: this.web3Service.chanId,
-      gas: 2000000,
+      gas: '10000000',
       data: deploy._deployData
     };
 
@@ -56,6 +56,10 @@ export class NewidentityComponent implements OnInit {
     .then((sgnTrx) => {
       return this.web3Service.web3.eth.sendSignedTransaction(sgnTrx.rawTransaction);
     }).then((receipt) => {
+      if (1 !== this.web3Service.web3.utils.hexToNumber(receipt.status)) {
+        console.log(receipt);
+        throw new Error('Could not deploy contract');
+      }
       return receipt.contractAddress;
     }).catch((error) => {
       throw new Error(error);

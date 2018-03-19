@@ -97,7 +97,7 @@ export class IdentityaddkeyComponent implements OnInit {
       ).encodeABI()
     };
 
-    const trxResult = await this.web3Service.web3.eth.accounts.signTransaction(trx, managmentAccount.privateKey)
+    const receipt = await this.web3Service.web3.eth.accounts.signTransaction(trx, managmentAccount.privateKey)
     .then((sgnTrx) => {
       const trxPromise = this.web3Service.web3.eth.sendSignedTransaction(sgnTrx.rawTransaction);
       /*
@@ -118,7 +118,7 @@ export class IdentityaddkeyComponent implements OnInit {
 
     /*
     IdentityContract.getPastEvents('KeyAdded', {
-      filter: { transactionHash: trxResult.transactionHash},
+      filter: { transactionHash: receipt.transactionHash},
       fromBlock: 0,
       toBlock: 'latest'
     })
@@ -126,7 +126,10 @@ export class IdentityaddkeyComponent implements OnInit {
         console.log(events);
     });
     */
+    if (1 !== this.web3Service.web3.utils.hexToNumber(receipt.status)) {
+      console.log(receipt);
+      throw new Error('Could not add key');
+    }
 
-    return true;
   }
 }
