@@ -1,3 +1,4 @@
+import { Web3Service } from './../web3.service';
 import { Injectable } from '@angular/core';
 import { Identity } from './identity';
 import { Key } from './key';
@@ -9,7 +10,7 @@ export class VaultService {
   private identities: Identity[] = new Array<Identity>();
   private keys: Key[] = new Array<Key>();
 
-  constructor() {
+  constructor(private web3Service: Web3Service) {
     const identities = <Identity[]> JSON.parse(localStorage.getItem(this.storateKeyIdentities));
     if (identities) {
       this.identities = identities;
@@ -61,7 +62,11 @@ export class VaultService {
     const newIdentity = new Identity();
     newIdentity.name = name;
     newIdentity.address = identityAddress,
-    newIdentity.keys.push({key: managementKey, purpose: 1});
+    newIdentity.keys.push({
+      address: this.web3Service.web3.eth.accounts.privateKeyToAccount(managementKey).address,
+      key: managementKey,
+      purpose: 1
+    });
     this.identities.push(newIdentity);
 
     this.saveIdentities();
@@ -75,7 +80,11 @@ export class VaultService {
             throw new Error('The given key/purpose already exitst');
           }
         }
-        identity.keys.push({key: key, purpose: purpose});
+        identity.keys.push({
+          address: this.web3Service.web3.eth.accounts.privateKeyToAccount(key).address,
+          key: key,
+          purpose: purpose
+        });
         this.saveIdentities();
         return;
       }
@@ -111,8 +120,19 @@ export class VaultService {
         throw new Error('The given key already exitsts');
       }
     }
-    this.keys.push({key: privateKey, purpose: 0});
+    this.keys.push({
+      address: this.web3Service.web3.eth.accounts.privateKeyToAccount(privateKey).address,
+      key: privateKey,
+      purpose: 0});
     this.saveKeys();
+  }
+
+  getKeyByAddress(address: string) {
+    for (const existingKey of this.keys) {
+      if (existingKey.address === address) {
+        return existingKey;
+      }
+    }
   }
 
 }

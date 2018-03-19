@@ -8,6 +8,7 @@ import { IdentityaddkeyComponent } from './identityaddkey/identityaddkey.compone
 import { KeysComponent } from './keys/keys.component';
 import { NewkeyComponent } from './newkey/newkey.component';
 import { ImportkeyComponent } from './importkey/importkey.component';
+import { TransferFromKeyComponent } from './transfer-from-key/transfer-from-key.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/identities', pathMatch: 'full' },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'identities/:address/newkey', component: IdentityaddkeyComponent },
   { path: 'identities/:address', component: IdentityComponent },
   { path: 'keys', component: KeysComponent },
+  { path: 'keys/:address/transfer', component: TransferFromKeyComponent },
   { path: 'keys/new', component: NewkeyComponent },
   { path: 'keys/import', component: ImportkeyComponent }
 ];

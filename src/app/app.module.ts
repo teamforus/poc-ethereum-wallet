@@ -14,6 +14,7 @@ import { Web3Service } from './web3.service';
 import { IdentityaddkeyComponent } from './identityaddkey/identityaddkey.component';
 import { ImportkeyComponent } from './importkey/importkey.component';
 import { NewkeyComponent } from './newkey/newkey.component';
+import { TransferFromKeyComponent } from './transfer-from-key/transfer-from-key.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { NewkeyComponent } from './newkey/newkey.component';
     KeysComponent,
     IdentityaddkeyComponent,
     ImportkeyComponent,
-    NewkeyComponent
+    NewkeyComponent,
+    TransferFromKeyComponent
   ],
   imports: [
     BrowserModule,

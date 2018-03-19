@@ -1,0 +1,15 @@
+<h2>Transfer ether from {{this.key.address}}</h2>
+<p>
+    Balance: {{balance}} (wei)
+</p>
+<label>To address:
+  <input [(ngModel)]="toAddress" placeholder="address">
+</label>
+<br/>
+<label>Amount:
+  <input [(ngModel)]="toValue" placeholder="amount"> (wei)
+</label>
+
+<br/>
+<button (click)="transfer()">transfer</button>
+<a routerLink="/keys">Cancel</a>

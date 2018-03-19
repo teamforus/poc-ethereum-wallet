@@ -22,6 +22,7 @@ export class KeysComponent implements OnInit {
       const account = this.web3Service.web3.eth.accounts.privateKeyToAccount(key.key);
       this.listKeys.push(
         {
+          address: this.web3Service.web3.eth.accounts.privateKeyToAccount(key.key).address,
           key: key.key,
           balance: this.web3Service.web3.eth.getBalance(account.address)
         }
@@ -32,6 +33,7 @@ export class KeysComponent implements OnInit {
 }
 
 class ListKey {
+  address: string;
   key: string;
   balance: number;
 }
