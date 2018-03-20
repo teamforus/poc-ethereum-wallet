@@ -9,5 +9,9 @@
 <ul>
   <li *ngFor="let key of identity.keys">{{key.key}} ({{key.purpose}})</li>
 </ul>
+<h3>Events</h3>
+<ul>
+  <li *ngFor="let event of allEvents">{{event.event}} ({{event.returnValues | eventParams}})</li>
+</ul>
 <a routerLink="/identities/{{identity.address}}/newkey">New key</a>
 <a routerLink="/identities/{{identity.address}}/issueclaim">Issue new claim</a>

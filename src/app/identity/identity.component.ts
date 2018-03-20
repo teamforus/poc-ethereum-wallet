@@ -3,6 +3,7 @@ import { Identity } from './../vault/identity';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { VaultService } from './../vault/vault.service';
+import * as IdentityContractData from './../../contracts/identity.js';
 
 @Component({
   selector: 'app-identity',
@@ -12,6 +13,7 @@ import { VaultService } from './../vault/vault.service';
 export class IdentityComponent implements OnInit {
   identity: Identity;
   balance: 0;
+  allEvents = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -22,6 +24,36 @@ export class IdentityComponent implements OnInit {
   ngOnInit() {
     this.identity = this.vault.getIdentity(this.route.snapshot.paramMap.get('address'));
     this.web3Service.web3.eth.getBalance(this.identity.address).then((balance) => { this.balance = balance; });
+
+    const identityContract = new this.web3Service.web3.eth.Contract(
+      IdentityContractData.abi,
+      this.identity.address,
+      null
+    );
+
+    identityContract.events.allEvents(
+      {
+        fromBlock: 0,
+        toBlock: 'latest'
+      },
+      (error, event) => {
+        if (error) {
+          throw new error(error);
+        }
+        this.allEvents.push(event);
+      }
+      );
+
+      identityContract.getPastEvents(
+        'allEvents',
+        {fromBlock: 0, toBlock: 'latest'},
+        (error, events) => {
+          if (error) {
+            throw new error(error);
+          }
+          this.allEvents = events;
+        }
+      );
   }
 
 }
