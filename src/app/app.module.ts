@@ -15,6 +15,7 @@ import { IdentityaddkeyComponent } from './identityaddkey/identityaddkey.compone
 import { ImportkeyComponent } from './importkey/importkey.component';
 import { NewkeyComponent } from './newkey/newkey.component';
 import { TransferFromKeyComponent } from './transfer-from-key/transfer-from-key.component';
+import { IssueClaimComponent } from './issue-claim/issue-claim.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { TransferFromKeyComponent } from './transfer-from-key/transfer-from-key.
     IdentityaddkeyComponent,
     ImportkeyComponent,
     NewkeyComponent,
-    TransferFromKeyComponent
+    TransferFromKeyComponent,
+    IssueClaimComponent
   ],
   imports: [
     BrowserModule,

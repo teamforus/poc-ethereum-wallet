@@ -9,12 +9,14 @@ import { KeysComponent } from './keys/keys.component';
 import { NewkeyComponent } from './newkey/newkey.component';
 import { ImportkeyComponent } from './importkey/importkey.component';
 import { TransferFromKeyComponent } from './transfer-from-key/transfer-from-key.component';
+import { IssueClaimComponent } from './issue-claim/issue-claim.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/identities', pathMatch: 'full' },
   { path: 'identities', component: IdentitiesComponent },
   { path: 'identities/new', component: NewidentityComponent },
   { path: 'identities/:address/newkey', component: IdentityaddkeyComponent },
+  { path: 'identities/:address/issueclaim', component: IssueClaimComponent },
   { path: 'identities/:address', component: IdentityComponent },
   { path: 'keys', component: KeysComponent },
   { path: 'keys/:address/transfer', component: TransferFromKeyComponent },

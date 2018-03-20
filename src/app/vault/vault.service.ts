@@ -72,21 +72,34 @@ export class VaultService {
     this.saveIdentities();
   }
 
-  addKeyToIdentity(identityAddress: string, key: string, purpose: number) {
+
+  async addKeyToIdentity(identityContract, managmentAccount, toAdd, purpose: number) {
     for (const identity of this.identities) {
-      if (identityAddress === identity.address) {
+      if (identityContract.options.address === identity.address) {
         for (const existingKey of identity.keys) {
-          if (key === existingKey.key && purpose === existingKey.purpose) {
+          if (toAdd.privateKey === existingKey.key && purpose === existingKey.purpose) {
             throw new Error('The given key/purpose already exitst');
           }
         }
-        identity.keys.push({
-          address: this.web3Service.web3.eth.accounts.privateKeyToAccount(key).address,
-          key: key,
-          purpose: purpose
-        });
-        this.saveIdentities();
-        return;
+
+        let keyAdded = false;
+        try {
+          await this.web3Service.addKeyToIdentity(identityContract, managmentAccount, toAdd, purpose);
+          keyAdded = true;
+        } catch (error) {
+          console.log(error);
+        }
+
+        if (keyAdded) {
+          identity.keys.push({
+            address: toAdd.address,
+            key: toAdd.privateKey,
+            purpose: purpose
+          });
+          this.saveIdentities();
+          return;
+        }
+
       }
     }
 

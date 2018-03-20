@@ -46,90 +46,15 @@ export class IdentityaddkeyComponent implements OnInit {
 
     const managmentAccount = this.web3Service.web3.eth.accounts.privateKeyToAccount(this.managementkey);
 
-    const IdentityContract = new this.web3Service.web3.eth.Contract(
+    const identityContract = new this.web3Service.web3.eth.Contract(
       IdentityContractData.abi,
       this.identity.address,
       null
     );
 
-    let keyAdded = false;
-    try {
-      keyAdded = await this.addKeyToIdentity(IdentityContract, managmentAccount, toAdd, this.purpose);
-    } catch (error) {
-      console.log(error);
-      keyAdded = false;
-    }
 
-    if (keyAdded) {
-      this.vault.addKeyToIdentity(this.identity.address, toAdd.privateKey, this.purpose);
-      this.router.navigate(['/identities/' + this.route.snapshot.paramMap.get('address')]);
-    }
-
-  }
-
-  async addKeyToIdentity(IdentityContract, managmentAccount, toAdd, purpose) {
-    /*
-    IdentityContract.events.KeyAdded()
-    .on('data', (event) => {
-        console.log('Event:');
-        console.log(event);
-    })
-    .on('changed', (event) => {
-        console.log('Changed:');
-        console.log(event);
-    })
-    .on('error', (error) => {
-        console.log('Error:');
-        console.log(error);
-    });
-    */
-
-    const trx = {
-      // nonce: this.vault.getNonce(),
-      from: managmentAccount.address,
-      to: this.identity.address,
-      chainId: this.web3Service.chanId,
-      gas: 2000000,
-      data: IdentityContract.methods.addKey(
-        toAdd.address,
-        purpose,
-        1
-      ).encodeABI()
-    };
-
-    const receipt = await this.web3Service.web3.eth.accounts.signTransaction(trx, managmentAccount.privateKey)
-    .then((sgnTrx) => {
-      const trxPromise = this.web3Service.web3.eth.sendSignedTransaction(sgnTrx.rawTransaction);
-      /*
-      trxPromise.on('transactionHash', (hash) => {
-        IdentityContract.once('KeyAdded', { filter: { transactionHash: hash}}, (error, event) => {
-          console.log('Once:');
-          console.log(error);
-          console.log(event);
-        });
-      });
-      */
-      return trxPromise;
-    }).then((result) => {
-      return result;
-    }).catch((error) => {
-      throw new Error(error);
-    });
-
-    /*
-    IdentityContract.getPastEvents('KeyAdded', {
-      filter: { transactionHash: receipt.transactionHash},
-      fromBlock: 0,
-      toBlock: 'latest'
-    })
-    .then((events) => {
-        console.log(events);
-    });
-    */
-    if (1 !== this.web3Service.web3.utils.hexToNumber(receipt.status)) {
-      console.log(receipt);
-      throw new Error('Could not add key');
-    }
+    await this.vault.addKeyToIdentity(identityContract, managmentAccount, toAdd, this.purpose);
+    this.router.navigate(['/identities/' + this.route.snapshot.paramMap.get('address')]);
 
   }
 }

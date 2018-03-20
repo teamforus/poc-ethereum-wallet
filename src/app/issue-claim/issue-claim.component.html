@@ -1,0 +1,40 @@
+<h2>Issue claim</h2>
+<label>Subject:
+  <input [(ngModel)]="subjectAddress" placeholder="address">
+</label>
+
+<br/>
+
+<label>Claim type:
+  <input [(ngModel)]="claimType" placeholder="number">
+</label>
+
+<br/>
+
+<label>Scheme:
+  <input [(ngModel)]="scheme" placeholder="number">
+</label>
+
+<br/>
+
+<label>Data:
+  <input [(ngModel)]="data" placeholder="">
+</label>
+
+<br/>
+
+<label>URI:
+  <input [(ngModel)]="uri" placeholder="">
+</label>
+
+<br/>
+
+<label>Management key to use:
+  <select [(ngModel)]="managementkey">
+      <option *ngFor="let key of managementkeys">{{key.key}}</option>
+  </select>
+</label>
+
+<br/>
+<button (click)="issue()">Issue</button>
+<a class="button" routerLink="/identities/{{identity.address}}">Cancel</a>

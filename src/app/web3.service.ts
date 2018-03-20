@@ -10,4 +10,39 @@ export class Web3Service {
     this.web3 = new Web3("ws://localhost:8546");
   }
 
+  async sendSignedTransaction(trx: object, privateKey: string) {
+    return this.web3.eth.accounts.signTransaction(trx, privateKey)
+    .then((sgnTrx) => {
+      return this.web3.eth.sendSignedTransaction(sgnTrx.rawTransaction);
+    }).then((result) => {
+      return result;
+    }).catch((error) => {
+      throw new Error(error);
+    });
+  }
+
+
+  async addKeyToIdentity(identityContract, managmentAccount, toAdd, purpose) {
+    const trx = {
+      from: managmentAccount.address,
+      to: identityContract.options.address,
+      chainId: this.chanId,
+      gas: 2000000,
+      data: identityContract.methods.addKey(
+        toAdd.address,
+        purpose,
+        1
+      ).encodeABI()
+    };
+
+    const receipt = await this.sendSignedTransaction(trx, managmentAccount.privateKey);
+
+    if (1 !== this.web3.utils.hexToNumber(receipt.status)) {
+      console.log(receipt);
+      throw new Error('Could not add key');
+    }
+
+
+  }
+
 }
