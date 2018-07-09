@@ -42,18 +42,19 @@ export class IdentityComponent implements OnInit {
         }
         this.allEvents.push(event);
       }
-      );
+    );
 
-      identityContract.getPastEvents(
-        'allEvents',
-        {fromBlock: 0, toBlock: 'latest'},
-        (error, events) => {
-          if (error) {
-            throw new error(error);
-          }
-          this.allEvents = events;
+    identityContract.getPastEvents(
+      'allEvents',
+      {fromBlock: 0, toBlock: 'latest'},
+      (error, events) => {
+        if (error) {
+          throw new error(error);
         }
-      );
-  }
+        this.allEvents = events;
+      }
+    );
 
+
+  }
 }
