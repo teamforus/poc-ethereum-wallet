@@ -3,7 +3,7 @@ import * as Web3 from 'web3';
 
 @Injectable()
 export class Web3Service {
-  chanId = 6292;
+  chanId = 3177;
   web3: Web3;
 
   constructor() {
