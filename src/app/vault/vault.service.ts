@@ -21,6 +21,13 @@ export class VaultService {
     }
   }
 
+  reset() {
+    this.identities = new Array<Identity>();
+    //this.keys = new Array<Key>();
+    this.saveIdentities();
+    //this.saveKeys();
+  }
+
   getNonce(): number {
     let nonce = 1000000000;
     try {
