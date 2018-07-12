@@ -56,7 +56,7 @@ export class NewidentityComponent implements OnInit {
     .then((sgnTrx) => {
       return this.web3Service.web3.eth.sendSignedTransaction(sgnTrx.rawTransaction);
     }).then((receipt) => {
-      if (1 !== this.web3Service.web3.utils.hexToNumber(receipt.status)) {
+      if ('true' === receipt.status) {
         console.log(receipt);
         throw new Error('Could not deploy contract');
       }

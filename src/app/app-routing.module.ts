@@ -11,6 +11,7 @@ import { ImportkeyComponent } from './importkey/importkey.component';
 import { TransferFromKeyComponent } from './transfer-from-key/transfer-from-key.component';
 import { IssueClaimComponent } from './issue-claim/issue-claim.component';
 import { CurrenciesComponent } from './currencies/currencies.component';
+import { TransferFromIdentityComponent } from './transfer-from-identity/transfer-from-identity.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/identities', pathMatch: 'full' },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'identities/:address/newkey', component: IdentityaddkeyComponent },
   { path: 'identities/:address/issueclaim', component: IssueClaimComponent },
   { path: 'identities/:address', component: IdentityComponent },
+  { path: 'identities/:address/transfer', component: TransferFromIdentityComponent },
   { path: 'keys', component: KeysComponent },
   { path: 'keys/:address/transfer', component: TransferFromKeyComponent },
   { path: 'keys/new', component: NewkeyComponent },
