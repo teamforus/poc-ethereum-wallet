@@ -12,6 +12,7 @@ import { TransferFromKeyComponent } from './transfer-from-key/transfer-from-key.
 import { IssueClaimComponent } from './issue-claim/issue-claim.component';
 import { CurrenciesComponent } from './currencies/currencies.component';
 import { TransferFromIdentityComponent } from './transfer-from-identity/transfer-from-identity.component';
+import { AddtokenComponent } from './addtoken/addtoken.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/identities', pathMatch: 'full' },
@@ -25,7 +26,8 @@ const routes: Routes = [
   { path: 'keys/:address/transfer', component: TransferFromKeyComponent },
   { path: 'keys/new', component: NewkeyComponent },
   { path: 'keys/import', component: ImportkeyComponent },
-  { path: 'currencies', component: CurrenciesComponent }
+  { path: 'currencies', component: CurrenciesComponent },
+  { path: 'currencies/addtoken', component: AddtokenComponent }
 ];
 
 @NgModule({

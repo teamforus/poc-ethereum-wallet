@@ -1,12 +1,34 @@
 <h2>Currencies</h2>
+
 <h3>Ether</h3>
 <ul>
   <li *ngFor="let ethBalance of ethBalances">
     {{ethBalance.address}}<br/>
     balance: {{ethBalance.balance | async}}
-    <a *ngIf="ethBalance.type == EthBalanceType.Key" routerLink="/keys/{{ethBalance.address}}/transfer">transfer</a>
-    <a *ngIf="ethBalance.type == EthBalanceType.Identity" routerLink="/identities/{{ethBalance.address}}/transfer">transfer</a>
+    <a *ngIf="ethBalance.type == BalanceType.Key" routerLink="/keys/{{ethBalance.address}}/transfer">transfer</a>
+    <a *ngIf="ethBalance.type == BalanceType.Identity" routerLink="/identities/{{ethBalance.address}}/transfer">transfer</a>
     <br/>
-    type: {{EthBalanceType[ethBalance.type]}}
+    type: {{BalanceType[ethBalance.type]}}
   </li>
 </ul>
+
+<h3>Tokens</h3>
+<ul>
+  <li *ngFor="let token of tokens">
+    {{token.address}}<br/>
+    Name: {{token.name | async}}<br/>
+    <b>Balances</b>
+    <ul>
+      <li *ngFor="let balance of token.balances">
+        {{balance.address}}<br/>
+        balance: {{balance.balance | async}}
+        <a *ngIf="balance.type == BalanceType.Key" routerLink="/keys/{{balance.address}}/transfertoken/{{token.address}}">transfer</a>
+        <a *ngIf="balance.type == BalanceType.Identity" routerLink="/identities/{{balance.address}}/transfertoken/{{token.address}}">transfer</a>
+        <br/>
+        type: {{BalanceType[balance.type]}}
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<a routerLink="/currencies/addtoken">Add token</a>

@@ -7,8 +7,10 @@ import { Key } from './key';
 export class VaultService {
   private storateKeyIdentities = 'identities';
   private storateKeyKeys = 'keys';
+  private storateKeyTokens = 'tokens';
   private identities: Identity[] = new Array<Identity>();
   private keys: Key[] = new Array<Key>();
+  private tokens: string[] = new Array<string>();
 
   constructor(private web3Service: Web3Service) {
     const identities = <Identity[]> JSON.parse(localStorage.getItem(this.storateKeyIdentities));
@@ -19,13 +21,19 @@ export class VaultService {
     if (keys) {
       this.keys = keys;
     }
+    const tokens = JSON.parse(localStorage.getItem(this.storateKeyTokens));
+    if (tokens) {
+      this.tokens = tokens;
+    }
   }
 
   reset() {
     this.identities = new Array<Identity>();
-    //this.keys = new Array<Key>();
+    this.keys = new Array<Key>();
+    this.tokens = new Array<string>();
     this.saveIdentities();
-    //this.saveKeys();
+    this.saveKeys();
+    this.saveTokens();
   }
 
   getNonce(): number {
@@ -49,6 +57,10 @@ export class VaultService {
 
   private saveKeys() {
     localStorage.setItem(this.storateKeyKeys, JSON.stringify(this.keys));
+  }
+
+  private saveTokens() {
+    localStorage.setItem(this.storateKeyTokens, JSON.stringify(this.tokens));
   }
 
   getIdentities(): Identity[] {
@@ -153,6 +165,15 @@ export class VaultService {
         return existingKey;
       }
     }
+  }
+
+  addToken(address: string) {
+    this.tokens.push(address);
+    this.saveTokens();
+  }
+
+  getTokens() {
+    return this.tokens;
   }
 
 }

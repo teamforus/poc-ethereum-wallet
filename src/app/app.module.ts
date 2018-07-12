@@ -19,6 +19,7 @@ import { IssueClaimComponent } from './issue-claim/issue-claim.component';
 import { EventParamsPipe } from './pipes/event-params.pipe';
 import { CurrenciesComponent } from './currencies/currencies.component';
 import { TransferFromIdentityComponent } from './transfer-from-identity/transfer-from-identity.component';
+import { AddtokenComponent } from './addtoken/addtoken.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { TransferFromIdentityComponent } from './transfer-from-identity/transfer
     IssueClaimComponent,
     EventParamsPipe,
     CurrenciesComponent,
-    TransferFromIdentityComponent
+    TransferFromIdentityComponent,
+    AddtokenComponent
   ],
   imports: [
     BrowserModule,

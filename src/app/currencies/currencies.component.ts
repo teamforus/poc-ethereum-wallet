@@ -1,9 +1,11 @@
+import { Key } from './../vault/key';
 import { Web3Service } from './../web3.service';
 import { VaultService } from './../vault/vault.service';
 import { Component, OnInit } from '@angular/core';
+import * as Erc20ContractData from './../../contracts/erc20.js';
 
 
-enum EthBalanceType {
+enum BalanceType {
   Key,
   Identity
 }
@@ -14,8 +16,9 @@ enum EthBalanceType {
   styleUrls: ['./currencies.component.css']
 })
 export class CurrenciesComponent implements OnInit {
-  EthBalanceType = EthBalanceType;
-  ethBalances: EthBalance[] = new Array<EthBalance>();
+  BalanceType = BalanceType;
+  ethBalances: Balance[] = new Array<Balance>();
+  tokens: Token[] = new Array<Token>();
 
   constructor(
     private vault: VaultService,
@@ -30,7 +33,7 @@ export class CurrenciesComponent implements OnInit {
         {
           address: this.web3Service.web3.eth.accounts.privateKeyToAccount(key.key).address,
           balance: this.web3Service.web3.eth.getBalance(account.address),
-          type: EthBalanceType.Key
+          type: BalanceType.Key
         }
       );
     }
@@ -41,16 +44,51 @@ export class CurrenciesComponent implements OnInit {
         {
           address: identity.address,
           balance: this.web3Service.web3.eth.getBalance(identity.address),
-          type: EthBalanceType.Identity
+          type: BalanceType.Identity
         }
       );
     }
+
+    const tokenAddresses = this.vault.getTokens();
+    for (const tokenAddress of tokenAddresses) {
+      const contract = new this.web3Service.web3.eth.Contract(Erc20ContractData.abi, tokenAddress);
+      const token = {
+        address: tokenAddress,
+        name: contract.methods.name().call(),
+        symbol: '',
+        balances: new Array<Balance>()
+      };
+      for (const key of keys) {
+        token.balances.push({
+          address: key.address,
+          balance: contract.methods.balanceOf(key.address).call(),
+          type: BalanceType.Key
+        });
+      }
+      for (const identity of identities) {
+        token.balances.push({
+          address: identity.address,
+          balance: contract.methods.balanceOf(identity.address).call(),
+          type: BalanceType.Identity
+        });
+      }
+
+      this.tokens.push(token);
+    }
+
   }
 
 }
 
-class EthBalance {
+class Balance {
   address: string;
   balance: number;
-  type: EthBalanceType;
+  type: BalanceType;
+}
+
+class Token {
+  address: string;
+  name: string;
+  symbol: string;
+  balances: Balance[];
 }
