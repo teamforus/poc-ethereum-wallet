@@ -23,7 +23,6 @@ export class IdentityComponent implements OnInit {
 
   ngOnInit() {
     this.identity = this.vault.getIdentity(this.route.snapshot.paramMap.get('address'));
-    this.web3Service.web3.eth.getBalance(this.identity.address).then((balance) => { this.balance = balance; });
 
     const identityContract = new this.web3Service.web3.eth.Contract(
       IdentityContractData.abi,

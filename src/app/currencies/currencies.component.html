@@ -1,10 +1,12 @@
 <h2>Currencies</h2>
 <h3>Ether</h3>
 <ul>
-  <li *ngFor="let key of listKeys">
-    {{key.address}}<br/>
-    balance: {{key.balance | async}} <a routerLink="/keys/{{key.address}}/transfer">transfer</a>
+  <li *ngFor="let ethBalance of ethBalances">
+    {{ethBalance.address}}<br/>
+    balance: {{ethBalance.balance | async}}
+    <a *ngIf="ethBalance.type == EthBalanceType.Key" routerLink="/keys/{{ethBalance.address}}/transfer">transfer</a>
+    <a *ngIf="ethBalance.type == EthBalanceType.Identity" routerLink="/identities/{{ethBalance.address}}/transfer">transfer</a>
+    <br/>
+    type: {{EthBalanceType[ethBalance.type]}}
   </li>
 </ul>
-<a routerLink="/keys/new">New key</a>
-<a routerLink="/keys/import">Import key</a>
