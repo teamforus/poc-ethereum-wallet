@@ -17,6 +17,7 @@ import { NewkeyComponent } from './newkey/newkey.component';
 import { TransferFromKeyComponent } from './transfer-from-key/transfer-from-key.component';
 import { IssueClaimComponent } from './issue-claim/issue-claim.component';
 import { EventParamsPipe } from './pipes/event-params.pipe';
+import { CurrenciesComponent } from './currencies/currencies.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { EventParamsPipe } from './pipes/event-params.pipe';
     NewkeyComponent,
     TransferFromKeyComponent,
     IssueClaimComponent,
-    EventParamsPipe
+    EventParamsPipe,
+    CurrenciesComponent
   ],
   imports: [
     BrowserModule,

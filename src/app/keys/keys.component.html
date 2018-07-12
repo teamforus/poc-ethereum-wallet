@@ -1,8 +1,7 @@
 <h2>Keys</h2>
 <ul>
-  <li *ngFor="let key of listKeys">
-    {{key.address}}<br/>
-    balance: {{key.balance | async}} <a routerLink="/keys/{{key.address}}/transfer">transfer</a>
+  <li *ngFor="let key of keys">
+    {{key.address}}
   </li>
 </ul>
 <a routerLink="/keys/new">New key</a>

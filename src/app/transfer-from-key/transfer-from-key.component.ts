@@ -46,12 +46,12 @@ export class TransferFromKeyComponent implements OnInit {
       throw new Error(error);
     });
 
-    if (1 !== this.web3Service.web3.utils.hexToNumber(receipt.status)) {
+    if ('true' === receipt.status) {
       console.log(receipt);
       throw new Error('Error transferring ether');
     }
 
-    this.router.navigate(['/keys']);
+    this.router.navigate(['/currencies']);
 
   }
 

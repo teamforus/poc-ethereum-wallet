@@ -1,0 +1,10 @@
+<h2>Currencies</h2>
+<h3>Ether</h3>
+<ul>
+  <li *ngFor="let key of listKeys">
+    {{key.address}}<br/>
+    balance: {{key.balance | async}} <a routerLink="/keys/{{key.address}}/transfer">transfer</a>
+  </li>
+</ul>
+<a routerLink="/keys/new">New key</a>
+<a routerLink="/keys/import">Import key</a>
