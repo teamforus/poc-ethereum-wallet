@@ -21,6 +21,7 @@ import { CurrenciesComponent } from './currencies/currencies.component';
 import { TransferFromIdentityComponent } from './transfer-from-identity/transfer-from-identity.component';
 import { AddtokenComponent } from './addtoken/addtoken.component';
 import { TransferTokenFromKeyComponent } from './transfer-token-from-key/transfer-token-from-key.component';
+import { TransferTokenFromIdentityComponent } from './transfer-token-from-identity/transfer-token-from-identity.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { TransferTokenFromKeyComponent } from './transfer-token-from-key/transfe
     CurrenciesComponent,
     TransferFromIdentityComponent,
     AddtokenComponent,
-    TransferTokenFromKeyComponent
+    TransferTokenFromKeyComponent,
+    TransferTokenFromIdentityComponent
   ],
   imports: [
     BrowserModule,

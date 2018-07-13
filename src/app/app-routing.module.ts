@@ -14,6 +14,7 @@ import { CurrenciesComponent } from './currencies/currencies.component';
 import { TransferFromIdentityComponent } from './transfer-from-identity/transfer-from-identity.component';
 import { AddtokenComponent } from './addtoken/addtoken.component';
 import { TransferTokenFromKeyComponent } from './transfer-token-from-key/transfer-token-from-key.component';
+import { TransferTokenFromIdentityComponent } from './transfer-token-from-identity/transfer-token-from-identity.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/identities', pathMatch: 'full' },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'identities/:address/issueclaim', component: IssueClaimComponent },
   { path: 'identities/:address', component: IdentityComponent },
   { path: 'identities/:address/transfer', component: TransferFromIdentityComponent },
+  { path: 'identities/:address/transfertoken/:tokenaddress', component: TransferTokenFromIdentityComponent }
   { path: 'keys', component: KeysComponent },
   { path: 'keys/:address/transfer', component: TransferFromKeyComponent },
   { path: 'keys/new', component: NewkeyComponent },
