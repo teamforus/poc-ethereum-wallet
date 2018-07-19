@@ -24,6 +24,7 @@ import { TransferTokenFromKeyComponent } from './transfer-token-from-key/transfe
 import { TransferTokenFromIdentityComponent } from './transfer-token-from-identity/transfer-token-from-identity.component';
 import { SetrecordComponent } from './setrecord/setrecord.component';
 import { DeleterecordComponent } from './deleterecord/deleterecord.component';
+import { ResetComponent } from './reset/reset.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { DeleterecordComponent } from './deleterecord/deleterecord.component';
     TransferTokenFromKeyComponent,
     TransferTokenFromIdentityComponent,
     SetrecordComponent,
-    DeleterecordComponent
+    DeleterecordComponent,
+    ResetComponent
   ],
   imports: [
     BrowserModule,
