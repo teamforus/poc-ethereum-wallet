@@ -4,10 +4,12 @@ import * as Web3 from 'web3';
 @Injectable()
 export class Web3Service {
   chanId = 3177;
+  // @ts-ignore
   web3: Web3;
 
   constructor() {
-    this.web3 = new Web3("ws://localhost:8546");
+    // @ts-ignore
+    this.web3 = new Web3('ws://localhost:8546');
   }
 
   async sendSignedTransaction(trx: object, privateKey: string) {

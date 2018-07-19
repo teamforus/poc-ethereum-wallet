@@ -36,6 +36,7 @@ export class TransferTokenFromIdentityComponent implements OnInit {
       this.route.snapshot.paramMap.get('tokenaddress')
     );
     this.managementkeys = this.vault.getManagementKeys(this.identity.address);
+    // @ts-ignore
     this.balance = this.tokenContract.methods.balanceOf(this.identity.address).call();
   }
 
@@ -51,8 +52,10 @@ export class TransferTokenFromIdentityComponent implements OnInit {
       chainId: this.web3Service.chanId,
       gas: 3000000,
       data: senderContract.methods.execute(
+        // @ts-ignore
         this.tokenContract.options.address,
         0,
+        // @ts-ignore
         this.tokenContract.methods.transfer(
           this.toAddress,
           this.toValue

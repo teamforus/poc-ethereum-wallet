@@ -30,14 +30,17 @@ export class TransferTokenFromKeyComponent implements OnInit {
       Erc20ContractData.abi,
       this.route.snapshot.paramMap.get('tokenaddress')
     );
+    // @ts-ignore
     this.balance = this.tokenContract.methods.balanceOf(this.key.address).call();
   }
 
   async transfer() {
     const trx = {
+      // @ts-ignore
       to: this.tokenContract.options.address,
       chainId: this.web3Service.chanId,
       gas: 3000000,
+      // @ts-ignore
       data: this.tokenContract.methods.transfer(
         this.toAddress,
         this.toValue
