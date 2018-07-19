@@ -1,0 +1,12 @@
+<h2>Delete record</h2>
+<h3>Delete "{{recordKey}}"</h3>
+
+<label>Management key to use:
+  <select [(ngModel)]="managementkey">
+      <option *ngFor="let key of managementkeys">{{key.key}}</option>
+  </select>
+</label>
+
+<br/>
+<button (click)="delete()">Delete</button>
+<a class="button" routerLink="/identities/{{identity.address}}">Cancel</a>

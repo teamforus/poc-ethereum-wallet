@@ -14,6 +14,7 @@ export class IdentityComponent implements OnInit {
   identity: Identity;
   balance: 0;
   allEvents = [];
+  records: Record[] = new Array<Record>();
 
   constructor(
     private route: ActivatedRoute,
@@ -43,6 +44,16 @@ export class IdentityComponent implements OnInit {
       }
     );
 
+    identityContract.methods.getRecordKeys().call().then(recordKeys => {
+      for (const recordKey of recordKeys) {
+        if (0 == recordKey) { continue; }
+        this.records.push({
+          key: this.web3Service.web3.utils.hexToUtf8(recordKey),
+          value: identityContract.methods.getRecord(recordKey).call()
+        });
+      }
+    });
+
     identityContract.getPastEvents(
       'allEvents',
       {fromBlock: 0, toBlock: 'latest'},
@@ -56,4 +67,9 @@ export class IdentityComponent implements OnInit {
 
 
   }
+}
+
+class Record {
+  key: string;
+  value: string;
 }

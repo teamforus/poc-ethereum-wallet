@@ -15,6 +15,8 @@ import { TransferFromIdentityComponent } from './transfer-from-identity/transfer
 import { AddtokenComponent } from './addtoken/addtoken.component';
 import { TransferTokenFromKeyComponent } from './transfer-token-from-key/transfer-token-from-key.component';
 import { TransferTokenFromIdentityComponent } from './transfer-token-from-identity/transfer-token-from-identity.component';
+import { SetrecordComponent } from './setrecord/setrecord.component';
+import { DeleterecordComponent } from './deleterecord/deleterecord.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/identities', pathMatch: 'full' },
@@ -25,6 +27,9 @@ const routes: Routes = [
   { path: 'identities/:address', component: IdentityComponent },
   { path: 'identities/:address/transfer', component: TransferFromIdentityComponent },
   { path: 'identities/:address/transfertoken/:tokenaddress', component: TransferTokenFromIdentityComponent }
+  { path: 'identities/:address/record/:record/delete', component: DeleterecordComponent },
+  { path: 'identities/:address/record/:record', component: SetrecordComponent },
+  { path: 'identities/:address/record', component: SetrecordComponent },
   { path: 'keys', component: KeysComponent },
   { path: 'keys/:address/transfer', component: TransferFromKeyComponent },
   { path: 'keys/new', component: NewkeyComponent },
