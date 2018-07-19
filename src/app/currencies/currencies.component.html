@@ -4,7 +4,7 @@
 <ul>
   <li *ngFor="let ethBalance of ethBalances">
     {{ethBalance.address}} ({{BalanceType[ethBalance.type]}})<br/>
-    balance: {{ethBalance.balance | async}}
+    balance: {{ethBalance.balance | async | fromWei:'ether'}}
     <a *ngIf="ethBalance.type == BalanceType.Key" routerLink="/keys/{{ethBalance.address}}/transfer">transfer</a>
     <a *ngIf="ethBalance.type == BalanceType.Identity" routerLink="/identities/{{ethBalance.address}}/transfer">transfer</a>
   </li>

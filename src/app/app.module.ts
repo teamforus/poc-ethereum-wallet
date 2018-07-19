@@ -25,6 +25,7 @@ import { TransferTokenFromIdentityComponent } from './transfer-token-from-identi
 import { SetrecordComponent } from './setrecord/setrecord.component';
 import { DeleterecordComponent } from './deleterecord/deleterecord.component';
 import { ResetComponent } from './reset/reset.component';
+import { FromWeiPipe } from './pipes/from-wei.pipe';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import { ResetComponent } from './reset/reset.component';
     TransferTokenFromIdentityComponent,
     SetrecordComponent,
     DeleterecordComponent,
-    ResetComponent
+    ResetComponent,
+    FromWeiPipe
   ],
   imports: [
     BrowserModule,
