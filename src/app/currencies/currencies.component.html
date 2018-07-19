@@ -3,12 +3,10 @@
 <h3>Ether</h3>
 <ul>
   <li *ngFor="let ethBalance of ethBalances">
-    {{ethBalance.address}}<br/>
+    {{ethBalance.address}} ({{BalanceType[ethBalance.type]}})<br/>
     balance: {{ethBalance.balance | async}}
     <a *ngIf="ethBalance.type == BalanceType.Key" routerLink="/keys/{{ethBalance.address}}/transfer">transfer</a>
     <a *ngIf="ethBalance.type == BalanceType.Identity" routerLink="/identities/{{ethBalance.address}}/transfer">transfer</a>
-    <br/>
-    type: {{BalanceType[ethBalance.type]}}
   </li>
 </ul>
 
@@ -20,12 +18,10 @@
     <b>Balances</b>
     <ul>
       <li *ngFor="let balance of token.balances">
-        {{balance.address}}<br/>
+        {{balance.address}} ({{BalanceType[balance.type]}})<br/>
         balance: {{balance.balance | async}}
         <a *ngIf="balance.type == BalanceType.Key" routerLink="/keys/{{balance.address}}/transfertoken/{{token.address}}">transfer</a>
         <a *ngIf="balance.type == BalanceType.Identity" routerLink="/identities/{{balance.address}}/transfertoken/{{token.address}}">transfer</a>
-        <br/>
-        type: {{BalanceType[balance.type]}}
       </li>
     </ul>
   </li>
