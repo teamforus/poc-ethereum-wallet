@@ -26,7 +26,7 @@ const routes: Routes = [
   { path: 'identities/:address/issueclaim', component: IssueClaimComponent },
   { path: 'identities/:address', component: IdentityComponent },
   { path: 'identities/:address/transfer', component: TransferFromIdentityComponent },
-  { path: 'identities/:address/transfertoken/:tokenaddress', component: TransferTokenFromIdentityComponent }
+  { path: 'identities/:address/transfertoken/:tokenaddress', component: TransferTokenFromIdentityComponent },
   { path: 'identities/:address/record/:record/delete', component: DeleterecordComponent },
   { path: 'identities/:address/record/:record', component: SetrecordComponent },
   { path: 'identities/:address/record', component: SetrecordComponent },
