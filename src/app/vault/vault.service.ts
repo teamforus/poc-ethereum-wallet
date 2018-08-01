@@ -2,38 +2,35 @@ import { Web3Service } from './../web3.service';
 import { Injectable } from '@angular/core';
 import { Identity } from './identity';
 import { Key } from './key';
+import { Voucher } from './voucher';
 
 @Injectable()
 export class VaultService {
-  private storateKeyIdentities = 'identities';
-  private storateKeyKeys = 'keys';
-  private storateKeyTokens = 'tokens';
-  private identities: Identity[] = new Array<Identity>();
-  private keys: Key[] = new Array<Key>();
-  private tokens: string[] = new Array<string>();
+  private readonly storateKeyIdentities = 'identities';
+  private readonly storateKeyKeys = 'keys';
+  private readonly storateKeyTokens = 'tokens';
+  private readonly storateKeyVouchers = 'vouchers';
+  private identities: Identity[];
+  private keys: Key[];
+  private tokens: string[];
+  private vouchers: Voucher[];
 
   constructor(private web3Service: Web3Service) {
-    const identities = <Identity[]> JSON.parse(localStorage.getItem(this.storateKeyIdentities));
-    if (identities) {
-      this.identities = identities;
-    }
-    const keys = <Key[]> JSON.parse(localStorage.getItem(this.storateKeyKeys));
-    if (keys) {
-      this.keys = keys;
-    }
-    const tokens = JSON.parse(localStorage.getItem(this.storateKeyTokens));
-    if (tokens) {
-      this.tokens = tokens;
-    }
+    this.identities = <Identity[]> JSON.parse(localStorage.getItem(this.storateKeyIdentities)) || new Array<Identity>();
+    this.keys = <Key[]> JSON.parse(localStorage.getItem(this.storateKeyKeys)) || new Array<Key>();
+    this.tokens = JSON.parse(localStorage.getItem(this.storateKeyTokens)) || new Array<string>();
+    this.vouchers = JSON.parse(localStorage.getItem(this.storateKeyVouchers)) || new Array<Voucher>();
   }
 
   reset() {
     this.identities = new Array<Identity>();
     this.keys = new Array<Key>();
     this.tokens = new Array<string>();
+    this.vouchers = new Array<Voucher>();
     this.saveIdentities();
     this.saveKeys();
     this.saveTokens();
+    this.saveVouchers();
   }
 
   getNonce(): number {
@@ -61,6 +58,10 @@ export class VaultService {
 
   private saveTokens() {
     localStorage.setItem(this.storateKeyTokens, JSON.stringify(this.tokens));
+  }
+
+  private saveVouchers() {
+    localStorage.setItem(this.storateKeyVouchers, JSON.stringify(this.vouchers));
   }
 
   getIdentities(): Identity[] {
@@ -174,6 +175,15 @@ export class VaultService {
 
   getTokens() {
     return this.tokens;
+  }
+
+  addVoucher(address: string, sponsor: string) {
+    this.vouchers.push(new Voucher(address, sponsor));
+    this.saveVouchers();
+  }
+
+  getVouchers() {
+    return this.vouchers;
   }
 
 }

@@ -9,7 +9,7 @@ export class Web3Service {
 
   constructor() {
     // @ts-ignore
-    this.web3 = new Web3('ws://34.243.182.125:8546');
+    this.web3 = new Web3('ws://127.0.0.1:8546');
   }
 
   async sendSignedTransaction(trx: object, privateKey: string) {

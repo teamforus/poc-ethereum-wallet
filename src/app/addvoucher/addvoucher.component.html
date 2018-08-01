@@ -1,0 +1,17 @@
+<div class="voucher-form">
+  <h2>Add Voucher</h2>
+  <div class="input-wrapper">
+    <div class="input-label">
+      Address:
+    </div>
+    <input [(ngModel)]="voucherAddress" placeholder="Voucher address" />
+  </div>
+  <div class="input-wrapper">
+    <div class="input-label">
+      Sponsor:
+    </div>
+    <input [(ngModel)]="sponsorAddress" placeholder="Sponsor address" />
+  </div>
+  <button (click)="add()">add</button>
+  <a class="button" routerLink="/vouchers">Cancel</a>
+</div>
