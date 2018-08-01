@@ -1,0 +1,22 @@
+<h2>Request record</h2>
+<label>Key:
+  <input [(ngModel)]="recordKey" placeholder="Key">
+</label>
+
+<br/>
+
+<label>Oracle:
+  <input [(ngModel)]="oracleAddress" placeholder="Address">
+</label>
+
+<br/>
+
+<label>Management key to use:
+  <select [(ngModel)]="managementkey">
+      <option *ngFor="let key of managementkeys">{{key.key}}</option>
+  </select>
+</label>
+
+<br/>
+<button (click)="request()">Request</button>
+<a class="button" routerLink="/identities/{{identity.address}}">Cancel</a>

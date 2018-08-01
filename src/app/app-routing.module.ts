@@ -18,6 +18,7 @@ import { TransferTokenFromIdentityComponent } from './transfer-token-from-identi
 import { SetrecordComponent } from './setrecord/setrecord.component';
 import { DeleterecordComponent } from './deleterecord/deleterecord.component';
 import { ResetComponent } from './reset/reset.component';
+import { RequestrecordComponent } from './requestrecord/requestrecord.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/identities', pathMatch: 'full' },
@@ -38,7 +39,8 @@ const routes: Routes = [
   { path: 'currencies', component: CurrenciesComponent },
   { path: 'currencies/addtoken', component: AddtokenComponent },
   { path: 'keys/:address/transfertoken/:tokenaddress', component: TransferTokenFromKeyComponent },
-  { path: 'reset', component: ResetComponent }
+  { path: 'reset', component: ResetComponent },
+  { path: 'identities/:address/requestrecord', component: RequestrecordComponent }
 ];
 
 @NgModule({

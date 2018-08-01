@@ -26,6 +26,7 @@ import { SetrecordComponent } from './setrecord/setrecord.component';
 import { DeleterecordComponent } from './deleterecord/deleterecord.component';
 import { ResetComponent } from './reset/reset.component';
 import { FromWeiPipe } from './pipes/from-wei.pipe';
+import { RequestrecordComponent } from './requestrecord/requestrecord.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { FromWeiPipe } from './pipes/from-wei.pipe';
     SetrecordComponent,
     DeleterecordComponent,
     ResetComponent,
-    FromWeiPipe
+    FromWeiPipe,
+    RequestrecordComponent
   ],
   imports: [
     BrowserModule,
