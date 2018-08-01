@@ -22,6 +22,7 @@
         balance: {{balance.balance | async}}
         <a *ngIf="balance.type == BalanceType.Key" routerLink="/keys/{{balance.address}}/transfertoken/{{token.address}}">transfer</a>
         <a *ngIf="balance.type == BalanceType.Identity" routerLink="/identities/{{balance.address}}/transfertoken/{{token.address}}">transfer</a>
+        <a *ngIf="balance.type == BalanceType.Key" routerLink="/voucher/create/{{token.address}}/{{balance.address}}">Create voucher</a>
       </li>
     </ul>
   </li>

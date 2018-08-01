@@ -5,6 +5,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { AddtokenComponent } from './addtoken/addtoken.component';
 import { AddvoucherComponent } from './addvoucher/addvoucher.component';
 import { AppComponent } from './app.component';
+import { CreateVoucherComponent } from './createvoucher/createvoucher.component';
 import { CurrenciesComponent } from './currencies/currencies.component';
 import { DeleterecordComponent } from './deleterecord/deleterecord.component';
 import { IdentitiesComponent } from './identities/identities.component';
@@ -47,6 +48,7 @@ import { Web3Service } from './web3.service';
     TransferTokenFromIdentityComponent,
     VouchersComponent,
     AddvoucherComponent,
+    CreateVoucherComponent,
     SetrecordComponent,
     DeleterecordComponent,
     ResetComponent,

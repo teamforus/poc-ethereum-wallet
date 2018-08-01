@@ -19,6 +19,7 @@ import { TransferFromKeyComponent } from './transfer-from-key/transfer-from-key.
 import { TransferTokenFromIdentityComponent } from './transfer-token-from-identity/transfer-token-from-identity.component';
 import { TransferTokenFromKeyComponent } from './transfer-token-from-key/transfer-token-from-key.component';
 import { VouchersComponent } from './vouchers/vouchers.component';
+import { CreateVoucherComponent } from './createvoucher/createvoucher.component';
 
 
 const routes: Routes = [
@@ -41,6 +42,7 @@ const routes: Routes = [
   { path: 'currencies/addtoken', component: AddtokenComponent },
   { path: 'vouchers', component: VouchersComponent },
   { path: 'voucher/add', component: AddvoucherComponent },
+  { path: 'voucher/create/:tokenAddress/:sponsorAddress', component: CreateVoucherComponent },
   { path: 'keys/:address/transfertoken/:tokenaddress', component: TransferTokenFromKeyComponent },
   { path: 'reset', component: ResetComponent }
 ];
