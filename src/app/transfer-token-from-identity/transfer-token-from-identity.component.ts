@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import * as Erc20ContractData from './../../contracts/erc20.js';
 import * as IdentityContractData from './../../contracts/identity.js';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-transfer-token-from-identity',
@@ -49,8 +50,8 @@ export class TransferTokenFromIdentityComponent implements OnInit {
 
     const trx = {
       to: senderContract.options.address,
-      chainId: this.web3Service.chanId,
-      gas: 3000000,
+      chainId: this.web3Service.chainId,
+      gas: environment.gas,
       data: senderContract.methods.execute(
         // @ts-ignore
         this.tokenContract.options.address,

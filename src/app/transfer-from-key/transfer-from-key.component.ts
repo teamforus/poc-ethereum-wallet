@@ -3,6 +3,7 @@ import { Key } from './../vault/key';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VaultService } from './../vault/vault.service';
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-transfer-from-key',
@@ -32,8 +33,8 @@ export class TransferFromKeyComponent implements OnInit {
       // nonce: this.vault.getNonce(),
       from: this.key.address,
       to: this.toAddress,
-      chainId: this.web3Service.chanId,
-      gas: 3000000,
+      chainId: this.web3Service.chainId,
+      gas: environment.gas,
       value: this.toValue
     };
 

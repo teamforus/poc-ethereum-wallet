@@ -5,6 +5,7 @@ import { Web3Service } from './../web3.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as IdentityContractData from './../../contracts/identity.js';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-newidentity',
@@ -47,8 +48,8 @@ export class NewidentityComponent implements OnInit {
 
     const trx = {
       // nonce: this.vault.getNonce(),
-      chainId: this.web3Service.chanId,
-      gas: '10000000',
+      chainId: this.web3Service.chainId,
+      gas: 'environment.gas',
       data: deploy._deployData
     };
 

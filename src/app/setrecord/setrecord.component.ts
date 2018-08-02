@@ -5,6 +5,7 @@ import { Key } from './../vault/key';
 import { Identity } from './../vault/identity';
 import { Component, OnInit } from '@angular/core';
 import * as IdentityContractData from './../../contracts/identity.js';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-setrecord',
@@ -58,8 +59,8 @@ export class SetrecordComponent implements OnInit {
     const trx = {
       from: this.web3Service.web3.eth.accounts.privateKeyToAccount(this.managementkey).address,
       to: this.identity.address,
-      chainId: this.web3Service.chanId,
-      gas: 10000000,
+      chainId: this.web3Service.chainId,
+      gas: environment.gas,
       data: identityContract.methods.setRecord(
         this.web3Service.web3.utils.padLeft(this.web3Service.web3.utils.utf8ToHex(this.recordKey), 32),
         this.recordValue

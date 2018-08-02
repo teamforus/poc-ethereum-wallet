@@ -5,6 +5,7 @@ import { VaultService } from './../vault/vault.service';
 import { Web3Service } from './../web3.service';
 import { Component, OnInit } from '@angular/core';
 import * as IdentityContractData from './../../contracts/identity.js';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-issue-claim',
@@ -60,8 +61,8 @@ export class IssueClaimComponent implements OnInit {
 
     const trx = {
       to: issuerContract.options.address,
-      chainId: this.web3Service.chanId,
-      gas: 3000000,
+      chainId: this.web3Service.chainId,
+      gas: environment.gas,
       data: issuerContract.methods.execute(
         subjectContract.options.address,
         0,

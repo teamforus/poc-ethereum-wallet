@@ -4,6 +4,7 @@ import { Web3Service } from './../web3.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import * as Erc20ContractData from './../../contracts/erc20.js';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-transfer-token-from-key',
@@ -38,8 +39,8 @@ export class TransferTokenFromKeyComponent implements OnInit {
     const trx = {
       // @ts-ignore
       to: this.tokenContract.options.address,
-      chainId: this.web3Service.chanId,
-      gas: 3000000,
+      chainId: this.web3Service.chainId,
+      gas: environment.gas,
       // @ts-ignore
       data: this.tokenContract.methods.transfer(
         this.toAddress,

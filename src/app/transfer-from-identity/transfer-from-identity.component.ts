@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Identity } from './../vault/identity';
 import { Component, OnInit } from '@angular/core';
 import * as IdentityContractData from './../../contracts/identity.js';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-transfer-from-identity',
@@ -41,8 +42,8 @@ export class TransferFromIdentityComponent implements OnInit {
 
     const trx = {
       to: senderContract.options.address,
-      chainId: this.web3Service.chanId,
-      gas: 3000000,
+      chainId: this.web3Service.chainId,
+      gas: environment.gas,
       data: senderContract.methods.execute(
         this.toAddress,
         this.toValue,
