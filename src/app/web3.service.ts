@@ -3,7 +3,7 @@ import * as Web3 from 'web3';
 
 @Injectable()
 export class Web3Service {
-  chanId = 3177;
+  chainId = 3177;
   // @ts-ignore
   web3: Web3;
 
@@ -28,7 +28,7 @@ export class Web3Service {
     const trx = {
       from: managmentAccount.address,
       to: identityContract.options.address,
-      chainId: this.chanId,
+      chainId: this.chainId,
       gas: 2000000,
       data: identityContract.methods.addKey(
         toAdd.address,

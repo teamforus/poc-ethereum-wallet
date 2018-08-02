@@ -1,9 +1,9 @@
 import { Router, ActivatedRoute } from '@angular/router';
-import { Web3Service } from './../web3.service';
+import { Web3Service } from '@app/web3.service';
 import { Component, OnInit } from '@angular/core';
-import * as Erc20 from './../../contracts/erc20.js';
-import { VaultService } from '../vault/vault.service';
-import { Key } from '../vault/key';
+import * as Erc20 from '@contracts/erc20.js';
+import { VaultService } from '@app/vault/vault.service';
+import { Key } from '@app/vault/key';
 
 @Component({
   selector: 'app-createvoucher',
@@ -42,7 +42,7 @@ export class CreateVoucherComponent implements OnInit {
       // nonce: this.vault.getNonce(),
       from: this.key.address,
       to: this.voucherAddress,
-      chainId: this.web3Service.chanId,
+      chainId: this.web3Service.chainId,
       gas: 3000000,
       data: method.encodeABI()
     };

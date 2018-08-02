@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
-import { VaultService } from './../vault/vault.service';
-import { Web3Service } from './../web3.service';
+import { VaultService } from '@app/vault/vault.service';
+import { Web3Service } from '@app/web3.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './addvoucher.component.html',
   styleUrls: ['./addvoucher.component.css']
 })
-export class AddvoucherComponent implements OnInit {
+export class AddVoucherComponent implements OnInit {
   sponsorAddress = '';
   voucherAddress = '';
 

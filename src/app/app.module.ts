@@ -3,9 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './/app-routing.module';
 import { AddtokenComponent } from './addtoken/addtoken.component';
-import { AddvoucherComponent } from './addvoucher/addvoucher.component';
+import { AddVoucherComponent } from '@app/voucher/add/addvoucher.component';
 import { AppComponent } from './app.component';
-import { CreateVoucherComponent } from './createvoucher/createvoucher.component';
+import { CreateVoucherComponent } from '@app/voucher/create/createvoucher.component';
 import { CurrenciesComponent } from './currencies/currencies.component';
 import { DeleterecordComponent } from './deleterecord/deleterecord.component';
 import { IdentitiesComponent } from './identities/identities.component';
@@ -18,6 +18,7 @@ import { NewidentityComponent } from './newidentity/newidentity.component';
 import { NewkeyComponent } from './newkey/newkey.component';
 import { EventParamsPipe } from './pipes/event-params.pipe';
 import { FromWeiPipe } from './pipes/from-wei.pipe';
+import { RedeemVoucherComponent } from '@app/voucher/redeem/redeemvoucher.component';
 import { ResetComponent } from './reset/reset.component';
 import { SetrecordComponent } from './setrecord/setrecord.component';
 import { TransferFromIdentityComponent } from './transfer-from-identity/transfer-from-identity.component';
@@ -25,7 +26,7 @@ import { TransferFromKeyComponent } from './transfer-from-key/transfer-from-key.
 import { TransferTokenFromIdentityComponent } from './transfer-token-from-identity/transfer-token-from-identity.component';
 import { TransferTokenFromKeyComponent } from './transfer-token-from-key/transfer-token-from-key.component';
 import { VaultService } from './vault/vault.service';
-import { VouchersComponent } from './vouchers/vouchers.component';
+import { VoucherListComponent } from '@app/voucher/list/voucherlist.component';
 import { Web3Service } from './web3.service';
 
 @NgModule({
@@ -46,9 +47,10 @@ import { Web3Service } from './web3.service';
     AddtokenComponent,
     TransferTokenFromKeyComponent,
     TransferTokenFromIdentityComponent,
-    VouchersComponent,
-    AddvoucherComponent,
+    VoucherListComponent,
+    AddVoucherComponent,
     CreateVoucherComponent,
+    RedeemVoucherComponent,
     SetrecordComponent,
     DeleterecordComponent,
     ResetComponent,

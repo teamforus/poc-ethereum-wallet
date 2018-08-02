@@ -60,7 +60,7 @@ export class IssueClaimComponent implements OnInit {
 
     const trx = {
       to: issuerContract.options.address,
-      chainId: this.web3Service.chanId,
+      chainId: this.web3Service.chainId,
       gas: 3000000,
       data: issuerContract.methods.execute(
         subjectContract.options.address,

@@ -49,7 +49,7 @@ export class TransferTokenFromIdentityComponent implements OnInit {
 
     const trx = {
       to: senderContract.options.address,
-      chainId: this.web3Service.chanId,
+      chainId: this.web3Service.chainId,
       gas: 3000000,
       data: senderContract.methods.execute(
         // @ts-ignore

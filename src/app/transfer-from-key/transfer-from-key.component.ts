@@ -32,7 +32,7 @@ export class TransferFromKeyComponent implements OnInit {
       // nonce: this.vault.getNonce(),
       from: this.key.address,
       to: this.toAddress,
-      chainId: this.web3Service.chanId,
+      chainId: this.web3Service.chainId,
       gas: 3000000,
       value: this.toValue
     };

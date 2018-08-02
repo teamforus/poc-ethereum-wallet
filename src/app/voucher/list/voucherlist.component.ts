@@ -1,7 +1,7 @@
-import { Web3Service } from './../web3.service';
-import { VaultService } from './../vault/vault.service';
+import { Web3Service } from '@app/web3.service';
+import { VaultService } from '@app/vault/vault.service';
 import { Component, OnInit } from '@angular/core';
-import * as Erc20ContractData from './../../contracts/erc20.js';
+import * as Erc20ContractData from '@contracts/erc20.js';
 
 enum BalanceType {
   Key,
@@ -10,10 +10,10 @@ enum BalanceType {
 
 @Component({
   selector: 'app-vouchers',
-  templateUrl: './vouchers.component.html',
-  styleUrls: ['./vouchers.component.css']
+  templateUrl: './voucherlist.component.html',
+  styleUrls: ['./voucherlist.component.css']
 })
-export class VouchersComponent implements OnInit {
+export class VoucherListComponent implements OnInit {
   BalanceType = BalanceType;
   vouchers: Voucher[] = new Array<Voucher>();
 

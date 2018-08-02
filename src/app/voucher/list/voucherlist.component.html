@@ -1,0 +1,19 @@
+<h2>Vouchers</h2>
+
+<ul>
+  <li *ngFor="let voucher of vouchers">
+    {{voucher.address}}<br/>
+    Sponsor: {{voucher.sponsor}}<br/>
+    Name: {{voucher.name | async}}<br/>
+    <b>Balances</b>
+    <ul>
+      <li *ngFor="let balance of voucher.balances">
+        {{balance.address}} ({{BalanceType[balance.type]}})<br/>
+        balance: {{balance.balance | async}}
+        <a *ngIf="balance.type == BalanceType.Key" routerLink="/voucher/{{voucher.address}}//{{voucher.sponsor}}/redeem/{{balance.address}}">redeem</a>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<a routerLink="/voucher/add">Add voucher</a>

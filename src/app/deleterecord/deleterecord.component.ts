@@ -41,7 +41,7 @@ export class DeleterecordComponent implements OnInit {
     const trx = {
       from: this.web3Service.web3.eth.accounts.privateKeyToAccount(this.managementkey).address,
       to: this.identity.address,
-      chainId: this.web3Service.chanId,
+      chainId: this.web3Service.chainId,
       gas: 10000000,
       data: identityContract.methods.unSetRecord(
         this.web3Service.web3.utils.padLeft(this.web3Service.web3.utils.utf8ToHex(this.recordKey), 32)

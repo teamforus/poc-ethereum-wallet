@@ -38,7 +38,7 @@ export class TransferTokenFromKeyComponent implements OnInit {
     const trx = {
       // @ts-ignore
       to: this.tokenContract.options.address,
-      chainId: this.web3Service.chanId,
+      chainId: this.web3Service.chainId,
       gas: 3000000,
       // @ts-ignore
       data: this.tokenContract.methods.transfer(
