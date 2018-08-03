@@ -49,7 +49,7 @@ export class NewidentityComponent implements OnInit {
     const trx = {
       // nonce: this.vault.getNonce(),
       chainId: this.web3Service.chainId,
-      gas: 'environment.gas',
+      gas: environment.gas,
       data: deploy._deployData
     };
 
