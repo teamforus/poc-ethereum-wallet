@@ -41,7 +41,7 @@ export class Web3Service {
 
     const receipt = await this.sendSignedTransaction(trx, managmentAccount.privateKey);
 
-    if (1 !== this.web3.utils.hexToNumber(receipt.status)) {
+    if (true !== receipt.status) {
       console.log(receipt);
       throw new Error('Could not add key');
     }
