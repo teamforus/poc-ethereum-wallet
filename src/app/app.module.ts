@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 
 import { AppComponent } from './app.component';
@@ -26,6 +26,7 @@ import { SetrecordComponent } from './setrecord/setrecord.component';
 import { DeleterecordComponent } from './deleterecord/deleterecord.component';
 import { ResetComponent } from './reset/reset.component';
 import { FromWeiPipe } from './pipes/from-wei.pipe';
+import { OnsenModule } from 'ngx-onsenui';
 
 
 @NgModule({
@@ -54,9 +55,11 @@ import { FromWeiPipe } from './pipes/from-wei.pipe';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    OnsenModule
   ],
   providers: [VaultService, Web3Service],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }

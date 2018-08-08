@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Identity as VaultIdentity } from '../vault/identity';
 
 @Component({
-  selector: 'app-identities',
+  selector: 'ons-page[identities]',
   templateUrl: './identities.component.html',
   styleUrls: ['./identities.component.css']
 })

@@ -3,7 +3,7 @@ import { VaultService } from './../vault/vault.service';
 import { Key } from '../vault/key';
 
 @Component({
-  selector: 'app-keys',
+  selector: 'ons-page[keys]',
   templateUrl: './keys.component.html',
   styleUrls: ['./keys.component.css']
 })

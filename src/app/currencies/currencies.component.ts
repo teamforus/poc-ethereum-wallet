@@ -11,7 +11,7 @@ enum BalanceType {
 }
 
 @Component({
-  selector: 'app-currencies',
+  selector: 'ons-page[currencies]',
   templateUrl: './currencies.component.html',
   styleUrls: ['./currencies.component.css']
 })

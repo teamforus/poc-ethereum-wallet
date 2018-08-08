@@ -20,7 +20,7 @@ import { DeleterecordComponent } from './deleterecord/deleterecord.component';
 import { ResetComponent } from './reset/reset.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/identities', pathMatch: 'full' },
+  //{ path: '', redirectTo: '/identities', pathMatch: 'full' },
   { path: 'identities', component: IdentitiesComponent },
   { path: 'identities/new', component: NewidentityComponent },
   { path: 'identities/:address/newkey', component: IdentityaddkeyComponent },

@@ -1,10 +1,13 @@
-<h1>{{title}}</h1>
-<nav>
-  <a routerLink="/keys">Keys</a>
-  |
-  <a routerLink="/identities">Identities</a>
-  |
-  <a routerLink="/currencies">Currencies</a>
-</nav>
-<hr/>
-<router-outlet></router-outlet>
+<ons-toolbar>
+    <div class="center">{{title}}</div>
+</ons-toolbar>
+
+<ons-tabbar>
+    <div class="tabbar__content"></div>
+    <div class="tabbar">
+        <ons-tab label="Keys" [page]="keys" active></ons-tab>
+        <ons-tab label="Identities" [page]="identities"></ons-tab>
+        <ons-tab label="Currencies" [page]="currencies"></ons-tab>
+    </div>
+</ons-tabbar>
+
