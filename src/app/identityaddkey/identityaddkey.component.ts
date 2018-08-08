@@ -8,7 +8,7 @@ import { Identity } from './../vault/identity';
 import * as IdentityContractData from './../../contracts/identity.js';
 
 @Component({
-  selector: 'app-identityaddkey',
+  selector: 'ons-page[identityaddkey]',
   templateUrl: './identityaddkey.component.html',
   styleUrls: ['./identityaddkey.component.css']
 })

@@ -1,6 +1,6 @@
+import { KeysPageNavComponent } from './keys-page-nav/keys-page-nav.component';
 import { CurrenciesComponent } from './currencies/currencies.component';
 import { IdentitiesComponent } from './identities/identities.component';
-import { KeysComponent } from './keys/keys.component';
 import { Component } from '@angular/core';
 
 @Component({
@@ -11,7 +11,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Wallet';
 
-  keys = KeysComponent;
+  keys = KeysPageNavComponent;
   identities = IdentitiesComponent;
   currencies = CurrenciesComponent;
 }

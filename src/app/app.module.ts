@@ -27,6 +27,7 @@ import { DeleterecordComponent } from './deleterecord/deleterecord.component';
 import { ResetComponent } from './reset/reset.component';
 import { FromWeiPipe } from './pipes/from-wei.pipe';
 import { OnsenModule } from 'ngx-onsenui';
+import { KeysPageNavComponent } from './keys-page-nav/keys-page-nav.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { OnsenModule } from 'ngx-onsenui';
     SetrecordComponent,
     DeleterecordComponent,
     ResetComponent,
-    FromWeiPipe
+    FromWeiPipe,
+    KeysPageNavComponent
   ],
   imports: [
     BrowserModule,
@@ -60,6 +62,9 @@ import { OnsenModule } from 'ngx-onsenui';
   ],
   providers: [VaultService, Web3Service],
   bootstrap: [AppComponent],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+  entryComponents: [
+    KeysPageNavComponent
+  ]
 })
 export class AppModule { }
