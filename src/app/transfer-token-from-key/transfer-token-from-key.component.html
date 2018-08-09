@@ -1,3 +1,4 @@
+<ons-page id="transfer-token-from-key">
 <h2>Transfer token from {{tokenContract.options.address}} held by {{this.key.address}}</h2>
 <p>
     Balance: {{balance | async}}
@@ -13,3 +14,4 @@
 <br/>
 <ons-button (click)="transfer()">transfer</ons-button>
 <ons-button (click)="cancel()">Cancel</ons-button>
+</ons-page>
