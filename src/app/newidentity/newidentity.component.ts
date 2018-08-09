@@ -1,14 +1,13 @@
+import { OnsNavigator } from 'ngx-onsenui';
 import { Key } from './../vault/key';
-import { async } from '@angular/core/testing';
 import { VaultService } from './../vault/vault.service';
 import { Web3Service } from './../web3.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import * as IdentityContractData from './../../contracts/identity.js';
 import { environment } from '../../environments/environment';
 
 @Component({
-  selector: 'app-newidentity',
+  selector: 'ons-page[newidentity]',
   templateUrl: './newidentity.component.html',
   styleUrls: ['./newidentity.component.css']
 })
@@ -20,7 +19,7 @@ export class NewidentityComponent implements OnInit {
   constructor(
     public web3Service: Web3Service,
     private vault: VaultService,
-    private router: Router
+    private navigator: OnsNavigator
   ) { }
 
   ngOnInit() {
@@ -31,7 +30,7 @@ export class NewidentityComponent implements OnInit {
     const keyAccount = this.web3Service.web3.eth.accounts.privateKeyToAccount(this.managementkey);
     const identityAddress = await this.deployIdentityContract(keyAccount);
     this.vault.addIdentity(this.name, identityAddress, keyAccount.privateKey);
-    this.router.navigate(['/identities']);
+    this.navigator.element.popPage();
   }
 
   private async deployIdentityContract(senderAccount) {
@@ -47,7 +46,6 @@ export class NewidentityComponent implements OnInit {
     );
 
     const trx = {
-      // nonce: this.vault.getNonce(),
       chainId: this.web3Service.chainId,
       gas: environment.gas,
       data: deploy._deployData
@@ -67,6 +65,10 @@ export class NewidentityComponent implements OnInit {
     });
 
     return contractAddress;
+  }
+
+  cancel() {
+    this.navigator.element.popPage();
   }
 
 }

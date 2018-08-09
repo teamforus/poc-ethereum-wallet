@@ -10,5 +10,7 @@
 <ul>
   <li *ngFor="let event of allEvents">{{event.event}} ({{event.returnValues | eventParams}})</li>
 </ul>
-<a routerLink="/identities/{{identity.address}}/newkey">New key</a>
-<a routerLink="/identities/{{identity.address}}/issueclaim">Issue new claim</a>
+<ons-button (click)="newkey(identity.address)">New key</ons-button>
+<ons-button (click)="issueclaim(identity.address)">Issue new claim</ons-button>
+<br/>
+<ons-button (click)="back()">Back</ons-button>

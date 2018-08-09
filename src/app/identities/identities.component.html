@@ -1,5 +1,7 @@
 <h2>Identities</h2>
 <ul>
-  <li *ngFor="let identity of identities"><a routerLink="/identities/{{identity.address}}">{{identity.name}}</a></li>
+  <li *ngFor="let identity of identities">
+      <ons-button (click)="show(identity.address)">{{identity.name}}</ons-button>
+  </li>
 </ul>
-<a routerLink="/identities/new">Create new identity</a>
+<ons-button (click)="new()">Create new identity</ons-button>

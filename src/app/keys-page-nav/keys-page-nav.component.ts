@@ -1,5 +1,5 @@
 import { KeysComponent } from './../keys/keys.component';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'ons-page[keys-page-nav]',

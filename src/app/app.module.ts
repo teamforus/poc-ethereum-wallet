@@ -27,6 +27,7 @@ import { FromWeiPipe } from './pipes/from-wei.pipe';
 import { OnsenModule } from 'ngx-onsenui';
 import { KeysPageNavComponent } from './keys-page-nav/keys-page-nav.component';
 import { CurrenciesPageNavComponent } from './currencies-page-nav/currencies-page-nav.component';
+import { IdentitiesPageNavComponent } from './identities-page-nav/identities-page-nav.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { CurrenciesPageNavComponent } from './currencies-page-nav/currencies-pag
     ResetComponent,
     FromWeiPipe,
     KeysPageNavComponent,
-    CurrenciesPageNavComponent
+    CurrenciesPageNavComponent,
+    IdentitiesPageNavComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +65,8 @@ import { CurrenciesPageNavComponent } from './currencies-page-nav/currencies-pag
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   entryComponents: [
     KeysPageNavComponent,
-    CurrenciesPageNavComponent
+    CurrenciesPageNavComponent,
+    IdentitiesPageNavComponent
   ]
 })
 export class AppModule { }
