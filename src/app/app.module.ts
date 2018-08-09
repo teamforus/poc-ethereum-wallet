@@ -22,8 +22,6 @@ import { TransferFromIdentityComponent } from './transfer-from-identity/transfer
 import { AddtokenComponent } from './addtoken/addtoken.component';
 import { TransferTokenFromKeyComponent } from './transfer-token-from-key/transfer-token-from-key.component';
 import { TransferTokenFromIdentityComponent } from './transfer-token-from-identity/transfer-token-from-identity.component';
-import { SetrecordComponent } from './setrecord/setrecord.component';
-import { DeleterecordComponent } from './deleterecord/deleterecord.component';
 import { ResetComponent } from './reset/reset.component';
 import { FromWeiPipe } from './pipes/from-wei.pipe';
 import { OnsenModule } from 'ngx-onsenui';
@@ -49,8 +47,6 @@ import { CurrenciesPageNavComponent } from './currencies-page-nav/currencies-pag
     AddtokenComponent,
     TransferTokenFromKeyComponent,
     TransferTokenFromIdentityComponent,
-    SetrecordComponent,
-    DeleterecordComponent,
     ResetComponent,
     FromWeiPipe,
     KeysPageNavComponent,
