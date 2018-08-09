@@ -1,7 +1,7 @@
 <ons-page id="importkey">
 <h2>Import key</h2>
 <label>Private key:
-  <input [(ngModel)]="privatekey" placeholder="Private key">
+  <input [(ngModel)]="privatekey" placeholder="Private key"><ons-button (click)="scan()">Scan</ons-button>
 </label>
 <br/>
 <ons-button (click)="importkey()">Import</ons-button>

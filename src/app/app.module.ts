@@ -28,6 +28,7 @@ import { OnsenModule } from 'ngx-onsenui';
 import { KeysPageNavComponent } from './keys-page-nav/keys-page-nav.component';
 import { CurrenciesPageNavComponent } from './currencies-page-nav/currencies-page-nav.component';
 import { IdentitiesPageNavComponent } from './identities-page-nav/identities-page-nav.component';
+import { ScannerService } from './scanner.service';
 
 
 @NgModule({
@@ -60,7 +61,7 @@ import { IdentitiesPageNavComponent } from './identities-page-nav/identities-pag
     FormsModule,
     OnsenModule
   ],
-  providers: [VaultService, Web3Service],
+  providers: [VaultService, Web3Service, ScannerService],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   entryComponents: [
