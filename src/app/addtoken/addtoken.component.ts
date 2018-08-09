@@ -1,10 +1,11 @@
+import { OnsNavigator } from 'ngx-onsenui';
 import { Router } from '@angular/router';
 import { VaultService } from './../vault/vault.service';
 import { Web3Service } from './../web3.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-addtoken',
+  selector: 'ons-page[addtoken]',
   templateUrl: './addtoken.component.html',
   styleUrls: ['./addtoken.component.css']
 })
@@ -14,7 +15,7 @@ export class AddtokenComponent implements OnInit {
   constructor(
     public web3Service: Web3Service,
     private vault: VaultService,
-    private router: Router
+    private navigator: OnsNavigator
   ) { }
 
   ngOnInit() {
@@ -22,7 +23,11 @@ export class AddtokenComponent implements OnInit {
 
   add() {
     this.vault.addToken(this.tokenAddress);
-    this.router.navigate(['/currencies']);
+    this.navigator.element.popPage();
+  }
+
+  cancel() {
+    this.navigator.element.popPage();
   }
 
 }

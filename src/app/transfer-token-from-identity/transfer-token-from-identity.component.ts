@@ -2,14 +2,14 @@ import { Identity } from './../vault/identity';
 import { Key } from './../vault/key';
 import { VaultService } from './../vault/vault.service';
 import { Web3Service } from './../web3.service';
-import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import * as Erc20ContractData from './../../contracts/erc20.js';
 import * as IdentityContractData from './../../contracts/identity.js';
 import { environment } from '../../environments/environment';
+import { Params, OnsNavigator } from 'ngx-onsenui';
 
 @Component({
-  selector: 'app-transfer-token-from-identity',
+  selector: 'ons-page[transfer-token-from-identity]',
   templateUrl: './transfer-token-from-identity.component.html',
   styleUrls: ['./transfer-token-from-identity.component.css']
 })
@@ -25,20 +25,20 @@ export class TransferTokenFromIdentityComponent implements OnInit {
 
   constructor(
     private vault: VaultService,
-    private route: ActivatedRoute,
     private web3Service: Web3Service,
-    private router: Router
+    private params: Params,
+    private navigator: OnsNavigator
   ) { }
 
   ngOnInit() {
-    this.identity = this.vault.getIdentity(this.route.snapshot.paramMap.get('address'));
+    this.identity = this.vault.getIdentity(this.params.data.balanceAddress);
     this.tokenContract = new this.web3Service.web3.eth.Contract(
       Erc20ContractData.abi,
-      this.route.snapshot.paramMap.get('tokenaddress')
+      this.params.data.tokenAddress
     );
     this.managementkeys = this.vault.getManagementKeys(this.identity.address);
     // @ts-ignore
-    this.balance = this.tokenContract.methods.balanceOf(this.identity.address).call();
+    this.balance = this.tokenContract.methods.balanceOf(this.identity.balanceAddress).call();
   }
 
   async transfer() {
@@ -65,7 +65,11 @@ export class TransferTokenFromIdentityComponent implements OnInit {
     };
 
     await this.web3Service.sendSignedTransaction(trx, this.managementkey);
-    this.router.navigate(['/currencies']);
+    this.navigator.element.popPage();
+  }
+
+  cancel() {
+    this.navigator.element.popPage();
   }
 
 }

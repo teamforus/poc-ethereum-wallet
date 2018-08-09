@@ -1,5 +1,5 @@
+import { CurrenciesPageNavComponent } from './currencies-page-nav/currencies-page-nav.component';
 import { KeysPageNavComponent } from './keys-page-nav/keys-page-nav.component';
-import { CurrenciesComponent } from './currencies/currencies.component';
 import { IdentitiesComponent } from './identities/identities.component';
 import { Component } from '@angular/core';
 
@@ -13,5 +13,5 @@ export class AppComponent {
 
   keys = KeysPageNavComponent;
   identities = IdentitiesComponent;
-  currencies = CurrenciesComponent;
+  currencies = CurrenciesPageNavComponent;
 }

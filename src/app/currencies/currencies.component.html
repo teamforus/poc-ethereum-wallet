@@ -5,8 +5,8 @@
   <li *ngFor="let ethBalance of ethBalances">
     {{ethBalance.address}} ({{BalanceType[ethBalance.type]}})<br/>
     balance: {{ethBalance.balance | async | fromWei:'ether'}}
-    <a *ngIf="ethBalance.type == BalanceType.Key" routerLink="/keys/{{ethBalance.address}}/transfer">transfer</a>
-    <a *ngIf="ethBalance.type == BalanceType.Identity" routerLink="/identities/{{ethBalance.address}}/transfer">transfer</a>
+    <ons-button *ngIf="ethBalance.type == BalanceType.Key" (click)="transferFromKey(ethBalance.address)">transfer</ons-button>
+    <ons-button *ngIf="ethBalance.type == BalanceType.Identity" (click)="transferFromIdentity(ethBalance.address)">transfer</ons-button>
   </li>
 </ul>
 
@@ -20,11 +20,11 @@
       <li *ngFor="let balance of token.balances">
         {{balance.address}} ({{BalanceType[balance.type]}})<br/>
         balance: {{balance.balance | async}}
-        <a *ngIf="balance.type == BalanceType.Key" routerLink="/keys/{{balance.address}}/transfertoken/{{token.address}}">transfer</a>
-        <a *ngIf="balance.type == BalanceType.Identity" routerLink="/identities/{{balance.address}}/transfertoken/{{token.address}}">transfer</a>
+        <ons-button *ngIf="balance.type == BalanceType.Key" (click)="transferTokenFromKey(balance.address, token.address)">transfer</ons-button>
+        <ons-button *ngIf="balance.type == BalanceType.Identity" (click)="transferTokenFromIdentity(balance.address, token.address)">transfer</ons-button>
       </li>
     </ul>
   </li>
 </ul>
 
-<a routerLink="/currencies/addtoken">Add token</a>
+<ons-button (click)="addToken()">Add token</ons-button>

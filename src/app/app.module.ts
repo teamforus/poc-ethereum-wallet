@@ -28,6 +28,7 @@ import { ResetComponent } from './reset/reset.component';
 import { FromWeiPipe } from './pipes/from-wei.pipe';
 import { OnsenModule } from 'ngx-onsenui';
 import { KeysPageNavComponent } from './keys-page-nav/keys-page-nav.component';
+import { CurrenciesPageNavComponent } from './currencies-page-nav/currencies-page-nav.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { KeysPageNavComponent } from './keys-page-nav/keys-page-nav.component';
     DeleterecordComponent,
     ResetComponent,
     FromWeiPipe,
-    KeysPageNavComponent
+    KeysPageNavComponent,
+    CurrenciesPageNavComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +66,8 @@ import { KeysPageNavComponent } from './keys-page-nav/keys-page-nav.component';
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   entryComponents: [
-    KeysPageNavComponent
+    KeysPageNavComponent,
+    CurrenciesPageNavComponent
   ]
 })
 export class AppModule { }

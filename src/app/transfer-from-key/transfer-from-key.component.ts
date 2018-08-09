@@ -1,12 +1,12 @@
 import { Web3Service } from './../web3.service';
 import { Key } from './../vault/key';
-import { ActivatedRoute, Router } from '@angular/router';
 import { VaultService } from './../vault/vault.service';
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../environments/environment';
+import { Params, OnsNavigator } from 'ngx-onsenui';
 
 @Component({
-  selector: 'app-transfer-from-key',
+  selector: 'ons-page[transfer-from-key]',
   templateUrl: './transfer-from-key.component.html',
   styleUrls: ['./transfer-from-key.component.css']
 })
@@ -18,19 +18,18 @@ export class TransferFromKeyComponent implements OnInit {
 
   constructor(
     private vault: VaultService,
-    private route: ActivatedRoute,
     private web3Service: Web3Service,
-    private router: Router
+    private params: Params,
+    private navigator: OnsNavigator
   ) { }
 
   ngOnInit() {
-    this.key = this.vault.getKeyByAddress(this.route.snapshot.paramMap.get('address'));
+    this.key = this.vault.getKeyByAddress(this.params.data.address);
     this.web3Service.web3.eth.getBalance(this.key.address).then((balance) => { this.balance = balance; });
   }
 
   async transfer() {
     const trx = {
-      // nonce: this.vault.getNonce(),
       from: this.key.address,
       to: this.toAddress,
       chainId: this.web3Service.chainId,
@@ -52,8 +51,12 @@ export class TransferFromKeyComponent implements OnInit {
       throw new Error('Error transferring ether');
     }
 
-    this.router.navigate(['/currencies']);
+    this.navigator.element.popPage();
 
+  }
+
+  cancel() {
+    this.navigator.element.popPage();
   }
 
 }

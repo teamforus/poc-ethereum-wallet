@@ -1,8 +1,13 @@
-import { Key } from './../vault/key';
+import { TransferTokenFromIdentityComponent } from './../transfer-token-from-identity/transfer-token-from-identity.component';
+import { TransferTokenFromKeyComponent } from './../transfer-token-from-key/transfer-token-from-key.component';
+import { TransferFromIdentityComponent } from './../transfer-from-identity/transfer-from-identity.component';
+import { OnsNavigator } from 'ngx-onsenui';
+import { AddtokenComponent } from './../addtoken/addtoken.component';
 import { Web3Service } from './../web3.service';
 import { VaultService } from './../vault/vault.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import * as Erc20ContractData from './../../contracts/erc20.js';
+import { TransferFromKeyComponent } from '../transfer-from-key/transfer-from-key.component';
 
 
 enum BalanceType {
@@ -22,7 +27,8 @@ export class CurrenciesComponent implements OnInit {
 
   constructor(
     private vault: VaultService,
-    private web3Service: Web3Service
+    private web3Service: Web3Service,
+    private navigator: OnsNavigator
   ) { }
 
   ngOnInit() {
@@ -76,6 +82,35 @@ export class CurrenciesComponent implements OnInit {
       this.tokens.push(token);
     }
 
+  }
+
+  @HostListener('window:show', ['$event'])
+  onShow(event) {
+    //console.log(event);
+  }
+
+  transferFromKey(address) {
+    this.navigator.element.pushPage(TransferFromKeyComponent, {data: {address: address}});
+  }
+
+  transferFromIdentity(address) {
+    this.navigator.element.pushPage(TransferFromIdentityComponent, {data: {address: address}});
+  }
+
+  transferTokenFromKey(balanceAddress, tokenAddress) {
+    this.navigator.element.pushPage(
+      TransferTokenFromKeyComponent, {data: {balanceAddress: balanceAddress, tokenAddress: tokenAddress}}
+    );
+  }
+
+  transferTokenFromIdentity(balanceAddress, tokenAddress) {
+    this.navigator.element.pushPage(
+      TransferTokenFromIdentityComponent, {data: {balanceAddress: balanceAddress, tokenAddress: tokenAddress}}
+    );
+  }
+
+  addToken() {
+    this.navigator.element.pushPage(AddtokenComponent);
   }
 
 }
