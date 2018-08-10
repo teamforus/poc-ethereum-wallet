@@ -1,13 +1,12 @@
-<ons-toolbar>
-    <div class="center">{{title}}</div>
-</ons-toolbar>
-
-<ons-tabbar>
-    <div class="tabbar__content"></div>
-    <div class="tabbar">
-        <ons-tab label="Keys" [page]="keys" active></ons-tab>
-        <ons-tab label="Identities" [page]="identities"></ons-tab>
-        <ons-tab label="Currencies" [page]="currencies"></ons-tab>
+<ons-page>
+    <div class="content">
+        <ons-tabbar>
+            <div class="tabbar__content"></div>
+            <div class="tabbar">
+                <ons-tab label="Keys" [page]="keys" active></ons-tab>
+                <ons-tab label="Identities" [page]="identities"></ons-tab>
+                <ons-tab label="Currencies" [page]="currencies"></ons-tab>
+            </div>
+        </ons-tabbar>
     </div>
-</ons-tabbar>
-
+</ons-page>

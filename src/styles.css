@@ -1,1 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
+
+
+.page_buttons {
+    text-align: center;
+}
+
+.page_buttons ons-button {
+    display: block;
+    margin: 10px;
+}
+
+.margin {
+    margin: 10px;
+}
+
+ons-toolbar p {
+    margin: 10px;
+}
+
+ons-page ons-toolbar p {
+    font-weight: bold;
+}

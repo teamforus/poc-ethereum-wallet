@@ -1,9 +1,17 @@
 <ons-page id="importkey">
-<h2>Import key</h2>
-<label>Private key:
-  <input [(ngModel)]="privatekey" placeholder="Private key"><ons-button (click)="scan()">Scan</ons-button>
-</label>
-<br/>
-<ons-button (click)="importkey()">Import</ons-button>
-<ons-button (click)="cancel()">Cancel</ons-button>
+
+    <ons-toolbar>
+        <p>Import key</p>
+    </ons-toolbar>
+
+    <div class="margin" style="height: 27px">
+        <ons-input style="position: absolute; left:10px; right: 50px;" placeholder="Private key" [(ngModel)]="privatekey"></ons-input>
+        <ons-icon style="position: absolute; right: 11px; font-size: 31px;" icon="fa-qrcode" (click)="scan()"></ons-icon>
+    </div>
+
+    <div class="page_buttons">
+        <ons-button (click)="importkey()">Import</ons-button>
+        <ons-button (click)="cancel()">Cancel</ons-button>
+    </div>
+
 </ons-page>
