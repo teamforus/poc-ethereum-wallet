@@ -29,6 +29,7 @@ import { KeysPageNavComponent } from './keys-page-nav/keys-page-nav.component';
 import { CurrenciesPageNavComponent } from './currencies-page-nav/currencies-page-nav.component';
 import { IdentitiesPageNavComponent } from './identities-page-nav/identities-page-nav.component';
 import { ScannerService } from './scanner.service';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { ScannerService } from './scanner.service';
     FromWeiPipe,
     KeysPageNavComponent,
     CurrenciesPageNavComponent,
-    IdentitiesPageNavComponent
+    IdentitiesPageNavComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +69,8 @@ import { ScannerService } from './scanner.service';
   entryComponents: [
     KeysPageNavComponent,
     CurrenciesPageNavComponent,
-    IdentitiesPageNavComponent
+    IdentitiesPageNavComponent,
+    LoginComponent
   ]
 })
 export class AppModule { }

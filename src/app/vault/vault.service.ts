@@ -2,6 +2,7 @@ import { Web3Service } from './../web3.service';
 import { Injectable } from '@angular/core';
 import { Identity } from './identity';
 import { Key } from './key';
+import { isString, isObject } from 'util';
 
 @Injectable()
 export class VaultService {
@@ -139,10 +140,33 @@ export class VaultService {
     const result = new Array<Key>();
     const identity = this.getIdentity(identityAddress);
     for (const key of identity.keys) {
-      if (1 === key.purpose) {
+      if ('1' === key.purpose.toString()) {
         result.push(key);
       }
     }
+    return result;
+  }
+
+  getKeysByPurpose(identity: string|Identity, purpose: number): Array<Key> {
+    const result = new Array<Key>();
+
+    if (isString(identity)) {
+      // @ts-ignore
+      identity = this.getIdentity(identity);
+    }
+
+    if (!isObject(identity)) {
+      return result;
+    }
+
+    const purposeStr = purpose.toString();
+    // @ts-ignore
+    for (const key of identity.keys) {
+      if (purposeStr === key.purpose.toString()) {
+        result.push(key);
+      }
+    }
+
     return result;
   }
 
