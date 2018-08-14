@@ -1,3 +1,4 @@
+import { Web3Service } from './../web3.service';
 import { VaultService } from './../vault/vault.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,7 +10,8 @@ import { Component, OnInit } from '@angular/core';
 export class SettingsComponent implements OnInit {
 
   constructor(
-    private vault: VaultService
+    private vault: VaultService,
+    private web3Service: Web3Service
   ) { }
 
   ngOnInit() {
