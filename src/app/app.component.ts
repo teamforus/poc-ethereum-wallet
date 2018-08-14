@@ -1,3 +1,4 @@
+import { TransactionComponent } from './transaction/transaction.component';
 import { IdentitiesPageNavComponent } from './identities-page-nav/identities-page-nav.component';
 import { CurrenciesPageNavComponent } from './currencies-page-nav/currencies-page-nav.component';
 import { KeysPageNavComponent } from './keys-page-nav/keys-page-nav.component';
@@ -17,5 +18,6 @@ export class AppComponent {
   identities = IdentitiesPageNavComponent;
   currencies = CurrenciesPageNavComponent;
   login = LoginComponent;
-  settings = SettingsComponent
+  settings = SettingsComponent;
+  transaction = TransactionComponent;
 }

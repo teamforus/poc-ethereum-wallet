@@ -31,6 +31,7 @@ import { IdentitiesPageNavComponent } from './identities-page-nav/identities-pag
 import { ScannerService } from './scanner.service';
 import { LoginComponent } from './login/login.component';
 import { SettingsComponent } from './settings/settings.component';
+import { TransactionComponent } from './transaction/transaction.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { SettingsComponent } from './settings/settings.component';
     CurrenciesPageNavComponent,
     IdentitiesPageNavComponent,
     LoginComponent,
-    SettingsComponent
+    SettingsComponent,
+    TransactionComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +75,8 @@ import { SettingsComponent } from './settings/settings.component';
     CurrenciesPageNavComponent,
     IdentitiesPageNavComponent,
     LoginComponent,
-    SettingsComponent
+    SettingsComponent,
+    TransactionComponent
   ]
 })
 export class AppModule { }
