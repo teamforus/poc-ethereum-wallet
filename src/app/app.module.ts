@@ -30,6 +30,7 @@ import { CurrenciesPageNavComponent } from './currencies-page-nav/currencies-pag
 import { IdentitiesPageNavComponent } from './identities-page-nav/identities-page-nav.component';
 import { ScannerService } from './scanner.service';
 import { LoginComponent } from './login/login.component';
+import { SettingsComponent } from './settings/settings.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { LoginComponent } from './login/login.component';
     KeysPageNavComponent,
     CurrenciesPageNavComponent,
     IdentitiesPageNavComponent,
-    LoginComponent
+    LoginComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +72,8 @@ import { LoginComponent } from './login/login.component';
     KeysPageNavComponent,
     CurrenciesPageNavComponent,
     IdentitiesPageNavComponent,
-    LoginComponent
+    LoginComponent,
+    SettingsComponent
   ]
 })
 export class AppModule { }

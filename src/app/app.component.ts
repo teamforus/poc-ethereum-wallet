@@ -3,6 +3,7 @@ import { CurrenciesPageNavComponent } from './currencies-page-nav/currencies-pag
 import { KeysPageNavComponent } from './keys-page-nav/keys-page-nav.component';
 import { Component } from '@angular/core';
 import { LoginComponent } from './login/login.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @Component({
   selector: 'app-root',
@@ -16,4 +17,5 @@ export class AppComponent {
   identities = IdentitiesPageNavComponent;
   currencies = CurrenciesPageNavComponent;
   login = LoginComponent;
+  settings = SettingsComponent
 }
