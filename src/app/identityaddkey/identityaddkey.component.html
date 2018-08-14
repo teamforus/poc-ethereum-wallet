@@ -31,7 +31,7 @@
 <br/>
 <label>Management key to use:
   <select [(ngModel)]="managementkey">
-      <option *ngFor="let key of managementkeys">{{key.key}}</option>
+      <option *ngFor="let key of managementkeys" [ngValue]="key.key">{{key.address}}</option>
   </select>
 </label>
 
