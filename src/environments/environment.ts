@@ -7,5 +7,19 @@ export const environment = {
   production: false,
   ethNode: 'ws://127.0.0.1:8546',
   gas: 10000000,
-  chainId: 3177
+  chainId: 3177,
+  libAddrMap: [
+    {
+      libName: 'IdentityData',
+      address: 'b1a63262FD865D3813a799eC1D0ade3B3891179f'
+    },
+    {
+      libName: 'IdentityLib',
+      address: '1532164Bb9A7f928776Ac3fc0A5F04abDa03e952'
+    },
+    {
+      libName: 'ClaimHolderLib',
+      address: '87fdd7492317bE986B9e950655ad2862B13Ca2Df'
+    }
+  ]
 };

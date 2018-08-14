@@ -41,8 +41,16 @@ export class NewidentityComponent implements OnInit {
       null
     );
 
+    let contractBin = IdentityContractData.bin;
+
+    console.log(environment.libAddrMap);
+    environment.libAddrMap.forEach((addrMap) => {
+      const placeholder = ('__' + addrMap.libName + '.sol:' + addrMap.libName).padEnd(40, '_');
+      contractBin = contractBin.replace(new RegExp(placeholder, 'g'), addrMap.address);
+    });
+
     const deploy = IdentityContract.deploy(
-      { data: IdentityContractData.bin }
+      { data: contractBin }
     );
 
     const trx = {
