@@ -1,7 +1,11 @@
 <ons-page id="identity">
 <h2>Identity {{identity.name}}</h2>
+<h3>
+  Contract address
+</h3>
 <p>
-  Contract address: {{identity.address}}
+  {{identity.address}}
+<qrcode [qrdata]="identity.address" [size]="128" [level]="'M'"></qrcode>
 </p>
 <h3>Keys</h3>
 <ul>

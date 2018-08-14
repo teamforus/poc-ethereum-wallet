@@ -20,3 +20,8 @@ ons-toolbar p {
 ons-page ons-toolbar p {
     font-weight: bold;
 }
+
+qrcode {
+  display: block;
+  margin: 10px;
+}

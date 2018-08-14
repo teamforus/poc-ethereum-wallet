@@ -32,6 +32,7 @@ import { ScannerService } from './scanner.service';
 import { LoginComponent } from './login/login.component';
 import { SettingsComponent } from './settings/settings.component';
 import { TransactionComponent } from './transaction/transaction.component';
+import { QRCodeModule } from 'angularx-qrcode';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { TransactionComponent } from './transaction/transaction.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    OnsenModule
+    OnsenModule,
+    QRCodeModule
   ],
   providers: [VaultService, Web3Service, ScannerService],
   bootstrap: [AppComponent],
