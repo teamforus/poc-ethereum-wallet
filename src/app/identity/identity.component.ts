@@ -42,8 +42,6 @@ export class IdentityComponent implements OnInit {
         if (error) {
           throw new error(error);
         }
-        console.log('All: ');
-        console.log(event);
         this.allEvents.push(event);
       }
     );
@@ -55,8 +53,6 @@ export class IdentityComponent implements OnInit {
         if (error) {
           throw new error(error);
         }
-        console.log('Past: ');
-        console.log(events);
         this.allEvents = events;
       }
     );
