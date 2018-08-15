@@ -4,32 +4,42 @@
         <p>Currencies</p>
     </ons-toolbar>
 
-    <h3>Ether</h3>
-    <ul>
-      <li *ngFor="let ethBalance of ethBalances">
-        {{ethBalance.address}} ({{BalanceType[ethBalance.type]}})<br/>
-        balance: {{ethBalance.balance | async | fromWei:'ether'}}
-        <ons-button *ngIf="ethBalance.type == BalanceType.Key" (click)="transferFromKey(ethBalance.address)">transfer</ons-button>
-        <ons-button *ngIf="ethBalance.type == BalanceType.Identity" (click)="transferFromIdentity(ethBalance.address)">transfer</ons-button>
-      </li>
-    </ul>
+    <ons-card>
+        <div class="title">
+            Ether
+        </div>
+        <div class="content">
+            <ons-list>
+                <ons-list-item *ngFor="let ethBalance of ethBalances">
+                    <div>
+                        {{ethBalance.address}} ({{BalanceType[ethBalance.type]}})<br/>
+                        balance: {{ethBalance.balance | async | fromWei:'ether'}}<br/>
+                        <ons-button *ngIf="ethBalance.type == BalanceType.Key" (click)="transferFromKey(ethBalance.address)">transfer</ons-button>
+                        <ons-button *ngIf="ethBalance.type == BalanceType.Identity" (click)="transferFromIdentity(ethBalance.address)">transfer</ons-button>
+                    </div>
+                </ons-list-item>
+            </ons-list>
+        </div>
+    </ons-card>
 
-    <h3>Tokens</h3>
-    <ul>
-      <li *ngFor="let token of tokens">
-        {{token.address}}<br/>
-        Name: {{token.name | async}}<br/>
-        <b>Balances</b>
-        <ul>
-          <li *ngFor="let balance of token.balances">
-            {{balance.address}} ({{BalanceType[balance.type]}})<br/>
-            balance: {{balance.balance | async}}
-            <ons-button *ngIf="balance.type == BalanceType.Key" (click)="transferTokenFromKey(balance.address, token.address)">transfer</ons-button>
-            <ons-button *ngIf="balance.type == BalanceType.Identity" (click)="transferTokenFromIdentity(balance.address, token.address)">transfer</ons-button>
-          </li>
-        </ul>
-      </li>
-    </ul>
+    <ons-card *ngFor="let token of tokens">
+        <div class="title">
+            {{token.address}}
+            <br/>
+            Name: {{token.name | async}}
+        </div>
+        <div class="content">
+            <ons-list>
+                <ons-list-header>Balances</ons-list-header>
+                <ons-list-item *ngFor="let balance of token.balances">
+                    {{balance.address}} ({{BalanceType[balance.type]}})<br/>
+                    balance: {{balance.balance | async}}<br/>
+                    <ons-button *ngIf="balance.type == BalanceType.Key" (click)="transferTokenFromKey(balance.address, token.address)">transfer</ons-button>
+                    <ons-button *ngIf="balance.type == BalanceType.Identity" (click)="transferTokenFromIdentity(balance.address, token.address)">transfer</ons-button>
+                </ons-list-item>
+            </ons-list>
+        </div>
+    </ons-card>
 
     <div class="page_buttons">
         <ons-button (click)="addToken()">Add token</ons-button>

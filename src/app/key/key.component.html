@@ -8,7 +8,7 @@
         <div class="title">
             Public key
         </div>
-        <div>
+        <div class="content">
             {{key.address}}
             <qrcode [qrdata]="key.address" [size]="128" [level]="'M'"></qrcode>
         </div>
@@ -18,7 +18,7 @@
         <div class="title">
             Private key
         </div>
-        <div>
+        <div class="content">
             {{key.key}}
             <qrcode [qrdata]="key.key" [size]="128" [level]="'M'"></qrcode>
         </div>

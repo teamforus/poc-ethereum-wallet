@@ -4,23 +4,38 @@
         <p>Identity {{identity.name}}</p>
     </ons-toolbar>
 
-    <h3>
-      Contract address
-    </h3>
-    <p>
-      {{identity.address}}
-    <qrcode [qrdata]="identity.address" [size]="128" [level]="'M'"></qrcode>
-    </p>
+    <ons-card>
+        <div class="title">
+            Address
+        </div>
+        <div class="content">
+            {{identity.address}}
+            <qrcode [qrdata]="identity.address" [size]="128" [level]="'M'"></qrcode>
+        </div>
+    </ons-card>
 
-    <h3>Keys</h3>
-    <ul>
-      <li *ngFor="let key of identity.keys">{{key.address}} ({{key.purpose}})</li>
-    </ul>
 
-    <h3>Events</h3>
-    <ul>
-      <li *ngFor="let event of allEvents">{{event.event}} ({{event.returnValues | eventParams}})</li>
-    </ul>
+    <ons-card>
+        <div class="title">
+            Keys
+        </div>
+        <div class="content">
+            <ons-list>
+                <ons-list-item *ngFor="let key of identity.keys">{{key.address}} ({{key.purpose}})</ons-list-item>
+            </ons-list>
+        </div>
+    </ons-card>
+
+    <ons-card>
+        <div class="title">
+            Events
+        </div>
+        <div class="content">
+            <ons-list>
+                <ons-list-item *ngFor="let event of allEvents">{{event.event}} ({{event.returnValues | eventParams}})</ons-list-item>
+            </ons-list>
+        </div>
+    </ons-card>
 
     <div class="page_buttons">
         <ons-button (click)="newkey(identity.address)">New key</ons-button>
