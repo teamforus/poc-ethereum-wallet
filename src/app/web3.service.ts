@@ -33,7 +33,7 @@ export class Web3Service {
       chainId: this.chainId,
       gas: environment.gas,
       data: identityContract.methods.addKey(
-        toAdd.address,
+        this.web3.utils.padLeft(toAdd.address, 64),
         purpose,
         1
       ).encodeABI()

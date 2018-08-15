@@ -11,15 +11,15 @@ export const environment = {
   libAddrMap: [
     {
       libName: 'IdentityData',
-      address: 'b1a63262FD865D3813a799eC1D0ade3B3891179f'
+      address: '1Fb06717EE4d5d3F5C715F893a2196105E01CB43'
     },
     {
       libName: 'IdentityLib',
-      address: '1532164Bb9A7f928776Ac3fc0A5F04abDa03e952'
+      address: 'd15E447452Ea0eb1623f60667fD9D037bF9A785E'
     },
     {
       libName: 'ClaimHolderLib',
-      address: '87fdd7492317bE986B9e950655ad2862B13Ca2Df'
+      address: 'c9766ebe697B6E03E0CdeB5fF87035752f6Ad3B1'
     }
   ]
 };
