@@ -31,6 +31,7 @@ export class ImportidentityComponent implements OnInit {
 
   importidentity() {
     this.vault.addIdentity(this.name, this.address);
+    this.navigator.element.popPage();
   }
 
 }
