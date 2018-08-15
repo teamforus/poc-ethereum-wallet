@@ -1,18 +1,24 @@
 <ons-page id="newidentity">
-<h2>New identity</h2>
-<label>Name:
-  <input [(ngModel)]="name" placeholder="name">
-</label>
 
-<br/>
+    <ons-toolbar>
+        <p>New identity</p>
+    </ons-toolbar>
 
-<label>Management key:
-  <select [(ngModel)]="managementkey">
-    <option *ngFor="let key of keys" [ngValue]="key.key">{{key.address}}</option>
-  </select>
-</label>
+    <label>Name:
+      <input [(ngModel)]="name" placeholder="name">
+    </label>
 
-<br/>
-<ons-button (click)="save()">save</ons-button>
-<ons-button (click)="cancel()">Cancel</ons-button>
+    <br/>
+
+    <label>Management key:
+      <select [(ngModel)]="managementkey">
+        <option *ngFor="let key of keys" [ngValue]="key.key">{{key.address}}</option>
+      </select>
+    </label>
+
+    <div class="page_buttons">
+        <ons-button (click)="save()">save</ons-button>
+        <ons-button (click)="cancel()">Cancel</ons-button>
+    </div>
+
 </ons-page>

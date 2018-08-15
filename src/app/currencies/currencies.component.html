@@ -1,32 +1,38 @@
 <ons-page id="currencies">
-<h2>Currencies</h2>
 
-<h3>Ether</h3>
-<ul>
-  <li *ngFor="let ethBalance of ethBalances">
-    {{ethBalance.address}} ({{BalanceType[ethBalance.type]}})<br/>
-    balance: {{ethBalance.balance | async | fromWei:'ether'}}
-    <ons-button *ngIf="ethBalance.type == BalanceType.Key" (click)="transferFromKey(ethBalance.address)">transfer</ons-button>
-    <ons-button *ngIf="ethBalance.type == BalanceType.Identity" (click)="transferFromIdentity(ethBalance.address)">transfer</ons-button>
-  </li>
-</ul>
+    <ons-toolbar>
+        <p>Currencies</p>
+    </ons-toolbar>
 
-<h3>Tokens</h3>
-<ul>
-  <li *ngFor="let token of tokens">
-    {{token.address}}<br/>
-    Name: {{token.name | async}}<br/>
-    <b>Balances</b>
+    <h3>Ether</h3>
     <ul>
-      <li *ngFor="let balance of token.balances">
-        {{balance.address}} ({{BalanceType[balance.type]}})<br/>
-        balance: {{balance.balance | async}}
-        <ons-button *ngIf="balance.type == BalanceType.Key" (click)="transferTokenFromKey(balance.address, token.address)">transfer</ons-button>
-        <ons-button *ngIf="balance.type == BalanceType.Identity" (click)="transferTokenFromIdentity(balance.address, token.address)">transfer</ons-button>
+      <li *ngFor="let ethBalance of ethBalances">
+        {{ethBalance.address}} ({{BalanceType[ethBalance.type]}})<br/>
+        balance: {{ethBalance.balance | async | fromWei:'ether'}}
+        <ons-button *ngIf="ethBalance.type == BalanceType.Key" (click)="transferFromKey(ethBalance.address)">transfer</ons-button>
+        <ons-button *ngIf="ethBalance.type == BalanceType.Identity" (click)="transferFromIdentity(ethBalance.address)">transfer</ons-button>
       </li>
     </ul>
-  </li>
-</ul>
 
-<ons-button (click)="addToken()">Add token</ons-button>
+    <h3>Tokens</h3>
+    <ul>
+      <li *ngFor="let token of tokens">
+        {{token.address}}<br/>
+        Name: {{token.name | async}}<br/>
+        <b>Balances</b>
+        <ul>
+          <li *ngFor="let balance of token.balances">
+            {{balance.address}} ({{BalanceType[balance.type]}})<br/>
+            balance: {{balance.balance | async}}
+            <ons-button *ngIf="balance.type == BalanceType.Key" (click)="transferTokenFromKey(balance.address, token.address)">transfer</ons-button>
+            <ons-button *ngIf="balance.type == BalanceType.Identity" (click)="transferTokenFromIdentity(balance.address, token.address)">transfer</ons-button>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <div class="page_buttons">
+        <ons-button (click)="addToken()">Add token</ons-button>
+    </div>
+
 </ons-page>

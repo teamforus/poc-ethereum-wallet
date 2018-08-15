@@ -1,42 +1,45 @@
 <ons-page id="identityaddkey">
-<h2>Identity {{identity.name}} : Add key</h2>
 
-<label>Key:
-  <select [(ngModel)]="newkey">
-    <option>Generate new</option>
-    <option>Import</option>
-    <optgroup label="Use existing">
-      <option *ngFor="let key of keys">{{key.key}}</option>
-    </optgroup>
-  </select>
-</label>
+    <ons-toolbar>
+        <p>Identity {{identity.name}} : Add key</p>
+    </ons-toolbar>
 
-<br/>
+    <label>Key:
+      <select [(ngModel)]="newkey">
+        <option>Generate new</option>
+        <option>Import</option>
+        <optgroup label="Use existing">
+          <option *ngFor="let key of keys">{{key.key}}</option>
+        </optgroup>
+      </select>
+    </label>
 
-<label>Key to import:
-  <input [(ngModel)]="importkey" placeholder="private key">
-</label>
+    <br/>
+
+    <label>Key to import:
+      <input [(ngModel)]="importkey" placeholder="private key">
+    </label>
 
 
-<br/>
-<label>New key purpose:
-  <select [(ngModel)]="purpose">
-      <option value="1">Management</option>
-      <option value="2">Action</option>
-      <option value="3">Claim</option>
-      <option value="4">Encryption</option>
-  </select>
-</label>
+    <br/>
+    <label>New key purpose:
+      <select [(ngModel)]="purpose">
+          <option value="1">Management</option>
+          <option value="2">Action</option>
+          <option value="3">Claim</option>
+          <option value="4">Encryption</option>
+      </select>
+    </label>
 
-<br/>
-<label>Management key to use:
-  <select [(ngModel)]="managementkey">
-      <option *ngFor="let key of managementkeys" [ngValue]="key.key">{{key.address}}</option>
-  </select>
-</label>
+    <br/>
+    <label>Management key to use:
+      <select [(ngModel)]="managementkey">
+          <option *ngFor="let key of managementkeys" [ngValue]="key.key">{{key.address}}</option>
+      </select>
+    </label>
 
-<br/>
-
-<ons-button (click)="addKey()">save</ons-button>
-<ons-button (click)="cancel()">Cancel</ons-button>
+    <div class="page_buttons">
+        <ons-button (click)="addKey()">save</ons-button>
+        <ons-button (click)="cancel()">Cancel</ons-button>
+    </div>
 </ons-page>

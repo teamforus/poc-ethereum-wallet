@@ -1,22 +1,31 @@
 <ons-page id="identity">
-<h2>Identity {{identity.name}}</h2>
-<h3>
-  Contract address
-</h3>
-<p>
-  {{identity.address}}
-<qrcode [qrdata]="identity.address" [size]="128" [level]="'M'"></qrcode>
-</p>
-<h3>Keys</h3>
-<ul>
-  <li *ngFor="let key of identity.keys">{{key.address}} ({{key.purpose}})</li>
-</ul>
-<h3>Events</h3>
-<ul>
-  <li *ngFor="let event of allEvents">{{event.event}} ({{event.returnValues | eventParams}})</li>
-</ul>
-<ons-button (click)="newkey(identity.address)">New key</ons-button>
-<ons-button (click)="issueclaim(identity.address)">Issue new claim</ons-button>
-<br/>
-<ons-button (click)="back()">Back</ons-button>
+
+    <ons-toolbar>
+        <p>Identity {{identity.name}}</p>
+    </ons-toolbar>
+
+    <h3>
+      Contract address
+    </h3>
+    <p>
+      {{identity.address}}
+    <qrcode [qrdata]="identity.address" [size]="128" [level]="'M'"></qrcode>
+    </p>
+
+    <h3>Keys</h3>
+    <ul>
+      <li *ngFor="let key of identity.keys">{{key.address}} ({{key.purpose}})</li>
+    </ul>
+
+    <h3>Events</h3>
+    <ul>
+      <li *ngFor="let event of allEvents">{{event.event}} ({{event.returnValues | eventParams}})</li>
+    </ul>
+
+    <div class="page_buttons">
+        <ons-button (click)="newkey(identity.address)">New key</ons-button>
+        <ons-button (click)="issueclaim(identity.address)">Issue new claim</ons-button>
+        <ons-button (click)="back()">Back</ons-button>
+    </div>
+
 </ons-page>

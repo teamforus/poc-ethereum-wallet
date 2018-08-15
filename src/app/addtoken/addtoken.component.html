@@ -1,10 +1,16 @@
 <ons-page id="addtoken">
-<h2>Add token</h2>
-<label>Address:
-  <input [(ngModel)]="tokenAddress" placeholder="token address">
-</label>
 
-<br/>
-<ons-button (click)="add()">add</ons-button>
-<ons-button (click)="cancel()">Cancel</ons-button>
+    <ons-toolbar>
+        <p>Add token</p>
+    </ons-toolbar>
+
+    <label>Address:
+        <input [(ngModel)]="tokenAddress" placeholder="token address">
+    </label>
+
+    <div class="page_buttons">
+        <ons-button (click)="add()">Add</ons-button>
+        <ons-button (click)="cancel()">Cancel</ons-button>
+    </div>
+
 </ons-page>
