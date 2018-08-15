@@ -35,6 +35,7 @@ import { TransactionComponent } from './transaction/transaction.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { ImportidentityComponent } from './importidentity/importidentity.component';
 import { IdentityimportkeyComponent } from './identityimportkey/identityimportkey.component';
+import { KeyComponent } from './key/key.component';
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { IdentityimportkeyComponent } from './identityimportkey/identityimportke
     SettingsComponent,
     TransactionComponent,
     ImportidentityComponent,
-    IdentityimportkeyComponent
+    IdentityimportkeyComponent,
+    KeyComponent
   ],
   imports: [
     BrowserModule,
@@ -84,7 +86,8 @@ import { IdentityimportkeyComponent } from './identityimportkey/identityimportke
     SettingsComponent,
     TransactionComponent,
     ImportidentityComponent,
-    IdentityimportkeyComponent
+    IdentityimportkeyComponent,
+    KeyComponent
   ]
 })
 export class AppModule { }

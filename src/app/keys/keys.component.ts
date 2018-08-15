@@ -1,3 +1,4 @@
+import { KeyComponent } from './../key/key.component';
 import { ImportkeyComponent } from './../importkey/importkey.component';
 import { Component, OnInit } from '@angular/core';
 import { VaultService } from './../vault/vault.service';
@@ -28,6 +29,10 @@ export class KeysComponent implements OnInit {
 
   importKey() {
     this.navigator.element.pushPage(ImportkeyComponent);
+  }
+
+  show(address) {
+    this.navigator.element.pushPage(KeyComponent, {data: {address: address}});
   }
 
 }

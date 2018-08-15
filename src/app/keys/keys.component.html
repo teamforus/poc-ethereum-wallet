@@ -5,7 +5,7 @@
     </ons-toolbar>
 
     <ons-list>
-        <ons-list-item  *ngFor="let key of keys">{{key.address}}</ons-list-item>
+        <ons-list-item  modifier="chevron" tappable *ngFor="let key of keys" (click)="show(key.address)">{{key.address}}</ons-list-item>
     </ons-list>
 
     <div class="page_buttons">
