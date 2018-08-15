@@ -72,7 +72,7 @@ export class VaultService {
     return this.keys;
   }
 
-  addIdentity(name: string, identityAddress: string, managementKey: string) {
+  addIdentity(name: string, identityAddress: string, managementKey: string = null) {
     for (const identity of this.identities) {
       if (identityAddress === identity.address) {
         throw new Error('An identity with this address already exists');
@@ -81,12 +81,14 @@ export class VaultService {
 
     const newIdentity = new Identity();
     newIdentity.name = name;
-    newIdentity.address = identityAddress,
-    newIdentity.keys.push({
-      address: this.web3Service.web3.eth.accounts.privateKeyToAccount(managementKey).address,
-      key: managementKey,
-      purpose: 1
-    });
+    newIdentity.address = identityAddress;
+    if (managementKey) {
+      newIdentity.keys.push({
+        address: this.web3Service.web3.eth.accounts.privateKeyToAccount(managementKey).address,
+        key: managementKey,
+        purpose: 1
+      });
+    }
     this.identities.push(newIdentity);
 
     this.saveIdentities();

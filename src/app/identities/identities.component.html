@@ -1,9 +1,17 @@
 <ons-page id="identities">
-<h2>Identities</h2>
-<ul>
-  <li *ngFor="let identity of identities">
-      <ons-button (click)="show(identity.address)">{{identity.name}}</ons-button>
-  </li>
-</ul>
-<ons-button (click)="new()">Create new identity</ons-button>
+    <ons-toolbar>
+      <p>Identities</p>
+    </ons-toolbar>
+
+    <ul>
+      <li *ngFor="let identity of identities">
+          <ons-button (click)="show(identity.address)">{{identity.name}}</ons-button>
+      </li>
+    </ul>
+
+    <div class="page_buttons">
+        <ons-button (click)="new()">Create new identity</ons-button>
+        <ons-button (click)="importIdentity()">Import identity</ons-button>
+    </div>
+
 </ons-page>

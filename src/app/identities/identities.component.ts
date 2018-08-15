@@ -4,6 +4,7 @@ import { OnsNavigator } from 'ngx-onsenui';
 import { VaultService } from './../vault/vault.service';
 import { Component, OnInit } from '@angular/core';
 import { Identity as VaultIdentity } from '../vault/identity';
+import { ImportidentityComponent } from '../importidentity/importidentity.component';
 
 @Component({
   selector: 'ons-page[identities]',
@@ -28,6 +29,10 @@ export class IdentitiesComponent implements OnInit {
 
   new() {
     this.navigator.element.pushPage(NewidentityComponent);
+  }
+
+  importIdentity() {
+    this.navigator.element.pushPage(ImportidentityComponent);
   }
 
 }
