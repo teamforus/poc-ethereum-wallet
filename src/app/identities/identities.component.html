@@ -3,11 +3,9 @@
       <p>Identities</p>
     </ons-toolbar>
 
-    <ul>
-      <li *ngFor="let identity of identities">
-          <ons-button (click)="show(identity.address)">{{identity.name}}</ons-button>
-      </li>
-    </ul>
+    <ons-list>
+        <ons-list-item modifier="chevron" tappable *ngFor="let identity of identities" (click)="show(identity.address)">{{identity.name}}</ons-list-item>
+    </ons-list>
 
     <div class="page_buttons">
         <ons-button (click)="new()">Create new identity</ons-button>
