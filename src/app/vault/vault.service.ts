@@ -94,6 +94,14 @@ export class VaultService {
     this.saveIdentities();
   }
 
+  importIdentityKey(identity, keyAddress, pk, purpose) {
+    identity.keys.push({
+      address: keyAddress,
+      key: pk,
+      purpose: purpose
+    });
+    this.saveIdentities();
+  }
 
   async addKeyToIdentity(identityContract, managmentAccount, toAdd, purpose: number) {
     for (const identity of this.identities) {

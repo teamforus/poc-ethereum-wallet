@@ -31,11 +31,7 @@ export class IdentityimportkeyComponent implements OnInit {
   }
 
   async addKey() {
-    this.identity.keys.push({
-      address: this.keyAddress,
-      key: this.vault.getKeyByAddress(this.keyAddress).key,
-      purpose: this.purpose
-    });
+    this.vault.importIdentityKey(this.identity, this.keyAddress, this.vault.getKeyByAddress(this.keyAddress).key, this.purpose);
 
     this.navigator.element.popPage();
   }
