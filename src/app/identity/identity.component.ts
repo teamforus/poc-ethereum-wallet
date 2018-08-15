@@ -1,3 +1,4 @@
+import { IdentityimportkeyComponent } from './../identityimportkey/identityimportkey.component';
 import { IssueClaimComponent } from './../issue-claim/issue-claim.component';
 import { IdentityaddkeyComponent } from './../identityaddkey/identityaddkey.component';
 import { Params, OnsNavigator } from 'ngx-onsenui';
@@ -61,6 +62,10 @@ export class IdentityComponent implements OnInit {
 
   newkey(address) {
     this.navigator.element.pushPage(IdentityaddkeyComponent, {data: {address: address}});
+  }
+
+  importkey(address) {
+    this.navigator.element.pushPage(IdentityimportkeyComponent, {data: {address: address}});
   }
 
   issueclaim(address) {
