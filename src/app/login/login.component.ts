@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
         'body': {
           'address': this.selectedIdentityAddress,
           'key': this.selectedKey,
-          'name': 'Public Key'
+          'name': this.vault.getIdentity(this.selectedIdentityAddress).name
         }
       })),
       ttl: 10,
