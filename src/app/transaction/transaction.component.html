@@ -12,7 +12,7 @@
   </ons-select>
 
   <ons-select [(ngModel)]="selectedKey" [attr.modifier]="selectedKey">
-      <option *ngFor="let key of keys" [value]="key.key">
+      <option *ngFor="let key of keys" [value]="key.address">
           {{ key.address }}
       </option>
   </ons-select>
@@ -23,7 +23,11 @@
       </ons-fab>
   </div>
 
-  <div class="page_buttons">
+  <div *ngIf="screenStatus == ScreenStatus.Busy" class="page_buttons">
+    <ons-progress-circular indeterminate></ons-progress-circular>
+  </div>
+
+  <div *ngIf="screenStatus == ScreenStatus.Start" class="page_buttons">
       <ons-button (click)="send()" [disabled]="transactionData==null">Send</ons-button>
   </div>
 
