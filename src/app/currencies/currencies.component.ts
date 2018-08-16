@@ -8,11 +8,13 @@ import { VaultService } from './../vault/vault.service';
 import { Component, OnInit, HostListener } from '@angular/core';
 import * as Erc20ContractData from './../../contracts/erc20.js';
 import { TransferFromKeyComponent } from '../transfer-from-key/transfer-from-key.component';
-
+import { Token as VaultToken } from '../vault/token';
 
 enum BalanceType {
   Key,
-  Identity
+  Identity,
+  KeyAllowance,
+  IdentityAllowance
 }
 
 @Component({
@@ -65,11 +67,11 @@ export class CurrenciesComponent implements OnInit {
         );
       }
 
-      const tokenAddresses = this.vault.getTokens();
-      for (const tokenAddress of tokenAddresses) {
-        const contract = new this.web3Service.web3.eth.Contract(Erc20ContractData.abi, tokenAddress);
+      const vaultTokens = this.vault.getTokens();
+      for (const vaultToken of vaultTokens) {
+        const contract = new this.web3Service.web3.eth.Contract(Erc20ContractData.abi, vaultToken.address);
         const token = {
-          address: tokenAddress,
+          address: vaultToken.address,
           name: contract.methods.name().call(),
           symbol: '',
           balances: new Array<Balance>()
@@ -87,6 +89,13 @@ export class CurrenciesComponent implements OnInit {
             balance: contract.methods.balanceOf(identity.address).call(),
             type: BalanceType.Identity
           });
+          for (const allowanceOwnerAddress of vaultToken.allowances) {
+            token.balances.push({
+              address: allowanceOwnerAddress,
+              balance: contract.methods.allowance(allowanceOwnerAddress, identity.address).call(),
+              type: BalanceType.IdentityAllowance
+            });
+          }
         }
 
         this.tokens.push(token);

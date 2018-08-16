@@ -4,9 +4,19 @@
         <p>Add token</p>
     </ons-toolbar>
 
-    <label>Address:
-        <input [(ngModel)]="tokenAddress" placeholder="token address">
-    </label>
+    <div>
+        <ons-input style="width: 100%;" placeholder="Token address" [(ngModel)]="tokenAddress"></ons-input>
+    </div>
+
+    <div>
+        <ons-input style="width: 100%;" placeholder="Allowance address" [(ngModel)]="allowanceAddress"></ons-input>
+    </div>
+
+    <div style="text-align: center">
+        <ons-fab (click)="scan()" ripple>
+            <ons-icon icon="fa-qrcode"></ons-icon>
+        </ons-fab>
+    </div>
 
     <div class="page_buttons">
         <ons-button (click)="add()">Add</ons-button>

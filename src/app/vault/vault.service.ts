@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Identity } from './identity';
 import { Key } from './key';
 import { isString, isObject } from 'util';
+import { Token } from './token';
 
 @Injectable()
 export class VaultService {
@@ -11,7 +12,7 @@ export class VaultService {
   private storateKeyTokens = 'tokens';
   private identities: Identity[] = new Array<Identity>();
   private keys: Key[] = new Array<Key>();
-  private tokens: string[] = new Array<string>();
+  private tokens: Token[] = new Array<Token>();
 
   constructor(private web3Service: Web3Service) {
     const identities = <Identity[]> JSON.parse(localStorage.getItem(this.storateKeyIdentities));
@@ -31,7 +32,7 @@ export class VaultService {
   reset() {
     this.identities = new Array<Identity>();
     this.keys = new Array<Key>();
-    this.tokens = new Array<string>();
+    this.tokens = new Array<Token>();
     this.saveIdentities();
     this.saveKeys();
     this.saveTokens();
@@ -201,8 +202,8 @@ export class VaultService {
     }
   }
 
-  addToken(address: string) {
-    this.tokens.push(address);
+  addToken(token: Token) {
+    this.tokens.push(token);
     this.saveTokens();
   }
 
