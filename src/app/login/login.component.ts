@@ -4,6 +4,13 @@ import { Key } from './../vault/key';
 import { VaultService } from './../vault/vault.service';
 import { Component, OnInit } from '@angular/core';
 import { Identity as VaultIdentity } from '../vault/identity';
+import * as ons from 'onsenui';
+
+enum ScreenStatus {
+  Start,
+  Busy,
+  Done
+}
 
 @Component({
   selector: 'ons-page[login]',
@@ -11,6 +18,8 @@ import { Identity as VaultIdentity } from '../vault/identity';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  ScreenStatus = ScreenStatus;
+  screenStatus: ScreenStatus = ScreenStatus.Start;
   identities: VaultIdentity[];
   selectedIdentityAddress = '';
   keys: Array<Key> = new Array<Key>();
@@ -34,7 +43,7 @@ export class LoginComponent implements OnInit {
   }
 
   onIdentitySelect() {
-    this.keys = this.vault.getKeysByPurpose(this.selectedIdentityAddress, 2);
+    this.keys = this.vault.getKeysByPurpose(this.selectedIdentityAddress, 1);
 
     this.selectedKey = '';
     if (this.keys.length > 0) {
@@ -43,8 +52,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log(this.selectedIdentityAddress);
-    console.log(this.selectedKey);
+    this.screenStatus = ScreenStatus.Busy;
 
     this.web3Service.web3.shh.post({
       pubKey: this.servicePubKey,
@@ -61,12 +69,16 @@ export class LoginComponent implements OnInit {
       powTime: 10,
       powTarget: 0.5
     })
-    .then(h => {
-        console.log('Message with hash ${h} was successfuly sent');
+    .then(hash => {
+      ons.notification.toast('Message successfuly sent', {timeout: 5000});
     })
     .catch(err => {
-        console.log('Error: ', err);
+        ons.notification.toast('Sending message failed', {timeout: 5000});
     });
+
+    this.servicePubKey = '';
+    this.serviceId = 0;
+    this.screenStatus = ScreenStatus.Start;
 
   }
 

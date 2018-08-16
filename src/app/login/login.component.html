@@ -23,7 +23,11 @@
         </ons-fab>
     </div>
 
-    <div class="page_buttons">
+    <div *ngIf="screenStatus == ScreenStatus.Busy" class="page_buttons">
+      <ons-progress-circular indeterminate></ons-progress-circular>
+    </div>
+
+    <div *ngIf="screenStatus == ScreenStatus.Start" class="page_buttons">
         <ons-button (click)="login()" [disabled]="servicePubKey==''">Login</ons-button>
     </div>
 
