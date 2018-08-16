@@ -7,18 +7,26 @@
 <p>
     Balance: {{balance | async}}
 </p>
-<label>To address:
-  <input [(ngModel)]="toAddress" placeholder="address">
-</label>
-<br/>
+
+
+<div class="margin" style="height: 27px">
+      <ons-input style="position: absolute; left:10px; right: 50px;" placeholder="Address" [(ngModel)]="toAddress"></ons-input>
+      <ons-icon style="position: absolute; right: 11px; font-size: 31px;" icon="fa-qrcode" (click)="scan()"></ons-icon>
+</div>
+
 <label>Amount:
-  <input [(ngModel)]="toValue" placeholder="amount">
+    <ons-input style="width: 100%;" placeholder="Amount" [(ngModel)]="toValue"></ons-input>
 </label>
+
+
+
 <br/>
 <label>Key to use:
-  <select [(ngModel)]="managementkey">
-      <option *ngFor="let key of managementkeys">{{key.key}}</option>
-  </select>
+    <ons-select [(ngModel)]="managementkey" [attr.modifier]="managementkey">
+        <option *ngFor="let key of managementkeys" [value]="key.address">
+            {{ key.address }}
+        </option>
+    </ons-select>
 </label>
 
   <div class="page_buttons">

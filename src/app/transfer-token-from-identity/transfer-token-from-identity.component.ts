@@ -1,3 +1,4 @@
+import { ScannerService } from './../scanner.service';
 import { Identity } from './../vault/identity';
 import { Key } from './../vault/key';
 import { VaultService } from './../vault/vault.service';
@@ -20,14 +21,15 @@ export class TransferTokenFromIdentityComponent implements OnInit {
   managementkeys: Key[] = new Array<Key>();
   managementkey = '';
   tokenContract: Object;
-  toAddress: string;
-  toValue: number;
+  toAddress = '';
+  toValue = 0 ;
 
   constructor(
     private vault: VaultService,
     private web3Service: Web3Service,
     private params: Params,
-    private navigator: OnsNavigator
+    private navigator: OnsNavigator,
+    private scanner: ScannerService
   ) { }
 
   ngOnInit() {
@@ -38,7 +40,7 @@ export class TransferTokenFromIdentityComponent implements OnInit {
     );
     this.managementkeys = this.vault.getManagementKeys(this.identity.address);
     // @ts-ignore
-    this.balance = this.tokenContract.methods.balanceOf(this.identity.balanceAddress).call();
+    this.balance = this.tokenContract.methods.balanceOf(this.identity.address).call();
   }
 
   async transfer() {
@@ -64,8 +66,14 @@ export class TransferTokenFromIdentityComponent implements OnInit {
       ).encodeABI()
     };
 
-    await this.web3Service.sendSignedTransaction(trx, this.managementkey);
+    await this.web3Service.sendSignedTransaction(trx, this.vault.getKeyByAddress(this.managementkey).key);
     this.navigator.element.popPage();
+  }
+
+  scan() {
+    this.scanner.scan((result) => {
+      this.toAddress = result;
+    });
   }
 
   cancel() {
