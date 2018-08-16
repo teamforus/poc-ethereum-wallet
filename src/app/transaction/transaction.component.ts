@@ -56,6 +56,14 @@ export class TransactionComponent implements OnInit {
       const resultObj = JSON.parse(result);
       if ('transaction' === resultObj.type) {
         this.transactionData = resultObj;
+        if (this.identities.length > 0 && this.transactionData.body.from) {
+          this.identities.forEach(identity => {
+            if (identity.address === this.transactionData.body.from) {
+              this.selectedIdentityAddress = identity.address;
+              this.onIdentitySelect();
+            }
+          });
+        }
       }
     });
   }
