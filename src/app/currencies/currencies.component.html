@@ -24,9 +24,9 @@
 
     <ons-card *ngFor="let token of tokens">
         <div class="title">
-            {{token.address}}
+            {{token.name | async}}
             <br/>
-            Name: {{token.name | async}}
+            <small>{{token.address}}</small>
         </div>
         <div class="content">
             <ons-list>
