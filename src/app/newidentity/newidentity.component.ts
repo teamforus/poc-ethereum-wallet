@@ -31,15 +31,16 @@ export class NewidentityComponent implements OnInit {
     private navigator: OnsNavigator
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.keys = this.vault.getKeys();
+    this.name = '';
+    this.managementkey = '';
+    this.screenStatus = ScreenStatus.Start;}
 
   @HostListener('window:show', ['$event'])
   onShow(event) {
     if ('newidentity' === event.target.id) {
-      this.keys = this.vault.getKeys();
-      this.name = '';
-      this.managementkey = '';
-      this.screenStatus = ScreenStatus.Start;
+      this.ngOnInit();
     }
   }
 
