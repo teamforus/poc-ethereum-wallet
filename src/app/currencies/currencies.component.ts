@@ -53,7 +53,8 @@ export class CurrenciesComponent implements OnInit {
             address: this.web3Service.web3.eth.accounts.privateKeyToAccount(key.key).address,
             balance: this.web3Service.web3.eth.getBalance(account.address),
             type: BalanceType.Key,
-            spender: null
+            spender: null,
+            displayName: null
           }
         );
       }
@@ -65,7 +66,8 @@ export class CurrenciesComponent implements OnInit {
             address: identity.address,
             balance: this.web3Service.web3.eth.getBalance(identity.address),
             type: BalanceType.Identity,
-            spender: null
+            spender: null,
+            displayName: identity.name
           }
         );
       }
@@ -84,7 +86,8 @@ export class CurrenciesComponent implements OnInit {
             address: key.address,
             balance: contract.methods.balanceOf(key.address).call(),
             type: BalanceType.Key,
-            spender: null
+            spender: null,
+            displayName: null
           });
         }
         for (const identity of identities) {
@@ -92,14 +95,16 @@ export class CurrenciesComponent implements OnInit {
             address: identity.address,
             balance: contract.methods.balanceOf(identity.address).call(),
             type: BalanceType.Identity,
-            spender: null
+            spender: null,
+            displayName: identity.name
           });
           for (const allowanceOwnerAddress of vaultToken.allowances) {
             token.balances.push({
               address: allowanceOwnerAddress,
               balance: contract.methods.allowance(allowanceOwnerAddress, identity.address).call(),
               type: BalanceType.IdentityAllowance,
-              spender: identity.address
+              spender: identity.address,
+              displayName: identity.name
             });
           }
         }
@@ -147,6 +152,7 @@ class Balance {
   balance: number;
   type: BalanceType;
   spender: string;
+  displayName: string;
 }
 
 class Token {
