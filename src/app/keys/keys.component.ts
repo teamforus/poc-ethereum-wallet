@@ -1,6 +1,6 @@
 import { KeyComponent } from './../key/key.component';
 import { ImportkeyComponent } from './../importkey/importkey.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { VaultService } from './../vault/vault.service';
 import { Key } from '../vault/key';
 import { OnsNavigator } from 'ngx-onsenui';
@@ -19,8 +19,13 @@ export class KeysComponent implements OnInit {
     private navigator: OnsNavigator
   ) { }
 
-  ngOnInit() {
-    this.keys = this.vault.getKeys();
+  ngOnInit() {}
+
+  @HostListener('window:show', ['$event'])
+  onShow(event) {
+    if ('keys' === event.target.id) {
+      this.keys = this.vault.getKeys();
+    }
   }
 
   newKey() {

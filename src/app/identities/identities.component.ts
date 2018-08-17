@@ -2,7 +2,7 @@ import { NewidentityComponent } from './../newidentity/newidentity.component';
 import { IdentityComponent } from './../identity/identity.component';
 import { OnsNavigator } from 'ngx-onsenui';
 import { VaultService } from './../vault/vault.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Identity as VaultIdentity } from '../vault/identity';
 import { ImportidentityComponent } from '../importidentity/importidentity.component';
 
@@ -19,8 +19,13 @@ export class IdentitiesComponent implements OnInit {
     private navigator: OnsNavigator
   ) { }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  @HostListener('window:show', ['$event'])
+  onShow(event) {
+    if ('identities' === event.target.id) {
     this.identities = this.vault.getIdentities();
+    }
   }
 
   show(address) {

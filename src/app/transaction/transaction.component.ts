@@ -2,7 +2,7 @@ import { Web3Service } from './../web3.service';
 import { ScannerService } from './../scanner.service';
 import { Key } from './../vault/key';
 import { VaultService } from './../vault/vault.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Identity as VaultIdentity } from '../vault/identity';
 import * as IdentityContractData from './../../contracts/identity.js';
 import { environment } from '../../environments/environment';
@@ -34,11 +34,17 @@ export class TransactionComponent implements OnInit {
     private web3Service: Web3Service
   ) { }
 
-  ngOnInit() {
-    this.identities = this.vault.getIdentities();
-    if (this.identities.length > 0) {
-      this.selectedIdentityAddress = this.identities[0].address;
-      this.onIdentitySelect();
+  ngOnInit() {}
+
+  @HostListener('window:show', ['$event'])
+    onShow(event) {
+      if ('transaction' === event.target.id) {
+      this.identities = this.vault.getIdentities();
+      if (this.identities.length > 0) {
+        this.selectedIdentityAddress = this.identities[0].address;
+        this.transactionData = null;
+        this.onIdentitySelect();
+      }
     }
   }
 
