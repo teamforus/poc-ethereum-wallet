@@ -1,3 +1,4 @@
+import { TransferAllowanceFromIdentityComponent } from './../transfer-allowance-from-identity/transfer-allowance-from-identity.component';
 import { TransferTokenFromIdentityComponent } from './../transfer-token-from-identity/transfer-token-from-identity.component';
 import { TransferTokenFromKeyComponent } from './../transfer-token-from-key/transfer-token-from-key.component';
 import { TransferFromIdentityComponent } from './../transfer-from-identity/transfer-from-identity.component';
@@ -51,7 +52,8 @@ export class CurrenciesComponent implements OnInit {
           {
             address: this.web3Service.web3.eth.accounts.privateKeyToAccount(key.key).address,
             balance: this.web3Service.web3.eth.getBalance(account.address),
-            type: BalanceType.Key
+            type: BalanceType.Key,
+            spender: null
           }
         );
       }
@@ -62,7 +64,8 @@ export class CurrenciesComponent implements OnInit {
           {
             address: identity.address,
             balance: this.web3Service.web3.eth.getBalance(identity.address),
-            type: BalanceType.Identity
+            type: BalanceType.Identity,
+            spender: null
           }
         );
       }
@@ -80,20 +83,23 @@ export class CurrenciesComponent implements OnInit {
           token.balances.push({
             address: key.address,
             balance: contract.methods.balanceOf(key.address).call(),
-            type: BalanceType.Key
+            type: BalanceType.Key,
+            spender: null
           });
         }
         for (const identity of identities) {
           token.balances.push({
             address: identity.address,
             balance: contract.methods.balanceOf(identity.address).call(),
-            type: BalanceType.Identity
+            type: BalanceType.Identity,
+            spender: null
           });
           for (const allowanceOwnerAddress of vaultToken.allowances) {
             token.balances.push({
               address: allowanceOwnerAddress,
               balance: contract.methods.allowance(allowanceOwnerAddress, identity.address).call(),
-              type: BalanceType.IdentityAllowance
+              type: BalanceType.IdentityAllowance,
+              spender: identity.address
             });
           }
         }
@@ -123,6 +129,13 @@ export class CurrenciesComponent implements OnInit {
     );
   }
 
+  transferAllowanceFromIdentity(allowanceOwnerAddress, allowanceSpenderAddress, tokenAddress) {
+    this.navigator.element.pushPage(
+      TransferAllowanceFromIdentityComponent,
+      {data: {allowanceOwnerAddress: allowanceOwnerAddress, allowanceSpenderAddress: allowanceSpenderAddress, tokenAddress: tokenAddress}}
+    );
+  }
+
   addToken() {
     this.navigator.element.pushPage(AddtokenComponent);
   }
@@ -133,6 +146,7 @@ class Balance {
   address: string;
   balance: number;
   type: BalanceType;
+  spender: string;
 }
 
 class Token {

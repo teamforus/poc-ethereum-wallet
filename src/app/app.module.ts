@@ -36,6 +36,7 @@ import { QRCodeModule } from 'angularx-qrcode';
 import { ImportidentityComponent } from './importidentity/importidentity.component';
 import { IdentityimportkeyComponent } from './identityimportkey/identityimportkey.component';
 import { KeyComponent } from './key/key.component';
+import { TransferAllowanceFromIdentityComponent } from './transfer-allowance-from-identity/transfer-allowance-from-identity.component';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { KeyComponent } from './key/key.component';
     TransactionComponent,
     ImportidentityComponent,
     IdentityimportkeyComponent,
-    KeyComponent
+    KeyComponent,
+    TransferAllowanceFromIdentityComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +89,8 @@ import { KeyComponent } from './key/key.component';
     TransactionComponent,
     ImportidentityComponent,
     IdentityimportkeyComponent,
-    KeyComponent
+    KeyComponent,
+    TransferAllowanceFromIdentityComponent
   ]
 })
 export class AppModule { }

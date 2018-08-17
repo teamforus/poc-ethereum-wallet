@@ -37,6 +37,7 @@
                         balance: {{balance.balance | async}}<br/>
                         <ons-button *ngIf="balance.type == BalanceType.Key" (click)="transferTokenFromKey(balance.address, token.address)">transfer</ons-button>
                         <ons-button *ngIf="balance.type == BalanceType.Identity" (click)="transferTokenFromIdentity(balance.address, token.address)">transfer</ons-button>
+                        <ons-button *ngIf="balance.type == BalanceType.IdentityAllowance" (click)="transferAllowanceFromIdentity(balance.address, balance.spender, token.address)">transfer</ons-button>
                     </div>
                 </ons-list-item>
             </ons-list>
