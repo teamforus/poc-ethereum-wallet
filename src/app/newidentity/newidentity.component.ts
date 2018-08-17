@@ -2,9 +2,16 @@ import { OnsNavigator } from 'ngx-onsenui';
 import { Key } from './../vault/key';
 import { VaultService } from './../vault/vault.service';
 import { Web3Service } from './../web3.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import * as IdentityContractData from './../../contracts/identity.js';
 import { environment } from '../../environments/environment';
+import * as ons from 'onsenui';
+
+enum ScreenStatus {
+  Start,
+  Busy,
+  Done
+}
 
 @Component({
   selector: 'ons-page[newidentity]',
@@ -12,6 +19,8 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./newidentity.component.css']
 })
 export class NewidentityComponent implements OnInit {
+  ScreenStatus = ScreenStatus;
+  screenStatus: ScreenStatus = ScreenStatus.Start;
   keys: Key[] = new Array<Key>();
   name = '';
   managementkey = '';
@@ -22,14 +31,24 @@ export class NewidentityComponent implements OnInit {
     private navigator: OnsNavigator
   ) { }
 
-  ngOnInit() {
-    this.keys = this.vault.getKeys();
+  ngOnInit() {}
+
+  @HostListener('window:show', ['$event'])
+  onShow(event) {
+    if ('newidentity' === event.target.id) {
+      this.keys = this.vault.getKeys();
+      this.name = '';
+      this.managementkey = '';
+      this.screenStatus = ScreenStatus.Start;
+    }
   }
 
   async save() {
+    this.screenStatus = ScreenStatus.Busy;
     const keyAccount = this.web3Service.web3.eth.accounts.privateKeyToAccount(this.managementkey);
     const identityAddress = await this.deployIdentityContract(keyAccount);
     this.vault.addIdentity(this.name, identityAddress, keyAccount.privateKey);
+    ons.notification.toast('Identity "' + this.name + '" successfuly created', {timeout: 5000});
     this.navigator.element.popPage();
   }
 

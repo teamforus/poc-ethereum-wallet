@@ -29,9 +29,13 @@
     </ons-select>
 </label>
 
-  <div class="page_buttons">
-      <ons-button (click)="transfer()">transfer</ons-button>
-      <ons-button (click)="cancel()">Cancel</ons-button>
-  </div>
+    <div *ngIf="screenStatus == ScreenStatus.Busy" class="page_buttons">
+        <ons-progress-circular indeterminate></ons-progress-circular>
+    </div>
+
+    <div *ngIf="screenStatus == ScreenStatus.Start" class="page_buttons">
+        <ons-button (click)="transfer()">transfer</ons-button>
+        <ons-button (click)="cancel()">Cancel</ons-button>
+    </div>
 
 </ons-page>

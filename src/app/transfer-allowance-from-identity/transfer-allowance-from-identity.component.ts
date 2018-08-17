@@ -3,11 +3,18 @@ import { Identity } from './../vault/identity';
 import { Key } from './../vault/key';
 import { VaultService } from './../vault/vault.service';
 import { Web3Service } from './../web3.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import * as Erc20ContractData from './../../contracts/erc20.js';
 import * as IdentityContractData from './../../contracts/identity.js';
 import { environment } from '../../environments/environment';
 import { Params, OnsNavigator } from 'ngx-onsenui';
+import * as ons from 'onsenui';
+
+enum ScreenStatus {
+  Start,
+  Busy,
+  Done
+}
 
 @Component({
   selector: 'ons-page[transfer-allowance-from-identity]',
@@ -15,6 +22,8 @@ import { Params, OnsNavigator } from 'ngx-onsenui';
   styleUrls: ['./transfer-allowance-from-identity.component.css']
 })
 export class TransferAllowanceFromIdentityComponent implements OnInit {
+  ScreenStatus = ScreenStatus;
+  screenStatus: ScreenStatus = ScreenStatus.Start;
   identity: Identity;
   key: Key;
   balance: 0;
@@ -41,9 +50,20 @@ export class TransferAllowanceFromIdentityComponent implements OnInit {
     this.managementkeys = this.vault.getManagementKeys(this.identity.address);
     // @ts-ignore
     this.balance = this.tokenContract.methods.allowance(this.params.data.allowanceOwnerAddress, this.identity.address).call();
+
+    this.toAddress = '';
+    this.toValue = 0 ;
+    this.screenStatus = ScreenStatus.Start;}
+
+  @HostListener('window:show', ['$event'])
+  onShow(event) {
+    if ('transfer-allowance-from-identity' === event.target.id) {
+      this.ngOnInit();
+    }
   }
 
   async transfer() {
+    this.screenStatus = ScreenStatus.Busy;
     const senderContract = new this.web3Service.web3.eth.Contract(
       IdentityContractData.abi,
       this.identity.address,
@@ -67,9 +87,8 @@ export class TransferAllowanceFromIdentityComponent implements OnInit {
       ).encodeABI()
     };
 
-    console.log(this.vault.getKeyByAddress(this.managementkey).key);
-
     await this.web3Service.sendSignedTransaction(trx, this.vault.getKeyByAddress(this.managementkey).key);
+    ons.notification.toast('Allowance successfuly transfered', {timeout: 5000});
     this.navigator.element.popPage();
   }
 
