@@ -39,8 +39,10 @@ export class CurrenciesComponent implements OnInit {
   }
 
   @HostListener('window:show', ['$event'])
-  onShow(event) {
+  async onShow(event) {
     if ('currencies' === event.target.id) {
+
+      await this.web3Service.checkConnection();
 
       this.ethBalances.length = 0;
       this.tokens.length = 0;

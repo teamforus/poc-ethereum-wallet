@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as Web3 from 'web3';
 import { environment } from '../environments/environment';
+import { isUndefined } from 'util';
 
 @Injectable()
 export class Web3Service {
@@ -9,9 +10,28 @@ export class Web3Service {
   web3: Web3;
 
   constructor() {
-    // @ts-ignore
-    this.web3 = new Web3(environment.ethNode);
+    this.checkConnection();
     this.chainId = environment.chainId;
+  }
+
+  async checkConnection() {
+    try {
+      if (
+        isUndefined(this.web3)
+        ||
+        isUndefined(this.web3.eth)
+        ||
+        isUndefined(this.web3.eth.net)
+        ||
+        !await this.web3.eth.net.isListening())
+      {
+        // @ts-ignore
+        this.web3 = new Web3(environment.ethNode);
+      }
+    } catch (error) {
+      // @ts-ignore
+      this.web3 = new Web3(environment.ethNode);
+    }
   }
 
   async sendSignedTransaction(trx: object, privateKey: string) {
