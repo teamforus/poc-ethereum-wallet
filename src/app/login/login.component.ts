@@ -61,6 +61,12 @@ export class LoginComponent implements OnInit {
   login() {
     this.screenStatus = ScreenStatus.Busy;
 
+    const identityName = this.vault.getIdentity(this.selectedIdentityAddress).name;
+    const key = this.vault.getKeyByAddress(this.selectedKey);
+
+    const signData = this.web3Service.web3.utils.soliditySha3(this.selectedIdentityAddress, this.selectedKey, identityName);
+    const signature = this.web3Service.web3.eth.accounts.sign(signData, key.key);
+
     this.web3Service.web3.shh.post({
       pubKey: this.servicePubKey,
       payload: this.web3Service.web3.utils.toHex(JSON.stringify({
@@ -69,7 +75,8 @@ export class LoginComponent implements OnInit {
         'body': {
           'address': this.selectedIdentityAddress,
           'key': this.selectedKey,
-          'name': this.vault.getIdentity(this.selectedIdentityAddress).name
+          'name': identityName,
+          'signature': signature.signature
         }
       })),
       ttl: 10,
