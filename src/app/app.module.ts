@@ -37,6 +37,11 @@ import { ImportidentityComponent } from './importidentity/importidentity.compone
 import { IdentityimportkeyComponent } from './identityimportkey/identityimportkey.component';
 import { KeyComponent } from './key/key.component';
 import { TransferAllowanceFromIdentityComponent } from './transfer-allowance-from-identity/transfer-allowance-from-identity.component';
+import { HomeComponent } from './home/home.component';
+import { WelcomeComponent } from '@app/register/welcome/welcome.component';
+import { NewKeyComponent } from '@app/register/new-key/new-key.component';
+import { NewIdentityComponent } from '@app/register/new-identity/new-identity.component';
+import { KeySelecterComponent } from '@app/utils/key-selecter/key-selecter.component';
 
 
 @NgModule({
@@ -68,7 +73,12 @@ import { TransferAllowanceFromIdentityComponent } from './transfer-allowance-fro
     ImportidentityComponent,
     IdentityimportkeyComponent,
     KeyComponent,
-    TransferAllowanceFromIdentityComponent
+    TransferAllowanceFromIdentityComponent,
+    HomeComponent,
+    WelcomeComponent,
+    NewKeyComponent,
+    NewIdentityComponent,
+    KeySelecterComponent
   ],
   imports: [
     BrowserModule,
@@ -90,7 +100,11 @@ import { TransferAllowanceFromIdentityComponent } from './transfer-allowance-fro
     ImportidentityComponent,
     IdentityimportkeyComponent,
     KeyComponent,
-    TransferAllowanceFromIdentityComponent
+    TransferAllowanceFromIdentityComponent,
+    HomeComponent,
+    WelcomeComponent,
+    NewKeyComponent,
+    NewIdentityComponent
   ]
 })
 export class AppModule { }

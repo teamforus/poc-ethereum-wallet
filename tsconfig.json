@@ -3,6 +3,18 @@
   "compilerOptions": {
     "allowJs": true,
     "outDir": "./dist/out-tsc",
+    "baseUrl": "src",
+    "paths": {
+      "@app/*": [
+        "app/*"
+      ],
+      "@contracts/*": [
+        "contracts/*"
+      ],
+      "@environments/*": [
+        "environments/*"
+      ]
+    },
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",

@@ -1,0 +1,27 @@
+<ons-page id="new-identity">
+  <div class="content">
+    <div class="info">
+      <p>Info over identiteiten</p>
+    </div>
+    <div class="form">
+      <div *ngIf="screenStatus === ScreenStatus.Busy" class="page_buttons">
+        <ons-progress-circular indeterminate></ons-progress-circular>
+      </div>
+      <div *ngIf="screenStatus === ScreenStatus.Start" class="loading-switcher">
+        <div class="input-wrapper">
+          <div class="label">
+            Naam
+          </div>
+          <div class="input">
+            <input [(ngModel)]="name" placeholder="Waar ga je deze identiteit bijvoorbeeld voor gebruiken?">
+          </div>
+        </div>
+        <app-key-selecter (keySelected)="keySelected($event)"></app-key-selecter>
+        <div class="button-wrapper">
+          <ons-button (click)="save()">Aanmaken</ons-button>
+          <ons-button *ngIf="canCancel()" (click)="cancel()">Cancel</ons-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ons-page>
