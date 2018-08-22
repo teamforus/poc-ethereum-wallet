@@ -7,7 +7,7 @@ import { IdentityComponent } from './identity/identity.component';
 import { IdentityaddkeyComponent } from './identityaddkey/identityaddkey.component';
 import { KeysComponent } from './keys/keys.component';
 import { NewkeyComponent } from './newkey/newkey.component';
-import { ImportkeyComponent } from './importkey/importkey.component';
+// import { ImportkeyComponent } from '@app/register/import-key/import-key.component';
 import { TransferFromKeyComponent } from './transfer-from-key/transfer-from-key.component';
 import { IssueClaimComponent } from './issue-claim/issue-claim.component';
 import { CurrenciesComponent } from './currencies/currencies.component';
@@ -18,7 +18,7 @@ import { TransferTokenFromIdentityComponent } from './transfer-token-from-identi
 import { ResetComponent } from './reset/reset.component';
 
 const routes: Routes = [
-  //{ path: '', redirectTo: '/identities', pathMatch: 'full' },
+  // { path: '', redirectTo: '/identities', pathMatch: 'full' },
   { path: 'identities', component: IdentitiesComponent },
   { path: 'identities/new', component: NewidentityComponent },
   { path: 'identities/:address/newkey', component: IdentityaddkeyComponent },
@@ -29,7 +29,7 @@ const routes: Routes = [
   { path: 'keys', component: KeysComponent },
   { path: 'keys/:address/transfer', component: TransferFromKeyComponent },
   { path: 'keys/new', component: NewkeyComponent },
-  { path: 'keys/import', component: ImportkeyComponent },
+  // { path: 'keys/import', component: ImportkeyComponent },
   { path: 'currencies', component: CurrenciesComponent },
   { path: 'currencies/addtoken', component: AddtokenComponent },
   { path: 'keys/:address/transfertoken/:tokenaddress', component: TransferTokenFromKeyComponent },

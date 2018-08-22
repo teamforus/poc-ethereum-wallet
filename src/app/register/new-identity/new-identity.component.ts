@@ -18,10 +18,12 @@ enum ScreenStatus {
   styleUrls: ['./new-identity.component.css']
 })
 export class NewIdentityComponent implements OnInit {
-  ScreenStatus = ScreenStatus;
-  screenStatus: ScreenStatus = ScreenStatus.Start;
-  name = '';
+  private readonly ScreenStatus = ScreenStatus;
+
   managementkey = '';
+  name = '';
+  private _nameError = '';
+  screenStatus: ScreenStatus = ScreenStatus.Start;
 
   constructor(
     public _web3Service: Web3Service,
@@ -52,12 +54,14 @@ export class NewIdentityComponent implements OnInit {
   }
 
   async save() {
-    this.screenStatus = ScreenStatus.Busy;
-    const keyPair: KeyPair = await this._web3Service.getKeyPairFromPrivateKey(this.managementkey);
-    const identityAddress = await this.deployIdentityContract(keyPair);
-    this._vaultService.addIdentity(this.name, identityAddress, keyPair.privateKey);
-    ons.notification.toast('Identity "' + this.name + '" successfuly created', { timeout: 5000 });
-    this._navigator.element.popPage();
+    if (this.validateName()) {
+      this.screenStatus = ScreenStatus.Busy;
+      const keyPair: KeyPair = await this._web3Service.getKeyPairFromPrivateKey(this.managementkey);
+      const identityAddress = await this.deployIdentityContract(keyPair);
+      this._vaultService.addIdentity(this.name, identityAddress, keyPair.privateKey);
+      ons.notification.toast('Identity "' + this.name + '" successfuly created', { timeout: 5000 });
+      this._navigator.element.popPage();
+    }
   }
 
   private async deployIdentityContract(senderKeyPair: KeyPair) {
@@ -78,6 +82,16 @@ export class NewIdentityComponent implements OnInit {
 
       return contractAddress;
     }
+  }
+
+  private validateName(): boolean {
+    const isLengthValid = (!!this.name
+      && !!this.name.length
+      && this.name.length >= 3);
+      if (!isLengthValid) {
+        this._nameError = 'De naam moet minimaal 3 karakters hebben';
+      }
+    return isLengthValid;
   }
 
 }

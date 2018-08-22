@@ -1,15 +1,22 @@
 <ons-page id="welcome">
-  <div class="content">
-    <div class="header">
-
-    </div>
-    <div class="button-wrapper">
-      <div class="button new-user" (click)="newUser()">
-        Ik ben nieuw
-      </div>
-      <div class="button import-user" (click)="importUser()">
-        Ik heb al een identiteit
-      </div>
-    </div>
-  </div>
+  <table class="content">
+    <tr class="header fill">
+      <td>
+        <p>Hier komt info over hoe deze app en/met je identiteit werkt.</p>
+      </td>
+    </tr>
+    <tr class="button-wrapper">
+      <td>
+        <div class="button new-user" (click)="newUser()">
+          Ik ben nieuw
+        </div>
+      </td>
+      <tr class="button-wrapper">
+        <td>
+          <div class="button import-user" (click)="importUser()">
+            Ik heb al een identiteit
+          </div>
+        </td>
+      </tr>
+  </table>
 </ons-page>

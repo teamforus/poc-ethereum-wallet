@@ -1,16 +1,16 @@
-import { ScannerService } from './../scanner.service';
+import { ScannerService } from '@app/scanner.service';
 import { OnsNavigator } from 'ngx-onsenui';
-import { VaultService } from './../vault/vault.service';
-import { Web3Service } from './../web3.service';
+import { VaultService } from '@app/vault/vault.service';
+import { Web3Service } from '@app/web3.service';
 import { Component, OnInit } from '@angular/core';
 
 
 @Component({
-  selector: 'ons-page[importkey]',
-  templateUrl: './importkey.component.html',
-  styleUrls: ['./importkey.component.css']
+  selector: 'ons-page[import-key]',
+  templateUrl: './import-key.component.html',
+  styleUrls: ['./import-key.component.css']
 })
-export class ImportkeyComponent implements OnInit {
+export class ImportKeyComponent implements OnInit {
   privatekey = '';
 
   constructor(
@@ -31,6 +31,10 @@ export class ImportkeyComponent implements OnInit {
 
   cancel() {
     this.navigator.element.popPage();
+  }
+
+  private get hasKey(): boolean {
+    return this.privatekey.length > 0;
   }
 
   scan() {

@@ -1,5 +1,5 @@
 import { KeyComponent } from './../key/key.component';
-import { ImportkeyComponent } from './../importkey/importkey.component';
+import { ImportKeyComponent } from '@app/register/import-key/import-key.component';
 import { Component, OnInit, HostListener } from '@angular/core';
 import { VaultService } from './../vault/vault.service';
 import { Key } from '../vault/key';
@@ -33,7 +33,7 @@ export class KeysComponent implements OnInit {
   }
 
   importKey() {
-    this.navigator.element.pushPage(ImportkeyComponent);
+    this.navigator.element.pushPage(ImportKeyComponent);
   }
 
   show(address) {

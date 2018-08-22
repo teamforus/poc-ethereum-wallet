@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OnsNavigator } from 'ngx-onsenui';
-import { ImportkeyComponent } from '@app/importkey/importkey.component';
+import { ImportKeyComponent } from '@app/register/import-key/import-key.component';
 import { NewKeyComponent } from '@app/register/new-key/new-key.component';
 
 @Component({
@@ -15,7 +15,7 @@ export class WelcomeComponent {
   ) { }
 
   private importUser() {
-    this._navigator.element.pushPage(ImportkeyComponent);
+    this._navigator.element.pushPage(ImportKeyComponent);
   }
 
   private newUser() {

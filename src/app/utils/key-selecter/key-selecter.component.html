@@ -1,14 +1,20 @@
-<div class="error" *ngIf="!_keys || _keys.length <= 0">
-  Er is geen sleutel gevonden.</div>
-<div class="input-wrapper key-selecter" [hidden]="_keys.length === 1">
-  <div class="label-wrapper">
+<tr *ngIf="!_keys || _keys.length <= 0">
+  <td class="error">
+    Er is geen sleutel gevonden.
+  </td>
+</tr>
+<tr *ngIf="_keys.length > 1">
+  <td class="label-wrapper">
     Ondertekenen met
-  </div>
-  <div class="input-wrapper" *ngIf="_keys.length > 1">
+  </td>
+</tr>
+
+<tr class="key-selecter" *ngIf="_keys.length > 1">
+  <td class="input-wrapper">
     <select [(ngModel)]="key">
       <option *ngFor="let keyObject of _keys" [value]="keyObject.key" [selected]="keyObject.key === _key">
         {{keyObject.address}}
       </option>
     </select>
-  </div>
-</div>
+  </td>
+</tr>

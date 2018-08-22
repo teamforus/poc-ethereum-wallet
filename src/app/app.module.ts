@@ -12,7 +12,7 @@ import { VaultService } from './vault/vault.service';
 import { FormsModule } from '@angular/forms';
 import { Web3Service } from './web3.service';
 import { IdentityaddkeyComponent } from './identityaddkey/identityaddkey.component';
-import { ImportkeyComponent } from './importkey/importkey.component';
+import { ImportKeyComponent } from '@app/register/import-key/import-key.component';
 import { NewkeyComponent } from './newkey/newkey.component';
 import { TransferFromKeyComponent } from './transfer-from-key/transfer-from-key.component';
 import { IssueClaimComponent } from './issue-claim/issue-claim.component';
@@ -52,7 +52,7 @@ import { KeySelecterComponent } from '@app/utils/key-selecter/key-selecter.compo
     IdentityComponent,
     KeysComponent,
     IdentityaddkeyComponent,
-    ImportkeyComponent,
+    ImportKeyComponent,
     NewkeyComponent,
     TransferFromKeyComponent,
     IssueClaimComponent,
@@ -91,6 +91,13 @@ import { KeySelecterComponent } from '@app/utils/key-selecter/key-selecter.compo
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   entryComponents: [
+    HomeComponent,
+    WelcomeComponent,
+    NewKeyComponent,
+    NewIdentityComponent,
+    ImportKeyComponent,
+
+    // TO BE REDONE
     KeysPageNavComponent,
     CurrenciesPageNavComponent,
     IdentitiesPageNavComponent,
@@ -100,11 +107,7 @@ import { KeySelecterComponent } from '@app/utils/key-selecter/key-selecter.compo
     ImportidentityComponent,
     IdentityimportkeyComponent,
     KeyComponent,
-    TransferAllowanceFromIdentityComponent,
-    HomeComponent,
-    WelcomeComponent,
-    NewKeyComponent,
-    NewIdentityComponent
+    TransferAllowanceFromIdentityComponent
   ]
 })
 export class AppModule { }

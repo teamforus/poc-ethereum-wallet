@@ -1,12 +1,18 @@
 <ons-navigator #navigator>
   <ons-page id="app-root">
-    <div class="content">
-      Welkom
-    </div>
-    <div class="button-wrapper">
-      <div class="button" (click)="resetPressed()">
-        Reset ({{_countDown}})
-      </div>
-    </div>
+    <table class="content splash">
+      <tr class="fill">
+        <td>
+          <h1>Welkom</h1>
+        </td>
+      </tr>
+      <tr class="button-wrapper" *ngIf="_countDown > 0">
+        <td>
+          <ons-button (click)="resetPressed()">
+            Reset ({{_countDown}})
+          </ons-button>
+        </td>
+      </tr>
+    </table>
   </ons-page>
 </ons-navigator>

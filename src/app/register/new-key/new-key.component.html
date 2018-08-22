@@ -1,10 +1,16 @@
 <ons-page id="new_key">
-  <div class="content">
-    <div class="header">
-      <p>Info over het maken van je identiteit en dergelijke hier</p>
-    </div>
-    <div class="butten create" (click)="generateKey()">
-      Doorgaan
-    </div>
-  </div>
+  <table class="content">
+    <tr class="fill">
+      <td>
+        <p>Info over het gebruik van de app, privé sleutels, voorzichtig zijn</p>
+      </td>
+    </tr>
+    <tr class="button-wrapper">
+      <td>
+        <ons-button class="butten create" (click)="generateKey()">
+          Doorgaan
+        </ons-button>
+      </td>
+    </tr>
+  </table>
 </ons-page>

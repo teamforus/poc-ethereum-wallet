@@ -11,6 +11,10 @@ export class KeySelecterComponent implements OnInit {
 
   private _keys: Key[];
   private _key: string;
+
+  @Input()
+  useTable: boolean;
+
   @Output() keySelected = new EventEmitter<string>();
 
   constructor(

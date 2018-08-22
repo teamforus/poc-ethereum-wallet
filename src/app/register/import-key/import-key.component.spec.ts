@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ImportkeyComponent } from './importkey.component';
+import { ImportKeyComponent } from '@app/register/import-key/import-key.component';
 
 describe('ImportkeyComponent', () => {
-  let component: ImportkeyComponent;
-  let fixture: ComponentFixture<ImportkeyComponent>;
+  let component: ImportKeyComponent;
+  let fixture: ComponentFixture<ImportKeyComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ImportkeyComponent ]
+      declarations: [ ImportKeyComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ImportkeyComponent);
+    fixture = TestBed.createComponent(ImportKeyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
