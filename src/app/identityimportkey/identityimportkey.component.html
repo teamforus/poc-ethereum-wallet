@@ -1,0 +1,27 @@
+<ons-page id="identity">
+
+    <ons-toolbar>
+        <p>Identity {{identity.name}} : Import existing key</p>
+    </ons-toolbar>
+
+    <label>Key:
+        <select [(ngModel)]="keyAddress">
+            <option *ngFor="let key of keys">{{key.address}}</option>
+        </select>
+    </label>
+
+    <br/>
+    <label>Key purpose:
+        <select [(ngModel)]="purpose">
+            <option value="1">Management</option>
+            <option value="2">Action</option>
+            <option value="3">Claim</option>
+            <option value="4">Encryption</option>
+        </select>
+    </label>
+
+    <div class="page_buttons">
+        <ons-button (click)="addKey()">Save</ons-button>
+        <ons-button (click)="cancel()">Cancel</ons-button>
+    </div>
+</ons-page>

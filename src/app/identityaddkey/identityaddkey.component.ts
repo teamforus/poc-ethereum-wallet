@@ -1,14 +1,13 @@
+import { Params, OnsNavigator } from 'ngx-onsenui';
 import { Key } from './../vault/key';
 import { VaultService } from './../vault/vault.service';
 import { Web3Service } from './../web3.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
 import { Identity } from './../vault/identity';
 import * as IdentityContractData from './../../contracts/identity.js';
 
 @Component({
-  selector: 'app-identityaddkey',
+  selector: 'ons-page[identityaddkey]',
   templateUrl: './identityaddkey.component.html',
   styleUrls: ['./identityaddkey.component.css']
 })
@@ -22,14 +21,14 @@ export class IdentityaddkeyComponent implements OnInit {
   managementkey = '';
 
   constructor(
-    private route: ActivatedRoute,
     private vault: VaultService,
     private web3Service: Web3Service,
-    private router: Router
+    private params: Params,
+    private navigator: OnsNavigator
   ) { }
 
   ngOnInit() {
-    this.identity = this.vault.getIdentity(this.route.snapshot.paramMap.get('address'));
+    this.identity = this.vault.getIdentity(this.params.data.address);
     this.keys = this.vault.getKeys();
     this.managementkeys = this.vault.getManagementKeys(this.identity.address);
   }
@@ -52,9 +51,11 @@ export class IdentityaddkeyComponent implements OnInit {
       null
     );
 
-
     await this.vault.addKeyToIdentity(identityContract, managmentAccount, toAdd, this.purpose);
-    this.router.navigate(['/identities/' + this.route.snapshot.paramMap.get('address')]);
+    this.navigator.element.popPage();
+  }
 
+  cancel() {
+    this.navigator.element.popPage();
   }
 }

@@ -1,0 +1,39 @@
+<ons-page id="new-identity">
+  <table class="content">
+    <tr class="fill">
+      <td>
+        <p>Info over identiteiten</p>
+      </td>
+    </tr>
+    <tr *ngIf="screenStatus === ScreenStatus.Busy" class="fill page_buttons">
+      <td>
+        <ons-progress-circular indeterminate></ons-progress-circular>
+      </td>
+    </tr>
+    <tr *ngIf="screenStatus === ScreenStatus.Start">
+
+      <td class="label">
+        Naam
+      </td>
+    </tr>
+    <tr class="error-wrapper" *ngIf="!!_nameError.length">
+      <td class="error">
+        {{_nameError}}
+      </td>
+    </tr>
+    <tr>
+      <td class="input-wrapper">
+        <input [(ngModel)]="name" placeholder="Waar ga je deze identiteit bijvoorbeeld voor gebruiken?">
+      </td>
+    </tr>
+    <app-key-selecter (useTable)="true" (keySelected)="keySelected($event)"></app-key-selecter>
+    <tr class="fill button-wrapper">
+      <td>
+        <ons-button (click)="save()">Aanmaken</ons-button>
+      </td>
+      <td *ngIf="canCancel()">
+        <ons-button (click)="cancel()">Cancel</ons-button>
+      </td>
+    </tr>
+  </table>
+</ons-page>

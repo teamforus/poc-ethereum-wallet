@@ -1,13 +1,13 @@
 import { Key } from './../vault/key';
 import { VaultService } from './../vault/vault.service';
 import { Web3Service } from './../web3.service';
-import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import * as Erc20ContractData from './../../contracts/erc20.js';
 import { environment } from '../../environments/environment';
+import { Params, OnsNavigator } from 'ngx-onsenui';
 
 @Component({
-  selector: 'app-transfer-token-from-key',
+  selector: 'ons-page[transfer-token-from-key]',
   templateUrl: './transfer-token-from-key.component.html',
   styleUrls: ['./transfer-token-from-key.component.css']
 })
@@ -20,19 +20,19 @@ export class TransferTokenFromKeyComponent implements OnInit {
 
   constructor(
     private vault: VaultService,
-    private route: ActivatedRoute,
     private web3Service: Web3Service,
-    private router: Router
+    private params: Params,
+    private navigator: OnsNavigator
   ) { }
 
   ngOnInit() {
-    this.key = this.vault.getKeyByAddress(this.route.snapshot.paramMap.get('address'));
+    this.key = this.vault.getKeyByAddress(this.params.data.balanceAddress);
     this.tokenContract = new this.web3Service.web3.eth.Contract(
       Erc20ContractData.abi,
-      this.route.snapshot.paramMap.get('tokenaddress')
+      this.params.data.tokenAddress
     );
     // @ts-ignore
-    this.balance = this.tokenContract.methods.balanceOf(this.key.address).call();
+    this.balance = this.tokenContract.methods.balanceOf(this.key.balanceAddress).call();
   }
 
   async transfer() {
@@ -49,7 +49,10 @@ export class TransferTokenFromKeyComponent implements OnInit {
     };
 
     await this.web3Service.sendSignedTransaction(trx, this.key.key);
-    this.router.navigate(['/currencies']);
+    this.navigator.element.popPage();
   }
 
+  cancel() {
+    this.navigator.element.popPage();
+  }
 }

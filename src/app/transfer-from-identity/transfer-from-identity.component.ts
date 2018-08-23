@@ -1,14 +1,14 @@
 import { Key } from './../vault/key';
 import { Web3Service } from './../web3.service';
 import { VaultService } from './../vault/vault.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Identity } from './../vault/identity';
 import { Component, OnInit } from '@angular/core';
 import * as IdentityContractData from './../../contracts/identity.js';
 import { environment } from '../../environments/environment';
+import { Params, OnsNavigator } from 'ngx-onsenui';
 
 @Component({
-  selector: 'app-transfer-from-identity',
+  selector: 'ons-page[transfer-from-identity]',
   templateUrl: './transfer-from-identity.component.html',
   styleUrls: ['./transfer-from-identity.component.css']
 })
@@ -21,14 +21,14 @@ export class TransferFromIdentityComponent implements OnInit {
   toValue: number;
 
   constructor(
-    private route: ActivatedRoute,
     private vault: VaultService,
     private web3Service: Web3Service,
-    private router: Router
+    private params: Params,
+    private navigator: OnsNavigator
   ) { }
 
   ngOnInit() {
-    this.identity = this.vault.getIdentity(this.route.snapshot.paramMap.get('address'));
+    this.identity = this.vault.getIdentity(this.params.data.address);
     this.web3Service.web3.eth.getBalance(this.identity.address).then((balance) => { this.balance = balance; });
     this.managementkeys = this.vault.getManagementKeys(this.identity.address);
   }
@@ -52,8 +52,12 @@ export class TransferFromIdentityComponent implements OnInit {
     };
 
     await this.web3Service.sendSignedTransaction(trx, this.managementkey);
-    this.router.navigate(['/currencies']);
+    this.navigator.element.popPage();
 
+  }
+
+  cancel() {
+    this.navigator.element.popPage();
   }
 
 }

@@ -1,1 +1,95 @@
-/* You can add global styles to this file, and also import other style files */
+
+* {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
+
+.bold, b, h1, h2, h3,h4,h5,h6 {
+  font-weight: 600;
+}
+
+table.content {
+  width:100%;
+  height: 100%;
+  padding: 0;
+  padding-top: 15px;
+}
+
+table.content td {
+  padding: 15px;
+  padding-top: 0;
+  vertical-align: top;
+}
+
+tr.fill {
+  height: 100%;
+}
+
+.button-wrapper {
+  text-align: center;
+}
+
+tr.button-wrapper button, tr.button-wrapper .button, tr.button-wrapper ons-button {
+  margin: 0;
+  width: 100%;
+}
+
+table.content td.input-wrapper {
+  padding-bottom: 33px;
+}
+
+table input {
+  width: calc(100% - 8px);;
+}
+
+table.content .error {
+  color:red;
+  font-size:12px;
+  font-style:italic;
+  font-weight: 600;
+  padding-bottom: 6px;
+}
+
+tabel.content ons-toolbar::after{
+  height: 14px;
+  content: '&nbsp';
+}
+
+input {
+  line-height: 36px;
+  padding: 0 4px;
+  border-radius: 3px;
+  border: 1px solid #DADADA;
+  font-size: 16px;
+}
+
+input::placeholder {
+  font-style:italic;
+  color: #DADADA;
+}
+
+.page_buttons {
+    text-align: center;
+}
+
+.page_buttons ons-button {
+    display: block;
+    margin: 10px;
+}
+
+.margin {
+    margin: 10px;
+}
+
+ons-toolbar p {
+    margin: 10px;
+}
+
+ons-page ons-toolbar p {
+    font-weight: bold;
+}
+
+qrcode {
+  display: block;
+  margin: 10px;
+}

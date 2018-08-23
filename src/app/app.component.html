@@ -1,10 +1,18 @@
-<h1>{{title}}</h1>
-<nav>
-  <a routerLink="/keys">Keys</a>
-  |
-  <a routerLink="/identities">Identities</a>
-  |
-  <a routerLink="/currencies">Currencies</a>
-</nav>
-<hr/>
-<router-outlet></router-outlet>
+<ons-navigator #navigator>
+  <ons-page id="app-root">
+    <table class="content splash">
+      <tr class="fill">
+        <td>
+          <h1>Welkom</h1>
+        </td>
+      </tr>
+      <tr class="button-wrapper" *ngIf="_countDown > 0">
+        <td>
+          <ons-button (click)="resetPressed()">
+            Reset ({{_countDown}})
+          </ons-button>
+        </td>
+      </tr>
+    </table>
+  </ons-page>
+</ons-navigator>

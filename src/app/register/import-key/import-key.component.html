@@ -1,0 +1,20 @@
+<ons-page id="import-key">
+  <table class="content">
+    <tr class="fill header">
+      <td>
+        Info over het importeren van private key
+      </td>
+    </tr>
+    <tr class="button-wrapper">
+      <td>
+        <ons-button (click)="scan()">Scan code</ons-button>
+      </td>
+    </tr>
+    <tr *ngIf="hasKey" class="button-wrapper">
+      <td>
+        <ons-button (click)="importKey()">Inloggen</ons-button>
+
+      </td>
+    </tr>
+  </table>
+</ons-page>

@@ -1,18 +1,26 @@
+import { OnsNavigator } from 'ngx-onsenui';
 import { Key } from './../vault/key';
-import { async } from '@angular/core/testing';
 import { VaultService } from './../vault/vault.service';
 import { Web3Service } from './../web3.service';
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, HostListener } from '@angular/core';
 import * as IdentityContractData from './../../contracts/identity.js';
 import { environment } from '../../environments/environment';
+import * as ons from 'onsenui';
+
+enum ScreenStatus {
+  Start,
+  Busy,
+  Done
+}
 
 @Component({
-  selector: 'app-newidentity',
+  selector: 'ons-page[newidentity]',
   templateUrl: './newidentity.component.html',
   styleUrls: ['./newidentity.component.css']
 })
 export class NewidentityComponent implements OnInit {
+  ScreenStatus = ScreenStatus;
+  screenStatus: ScreenStatus = ScreenStatus.Start;
   keys: Key[] = new Array<Key>();
   name = '';
   managementkey = '';
@@ -20,18 +28,29 @@ export class NewidentityComponent implements OnInit {
   constructor(
     public web3Service: Web3Service,
     private vault: VaultService,
-    private router: Router
+    private navigator: OnsNavigator
   ) { }
 
   ngOnInit() {
     this.keys = this.vault.getKeys();
+    this.name = '';
+    this.managementkey = '';
+    this.screenStatus = ScreenStatus.Start;}
+
+  @HostListener('window:show', ['$event'])
+  onShow(event) {
+    if ('newidentity' === event.target.id) {
+      this.ngOnInit();
+    }
   }
 
   async save() {
+    this.screenStatus = ScreenStatus.Busy;
     const keyAccount = this.web3Service.web3.eth.accounts.privateKeyToAccount(this.managementkey);
     const identityAddress = await this.deployIdentityContract(keyAccount);
     this.vault.addIdentity(this.name, identityAddress, keyAccount.privateKey);
-    this.router.navigate(['/identities']);
+    ons.notification.toast('Identity "' + this.name + '" successfuly created', {timeout: 5000});
+    this.navigator.element.popPage();
   }
 
   private async deployIdentityContract(senderAccount) {
@@ -42,12 +61,18 @@ export class NewidentityComponent implements OnInit {
       null
     );
 
+    let contractBin = IdentityContractData.bin;
+
+    environment.libAddrMap.forEach((addrMap) => {
+      const placeholder = ('__' + addrMap.libName + '.sol:' + addrMap.libName).padEnd(40, '_');
+      contractBin = contractBin.replace(new RegExp(placeholder, 'g'), addrMap.address);
+    });
+
     const deploy = IdentityContract.deploy(
-      { data: IdentityContractData.bin }
+      { data: contractBin }
     );
 
     const trx = {
-      // nonce: this.vault.getNonce(),
       chainId: this.web3Service.chainId,
       gas: environment.gas,
       data: deploy._deployData
@@ -67,6 +92,10 @@ export class NewidentityComponent implements OnInit {
     });
 
     return contractAddress;
+  }
+
+  cancel() {
+    this.navigator.element.popPage();
   }
 
 }

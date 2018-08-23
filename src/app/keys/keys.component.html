@@ -1,8 +1,16 @@
-<h2>Keys</h2>
-<ul>
-  <li *ngFor="let key of keys">
-    {{key.address}}
-  </li>
-</ul>
-<a routerLink="/keys/new">New key</a>
-<a routerLink="/keys/import">Import key</a>
+<ons-page id="keys">
+
+    <ons-toolbar>
+        <p>Keys</p>
+    </ons-toolbar>
+
+    <ons-list>
+        <ons-list-item  modifier="chevron" tappable *ngFor="let key of keys" (click)="show(key.address)">{{key.address}}</ons-list-item>
+    </ons-list>
+
+    <div class="page_buttons">
+        <ons-button (click)="newKey()">New key</ons-button>
+        <ons-button (click)="importKey()">Import key</ons-button>
+    </div>
+
+</ons-page>

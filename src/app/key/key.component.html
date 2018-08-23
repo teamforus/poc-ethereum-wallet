@@ -1,0 +1,31 @@
+<ons-page id="keys">
+
+    <ons-toolbar>
+        <p>Key</p>
+    </ons-toolbar>
+
+    <ons-card>
+        <div class="title">
+            Public key
+        </div>
+        <div class="content">
+            {{key.address}}
+            <qrcode [qrdata]="key.address" [size]="128" [level]="'M'"></qrcode>
+        </div>
+    </ons-card>
+
+    <ons-card>
+        <div class="title">
+            Private key
+        </div>
+        <div class="content">
+            {{key.key}}
+            <qrcode [qrdata]="key.key" [size]="128" [level]="'M'"></qrcode>
+        </div>
+    </ons-card>
+
+    <div class="page_buttons">
+        <ons-button (click)="back()">Back</ons-button>
+    </div>
+
+</ons-page>

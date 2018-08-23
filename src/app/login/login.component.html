@@ -1,0 +1,34 @@
+<ons-page id="login">
+
+    <ons-toolbar>
+        <p>Login with identity</p>
+    </ons-toolbar>
+
+
+    <ons-select [(ngModel)]="selectedIdentityAddress" (ngModelChange)="onIdentitySelect()">
+        <option *ngFor="let identity of identities" [value]="identity.address">
+            {{ identity.name }}
+        </option>
+    </ons-select>
+
+    <ons-select [(ngModel)]="selectedKey" [attr.modifier]="selectedKey">
+        <option *ngFor="let key of keys" [value]="key.address">
+            {{ key.address }}
+        </option>
+    </ons-select>
+
+    <div style="text-align: center">
+        <ons-fab (click)="scan()" ripple>
+            <ons-icon icon="fa-qrcode"></ons-icon>
+        </ons-fab>
+    </div>
+
+    <div *ngIf="screenStatus == ScreenStatus.Busy" class="page_buttons">
+      <ons-progress-circular indeterminate></ons-progress-circular>
+    </div>
+
+    <div *ngIf="screenStatus == ScreenStatus.Start" class="page_buttons">
+        <ons-button (click)="login()" [disabled]="servicePubKey==''">Login</ons-button>
+    </div>
+
+</ons-page>

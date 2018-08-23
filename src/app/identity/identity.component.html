@@ -1,25 +1,47 @@
-<h2>Identity {{identity.name}}</h2>
-<p>
-  Contract address: {{identity.address}}
-</p>
-<h3>Keys</h3>
-<ul>
-  <li *ngFor="let key of identity.keys">{{key.address}}<!-- ({{key.purpose}})--></li>
-</ul>
-<h3>Records</h3>
-<ul>
-  <li *ngFor="let record of records">
-    {{record.key}}: {{record.value | async}}
-    <a routerLink="/identities/{{identity.address}}/record/{{record.key}}">edit</a>
-    <a routerLink="/identities/{{identity.address}}/record/{{record.key}}/delete">delete</a>
-  </li>
-</ul>
-<a routerLink="/identities/{{identity.address}}/record">Add record</a>
-<!--
-<h3>Events</h3>
-<ul>
-  <li *ngFor="let event of allEvents">{{event.event}} ({{event.returnValues | eventParams}})</li>
-</ul>
-<a routerLink="/identities/{{identity.address}}/newkey">New key</a>
-<a routerLink="/identities/{{identity.address}}/issueclaim">Issue new claim</a>
--->
+<ons-page id="identity">
+
+    <ons-toolbar>
+        <p>Identity {{identity.name}}</p>
+    </ons-toolbar>
+
+    <ons-card>
+        <div class="title">
+            Address
+        </div>
+        <div class="content">
+            {{identity.address}}
+            <qrcode [qrdata]="identity.address" [size]="128" [level]="'M'"></qrcode>
+        </div>
+    </ons-card>
+
+
+    <ons-card>
+        <div class="title">
+            Keys
+        </div>
+        <div class="content">
+            <ons-list>
+                <ons-list-item *ngFor="let key of identity.keys">{{key.address}} ({{key.purpose}})</ons-list-item>
+            </ons-list>
+        </div>
+    </ons-card>
+
+    <ons-card>
+        <div class="title">
+            Events
+        </div>
+        <div class="content">
+            <ons-list>
+                <ons-list-item *ngFor="let event of allEvents">{{event.event}} ({{event.returnValues | eventParams}})</ons-list-item>
+            </ons-list>
+        </div>
+    </ons-card>
+
+    <div class="page_buttons">
+        <ons-button (click)="newkey(identity.address)">New key</ons-button>
+        <ons-button (click)="importkey(identity.address)">Import existing key</ons-button>
+        <ons-button (click)="issueclaim(identity.address)">Issue new claim</ons-button>
+        <ons-button (click)="back()">Back</ons-button>
+    </div>
+
+</ons-page>

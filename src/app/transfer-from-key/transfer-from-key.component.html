@@ -1,4 +1,9 @@
-<h2>Transfer ether from {{this.key.address}}</h2>
+<ons-page id="transfer-from-key">
+
+    <ons-toolbar>
+        <p>Transfer ether from {{this.key.address}}</p>
+    </ons-toolbar>
+
 <p>
     Balance: {{balance}} (wei)
 </p>
@@ -10,6 +15,9 @@
   <input [(ngModel)]="toValue" placeholder="amount"> (wei)
 </label>
 
-<br/>
-<button (click)="transfer()">transfer</button>
-<a routerLink="/currencies">Cancel</a>
+    <div class="page_buttons">
+        <ons-button (click)="transfer()">Transfer</ons-button>
+        <ons-button (click)="cancel()">Cancel</ons-button>
+    </div>
+
+</ons-page>

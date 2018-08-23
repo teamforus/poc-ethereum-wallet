@@ -1,5 +1,15 @@
-<h2>Identities</h2>
-<ul>
-  <li *ngFor="let identity of identities"><a routerLink="/identities/{{identity.address}}">{{identity.name}}</a></li>
-</ul>
-<a routerLink="/identities/new">Create new identity</a>
+<ons-page id="identities">
+    <ons-toolbar>
+      <p>Identities</p>
+    </ons-toolbar>
+
+    <ons-list>
+        <ons-list-item modifier="chevron" tappable *ngFor="let identity of identities" (click)="show(identity.address)">{{identity.name}}</ons-list-item>
+    </ons-list>
+
+    <div class="page_buttons">
+        <ons-button (click)="new()">Create new identity</ons-button>
+        <ons-button (click)="importIdentity()">Import identity</ons-button>
+    </div>
+
+</ons-page>

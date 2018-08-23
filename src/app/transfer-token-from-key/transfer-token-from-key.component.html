@@ -1,4 +1,9 @@
-<h2>Transfer token from {{tokenContract.options.address}} held by {{this.key.address}}</h2>
+<ons-page id="transfer-token-from-key">
+
+    <ons-toolbar>
+        <p>Transfer token from {{tokenContract.options.address}} held by {{this.key.address}}</p>
+    </ons-toolbar>
+
 <p>
     Balance: {{balance | async}}
 </p>
@@ -10,6 +15,8 @@
   <input [(ngModel)]="toValue" placeholder="amount">
 </label>
 
-<br/>
-<button (click)="transfer()">transfer</button>
-<a routerLink="/currencies">Cancel</a>
+    <div class="page_buttons">
+        <ons-button (click)="transfer()">transfer</ons-button>
+        <ons-button (click)="cancel()">Cancel</ons-button>
+    </div>
+</ons-page>

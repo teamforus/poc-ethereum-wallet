@@ -1,0 +1,13 @@
+<ons-page id="settings">
+
+  <ons-toolbar>
+      <p>Settings</p>
+  </ons-toolbar>
+
+  <div>Connected to: {{ web3Service.web3.eth.net.currentProvider.connection.url }}</div>
+
+  <div class="page_buttons">
+      <ons-button (click)="reset()">Reset</ons-button>
+  </div>
+
+</ons-page>

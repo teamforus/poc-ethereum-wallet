@@ -1,5 +1,5 @@
+import { Params, OnsNavigator } from 'ngx-onsenui';
 import { Key } from './../vault/key';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Identity } from './../vault/identity';
 import { VaultService } from './../vault/vault.service';
 import { Web3Service } from './../web3.service';
@@ -8,7 +8,7 @@ import * as IdentityContractData from './../../contracts/identity.js';
 import { environment } from '../../environments/environment';
 
 @Component({
-  selector: 'app-issue-claim',
+  selector: 'ons-page[issue-claim]',
   templateUrl: './issue-claim.component.html',
   styleUrls: ['./issue-claim.component.css']
 })
@@ -25,12 +25,12 @@ export class IssueClaimComponent implements OnInit {
   constructor(
     private web3Service: Web3Service,
     private vault: VaultService,
-    private route: ActivatedRoute,
-    private router: Router
+    private params: Params,
+    private navigator: OnsNavigator
   ) { }
 
   ngOnInit() {
-    this.identity = this.vault.getIdentity(this.route.snapshot.paramMap.get('address'));
+    this.identity = this.vault.getIdentity(this.params.data.address);
     this.managementkeys = this.vault.getManagementKeys(this.identity.address);
   }
 
@@ -78,7 +78,11 @@ export class IssueClaimComponent implements OnInit {
     };
 
     await this.web3Service.sendSignedTransaction(trx, this.managementkey);
-    this.router.navigate(['/identities/' + this.route.snapshot.paramMap.get('address')]);
+    this.navigator.element.popPage();
+  }
+
+  cancel() {
+    this.navigator.element.popPage();
   }
 
 }

@@ -1,40 +1,48 @@
-<h2>Issue claim</h2>
-<label>Subject:
-  <input [(ngModel)]="subjectAddress" placeholder="address">
-</label>
+<ons-page id="issue-claim">
 
-<br/>
+    <ons-toolbar>
+        <p>Issue claim</p>
+    </ons-toolbar>
 
-<label>Claim type:
-  <input [(ngModel)]="claimType" placeholder="number">
-</label>
+    <label>Subject:
+      <input [(ngModel)]="subjectAddress" placeholder="address">
+    </label>
 
-<br/>
+    <br/>
 
-<label>Scheme:
-  <input [(ngModel)]="scheme" placeholder="number">
-</label>
+    <label>Claim type:
+      <input [(ngModel)]="claimType" placeholder="number">
+    </label>
 
-<br/>
+    <br/>
 
-<label>Data:
-  <input [(ngModel)]="data" placeholder="">
-</label>
+    <label>Scheme:
+      <input [(ngModel)]="scheme" placeholder="number">
+    </label>
 
-<br/>
+    <br/>
 
-<label>URI:
-  <input [(ngModel)]="uri" placeholder="">
-</label>
+    <label>Data:
+      <input [(ngModel)]="data" placeholder="">
+    </label>
 
-<br/>
+    <br/>
 
-<label>Management key to use:
-  <select [(ngModel)]="managementkey">
-      <option *ngFor="let key of managementkeys">{{key.key}}</option>
-  </select>
-</label>
+    <label>URI:
+      <input [(ngModel)]="uri" placeholder="">
+    </label>
 
-<br/>
-<button (click)="issue()">Issue</button>
-<a class="button" routerLink="/identities/{{identity.address}}">Cancel</a>
+    <br/>
+
+    <label>Management key to use:
+      <select [(ngModel)]="managementkey">
+          <option *ngFor="let key of managementkeys">{{key.key}}</option>
+      </select>
+    </label>
+
+    <div class="page_buttons">
+        <ons-button (click)="issue()">Issue</ons-button>
+        <ons-button (click)="cancel()">Cancel</ons-button>
+    </div>
+
+</ons-page>

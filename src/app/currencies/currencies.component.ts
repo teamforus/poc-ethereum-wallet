@@ -1,17 +1,25 @@
-import { Key } from './../vault/key';
+import { TransferAllowanceFromIdentityComponent } from './../transfer-allowance-from-identity/transfer-allowance-from-identity.component';
+import { TransferTokenFromIdentityComponent } from './../transfer-token-from-identity/transfer-token-from-identity.component';
+import { TransferTokenFromKeyComponent } from './../transfer-token-from-key/transfer-token-from-key.component';
+import { TransferFromIdentityComponent } from './../transfer-from-identity/transfer-from-identity.component';
+import { OnsNavigator } from 'ngx-onsenui';
+import { AddtokenComponent } from './../addtoken/addtoken.component';
 import { Web3Service } from './../web3.service';
 import { VaultService } from './../vault/vault.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import * as Erc20ContractData from './../../contracts/erc20.js';
-
+import { TransferFromKeyComponent } from '../transfer-from-key/transfer-from-key.component';
+import { Token as VaultToken } from '../vault/token';
 
 enum BalanceType {
   Key,
-  Identity
+  Identity,
+  KeyAllowance,
+  IdentityAllowance
 }
 
 @Component({
-  selector: 'app-currencies',
+  selector: 'ons-page[currencies]',
   templateUrl: './currencies.component.html',
   styleUrls: ['./currencies.component.css']
 })
@@ -22,60 +30,121 @@ export class CurrenciesComponent implements OnInit {
 
   constructor(
     private vault: VaultService,
-    private web3Service: Web3Service
+    private web3Service: Web3Service,
+    private navigator: OnsNavigator
   ) { }
 
   ngOnInit() {
-    const keys = this.vault.getKeys();
-    for (const key of keys) {
-      const account = this.web3Service.web3.eth.accounts.privateKeyToAccount(key.key);
-      this.ethBalances.push(
-        {
-          address: this.web3Service.web3.eth.accounts.privateKeyToAccount(key.key).address,
-          balance: this.web3Service.web3.eth.getBalance(account.address),
-          type: BalanceType.Key
-        }
-      );
-    }
 
-    const identities = this.vault.getIdentities();
-    for (const identity of identities) {
-      this.ethBalances.push(
-        {
-          address: identity.address,
-          balance: this.web3Service.web3.eth.getBalance(identity.address),
-          type: BalanceType.Identity
-        }
-      );
-    }
+  }
 
-    const tokenAddresses = this.vault.getTokens();
-    for (const tokenAddress of tokenAddresses) {
-      const contract = new this.web3Service.web3.eth.Contract(Erc20ContractData.abi, tokenAddress);
-      const token = {
-        address: tokenAddress,
-        name: contract.methods.name().call(),
-        symbol: '',
-        balances: new Array<Balance>()
-      };
+  @HostListener('window:show', ['$event'])
+  async onShow(event) {
+    if ('currencies' === event.target.id) {
+
+      await this.web3Service.checkConnection();
+
+      this.ethBalances.length = 0;
+      this.tokens.length = 0;
+
+      const keys = this.vault.getKeys();
       for (const key of keys) {
-        token.balances.push({
-          address: key.address,
-          balance: contract.methods.balanceOf(key.address).call(),
-          type: BalanceType.Key
-        });
+        const account = this.web3Service.web3.eth.accounts.privateKeyToAccount(key.key);
+        this.ethBalances.push(
+          {
+            address: this.web3Service.web3.eth.accounts.privateKeyToAccount(key.key).address,
+            balance: this.web3Service.web3.eth.getBalance(account.address),
+            type: BalanceType.Key,
+            spender: null,
+            displayName: null
+          }
+        );
       }
+
+      const identities = this.vault.getIdentities();
       for (const identity of identities) {
-        token.balances.push({
-          address: identity.address,
-          balance: contract.methods.balanceOf(identity.address).call(),
-          type: BalanceType.Identity
-        });
+        this.ethBalances.push(
+          {
+            address: identity.address,
+            balance: this.web3Service.web3.eth.getBalance(identity.address),
+            type: BalanceType.Identity,
+            spender: null,
+            displayName: identity.name
+          }
+        );
       }
 
-      this.tokens.push(token);
-    }
+      const vaultTokens = this.vault.getTokens();
+      for (const vaultToken of vaultTokens) {
+        const contract = new this.web3Service.web3.eth.Contract(Erc20ContractData.abi, vaultToken.address);
+        const token = {
+          address: vaultToken.address,
+          name: contract.methods.name().call(),
+          symbol: '',
+          balances: new Array<Balance>()
+        };
+        for (const key of keys) {
+          token.balances.push({
+            address: key.address,
+            balance: contract.methods.balanceOf(key.address).call(),
+            type: BalanceType.Key,
+            spender: null,
+            displayName: null
+          });
+        }
+        for (const identity of identities) {
+          token.balances.push({
+            address: identity.address,
+            balance: contract.methods.balanceOf(identity.address).call(),
+            type: BalanceType.Identity,
+            spender: null,
+            displayName: identity.name
+          });
+          for (const allowanceOwnerAddress of vaultToken.allowances) {
+            token.balances.push({
+              address: allowanceOwnerAddress,
+              balance: contract.methods.allowance(allowanceOwnerAddress, identity.address).call(),
+              type: BalanceType.IdentityAllowance,
+              spender: identity.address,
+              displayName: identity.name
+            });
+          }
+        }
 
+        this.tokens.push(token);
+      }
+    }
+  }
+
+  transferFromKey(address) {
+    this.navigator.element.pushPage(TransferFromKeyComponent, {data: {address: address}});
+  }
+
+  transferFromIdentity(address) {
+    this.navigator.element.pushPage(TransferFromIdentityComponent, {data: {address: address}});
+  }
+
+  transferTokenFromKey(balanceAddress, tokenAddress) {
+    this.navigator.element.pushPage(
+      TransferTokenFromKeyComponent, {data: {balanceAddress: balanceAddress, tokenAddress: tokenAddress}}
+    );
+  }
+
+  transferTokenFromIdentity(balanceAddress, tokenAddress) {
+    this.navigator.element.pushPage(
+      TransferTokenFromIdentityComponent, {data: {balanceAddress: balanceAddress, tokenAddress: tokenAddress}}
+    );
+  }
+
+  transferAllowanceFromIdentity(allowanceOwnerAddress, allowanceSpenderAddress, tokenAddress) {
+    this.navigator.element.pushPage(
+      TransferAllowanceFromIdentityComponent,
+      {data: {allowanceOwnerAddress: allowanceOwnerAddress, allowanceSpenderAddress: allowanceSpenderAddress, tokenAddress: tokenAddress}}
+    );
+  }
+
+  addToken() {
+    this.navigator.element.pushPage(AddtokenComponent);
   }
 
 }
@@ -84,6 +153,8 @@ class Balance {
   address: string;
   balance: number;
   type: BalanceType;
+  spender: string;
+  displayName: string;
 }
 
 class Token {

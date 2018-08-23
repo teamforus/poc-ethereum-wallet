@@ -19,13 +19,16 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "../node_modules/onsenui/css/onsenui.css",
+        "../node_modules/onsenui/css/onsen-css-components.css",
         "styles.css"
       ],
-      "scripts": [],
+      "scripts": ["./padEnd.js"],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
-        "prod": "environments/environment.prod.ts"
+        "prod": "environments/environment.prod.ts",
+        "phonegap": "environments/environment.phonegap.ts"
       }
     }
   ],
