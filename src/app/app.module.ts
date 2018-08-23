@@ -1,3 +1,4 @@
+import { ClaimsService } from './claims/claims.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
@@ -37,6 +38,7 @@ import { ImportidentityComponent } from './importidentity/importidentity.compone
 import { IdentityimportkeyComponent } from './identityimportkey/identityimportkey.component';
 import { KeyComponent } from './key/key.component';
 import { TransferAllowanceFromIdentityComponent } from './transfer-allowance-from-identity/transfer-allowance-from-identity.component';
+import { ClaimComponent } from './claim/claim.component';
 
 
 @NgModule({
@@ -68,7 +70,8 @@ import { TransferAllowanceFromIdentityComponent } from './transfer-allowance-fro
     ImportidentityComponent,
     IdentityimportkeyComponent,
     KeyComponent,
-    TransferAllowanceFromIdentityComponent
+    TransferAllowanceFromIdentityComponent,
+    ClaimComponent
   ],
   imports: [
     BrowserModule,
@@ -77,7 +80,7 @@ import { TransferAllowanceFromIdentityComponent } from './transfer-allowance-fro
     OnsenModule,
     QRCodeModule
   ],
-  providers: [VaultService, Web3Service, ScannerService],
+  providers: [VaultService, Web3Service, ScannerService, ClaimsService],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   entryComponents: [
@@ -90,7 +93,8 @@ import { TransferAllowanceFromIdentityComponent } from './transfer-allowance-fro
     ImportidentityComponent,
     IdentityimportkeyComponent,
     KeyComponent,
-    TransferAllowanceFromIdentityComponent
+    TransferAllowanceFromIdentityComponent,
+    ClaimComponent
   ]
 })
 export class AppModule { }
