@@ -1,9 +1,14 @@
+import { Web3Service } from './../web3.service';
+import { VaultService } from './../vault/vault.service';
+import { Key } from './../vault/key';
 import { Claim } from './../claims/Claim';
 import { ClaimsService } from './../claims/claims.service';
 import { OnsNavigator, Params } from 'ngx-onsenui';
 import { Component, OnInit } from '@angular/core';
 import { Identity } from '../vault/identity';
 import { ClaimStatus } from '../claims/ClaimStatus';
+import * as IdentityContractData from './../../contracts/identity.js';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'ons-page[claim]',
@@ -16,11 +21,15 @@ export class ClaimComponent implements OnInit {
   identity: Identity;
   identityClaims = null;
   claim: Claim;
+  managementkeys: Key[] = new Array<Key>();
+  managementkey = '';
 
   constructor(
     private navigator: OnsNavigator,
     private params: Params,
-    private claimService: ClaimsService
+    private claimService: ClaimsService,
+    private vault: VaultService,
+    private web3Service: Web3Service
   ) { }
 
   ngOnInit() {
@@ -28,13 +37,35 @@ export class ClaimComponent implements OnInit {
     this.identity = this.params.data.identity;
     this.identityClaims = this.claimService.getIdentityClaims(this.identity.address);
     this.claim = this.identityClaims.getClaim(this.claimId);
+    this.managementkeys = this.vault.getManagementKeys(this.identity.address);
   }
 
   back() {
     this.navigator.element.popPage();
   }
 
-  approve() {
+  async approve() {
+    const managmentAccount = this.web3Service.web3.eth.accounts.privateKeyToAccount(this.managementkey);
+
+    const identityContract = new this.web3Service.web3.eth.Contract(
+      IdentityContractData.abi,
+      this.identity.address,
+      null
+    );
+
+    const trx = {
+      from: managmentAccount.address,
+      to: identityContract.options.address,
+      chainId: environment.chainId,
+      gas: environment.gas,
+      data: identityContract.methods.approve(
+        this.claim.id,
+        true
+      ).encodeABI()
+    };
+
+    await this.web3Service.sendSignedTransaction(trx, managmentAccount.privateKey);
+    this.navigator.element.popPage();
 
   }
 

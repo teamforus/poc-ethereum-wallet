@@ -45,6 +45,18 @@
                 <ons-col>Uri: </ons-col>
                 <ons-col>{{claim.uri}}</ons-col>
             </ons-row>
+
+            <ons-row>
+                <ons-col>
+                    Management key to use for approval:
+                  </ons-col>
+                <ons-col>
+                    <ons-select [(ngModel)]="managementkey">
+                        <option *ngFor="let key of managementkeys" [ngValue]="key.key">{{key.address}}</option>
+                    </ons-select>
+                </ons-col>
+            </ons-row>
+
         </div>
     </ons-card>
 
