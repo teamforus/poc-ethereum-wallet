@@ -45,7 +45,7 @@ export class ClaimComponent implements OnInit {
   }
 
   async approve() {
-    const managmentAccount = this.web3Service.web3.eth.accounts.privateKeyToAccount(this.managementkey);
+    const managmentAccount = this.vault.getKeyByAddress(this.managementkey);
 
     const identityContract = new this.web3Service.web3.eth.Contract(
       IdentityContractData.abi,
@@ -59,12 +59,12 @@ export class ClaimComponent implements OnInit {
       chainId: environment.chainId,
       gas: environment.gas,
       data: identityContract.methods.approve(
-        this.claim.id,
+        this.web3Service.web3.utils.numberToHex(this.claim.requestId),
         true
       ).encodeABI()
     };
 
-    await this.web3Service.sendSignedTransaction(trx, managmentAccount.privateKey);
+    await this.web3Service.sendSignedTransaction(trx, managmentAccount.key);
     this.navigator.element.popPage();
 
   }
