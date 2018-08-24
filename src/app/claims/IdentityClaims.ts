@@ -53,11 +53,11 @@ export class IdentityClaims {
           if (
             this.claims.has(event.returnValues.claimId)
             &&
-            this.claims.has[event.returnValues.claimId].status !== ClaimStatus.DataMismatch
+            this.claims.get(event.returnValues.claimId).status !== ClaimStatus.DataMismatch
           ) {
 
             if (!this.claimValuesMatch(
-              this.claims.has[event.returnValues.claimId],
+              this.claims.get(event.returnValues.claimId),
               event.returnValues.claimId,
               event.returnValues.claimRequestId,
               event.returnValues.topic,
@@ -67,10 +67,10 @@ export class IdentityClaims {
               event.returnValues.data,
               event.returnValues.uri
             )) {
-              this.claims.has[event.returnValues.claimId].status = ClaimStatus.DataMismatch;
+              this.claims.get(event.returnValues.claimId).status = ClaimStatus.DataMismatch;
             }
 
-            this.claims[event.returnValues.claimId].status = ClaimStatus.Added;
+            this.claims.get(event.returnValues.claimId).status = ClaimStatus.Added;
           }
         }
 
@@ -78,11 +78,11 @@ export class IdentityClaims {
           if (
             this.claims.has(event.returnValues.claimId)
             &&
-            this.claims.has[event.returnValues.claimId].status !== ClaimStatus.DataMismatch
+            this.claims.get(event.returnValues.claimId).status !== ClaimStatus.DataMismatch
           ) {
 
             if (!this.claimValuesMatch(
-              this.claims.has[event.returnValues.claimId],
+              this.claims.get(event.returnValues.claimId),
               event.returnValues.claimId,
               event.returnValues.claimRequestId,
               event.returnValues.topic,
@@ -92,10 +92,10 @@ export class IdentityClaims {
               event.returnValues.data,
               event.returnValues.uri
             )) {
-              this.claims.has[event.returnValues.claimId].status = ClaimStatus.DataMismatch;
+              this.claims.get(event.returnValues.claimId).status = ClaimStatus.DataMismatch;
             }
 
-            this.claims[event.returnValues.claimId].status = ClaimStatus.Removed;
+            this.claims.get(event.returnValues.claimId).status = ClaimStatus.Removed;
           }
         }
 
@@ -103,11 +103,11 @@ export class IdentityClaims {
           if (
             this.claims.has(event.returnValues.claimId)
             &&
-            this.claims.has[event.returnValues.claimId].status !== ClaimStatus.DataMismatch
+            this.claims.get(event.returnValues.claimId).status !== ClaimStatus.DataMismatch
           ) {
 
             if (!this.claimValuesMatch(
-              this.claims.has[event.returnValues.claimId],
+              this.claims.get(event.returnValues.claimId),
               event.returnValues.claimId,
               event.returnValues.claimRequestId,
               event.returnValues.topic,
@@ -117,10 +117,10 @@ export class IdentityClaims {
               event.returnValues.data,
               event.returnValues.uri
             )) {
-              this.claims.has[event.returnValues.claimId].status = ClaimStatus.DataMismatch;
+              this.claims.get(event.returnValues.claimId).status = ClaimStatus.DataMismatch;
             }
 
-            this.claims[event.returnValues.claimId].status = ClaimStatus.Changed;
+            this.claims.get(event.returnValues.claimId).status = ClaimStatus.Changed;
           }
         }
 
