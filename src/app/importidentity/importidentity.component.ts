@@ -26,7 +26,7 @@ export class ImportidentityComponent implements OnInit {
   }
 
   scan() {
-    this.scanner.scan((result) => { this.address = result; });
+    this.scanner.scanRaw((result) => { this.address = result; });
   }
 
   importidentity() {

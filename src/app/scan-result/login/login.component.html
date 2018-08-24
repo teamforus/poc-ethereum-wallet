@@ -1,0 +1,55 @@
+<ons-page id="login">
+
+  <table class="content">
+    <tr class="header">
+      <td class="toolbar-wrapper">
+        <ons-toolbar>
+          <p>Inlogverzoek</p>
+        </ons-toolbar>
+      </td>
+    </tr>
+    <tr class="fill">
+      <td colspan="2">
+        <p>
+          Je hebt een code gescant om in te loggen in een externe applicatie.
+        </p>
+        <p>
+          Wilt u inloggen?
+        </p>
+      </td>
+    </tr>
+
+    <tr *ngIf="screenStatus == ScreenStatus.Busy">
+      <td colspan="2">
+        <ons-progress-circular indeterminate></ons-progress-circular>
+      </td>
+    </tr>
+    <tr class="form">
+      <td class="label-wrapper" colspan="2">
+        Met welke identiteit wilt u inloggen?
+      </td>
+    </tr>
+    <tr class="form">
+      <td class="input-wrapper" colspan="2">
+        <ons-select [(ngModel)]="_selectedIdentity" [disabled]="screenStatus !== ScreenStatus.Start" required>
+          <option *ngFor="let identity of _identities" [value]="identity">
+            {{identity.name}}
+          </option>
+        </ons-select>
+      </td>
+    </tr>
+    <key-selector (keySelected)="keySelected($key)"></key-selector>
+    <tr class="button-wrapper" *ngIf="screenStatus === ScreenStatus.Start">
+      <td>
+        <ons-button (click)="cancel()">
+          Annuleren
+        </ons-button>
+      </td>
+      <td>
+        <ons-button (click)="login()">
+          Inloggen
+        </ons-button>
+      </td>
+    </tr>
+  </table>
+</ons-page>

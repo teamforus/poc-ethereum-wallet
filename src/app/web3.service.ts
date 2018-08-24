@@ -47,6 +47,20 @@ export class Web3Service {
     }
   }
 
+  async createIdentity(senderKeyPair: KeyPair): Promise<string> {
+    /* TODO needs fixing. Does not deploy */
+    const trx = await this.getCreateIdentityTransaction(senderKeyPair.address);
+    if (await this.estimateTransactionSuccess(trx)) {
+      const sgnTrx = await this.web3.eth.accounts.signTransaction(trx, senderKeyPair.privateKey);
+      const receipt = await this.web3.eth.sendSignedTransaction(sgnTrx.rawTransaction);
+      if ('true' === receipt.status) {
+        console.log(receipt);
+        throw new Error('Could not deploy contract');
+      }
+      return receipt.contractAddress;
+    }
+  }
+
   createKeyPair(): KeyPair {
     return new this.web3.eth.accounts.create() as KeyPair;
   }
@@ -54,9 +68,13 @@ export class Web3Service {
   async estimateTransactionSuccess(transaction: Object): Promise<boolean> {
     try {
       this.checkConnection();
-      const gas = this.web3.eth.estimateGas(transaction);
+      const gas = await this.web3.eth.estimateGas(transaction);
+      console.log(gas);
       return (gas > 0);
+    } catch (e) {
+      console.error(e);
     } finally {
+      console.log('Oops');
       return false;
     }
   }
@@ -84,7 +102,7 @@ export class Web3Service {
       chainId: this.chainId,
       data: deploy._deployData,
       gas: environment.gas,
-      nonce: this.getNonce(sender)
+      nonce: await this.getNonce(sender)
     };
     return trx;
   }

@@ -38,7 +38,7 @@ export class ImportKeyComponent implements OnInit {
   }
 
   scan() {
-    this.scanner.scan((result) => { this.privatekey = result; });
+    this.scanner.scanRaw((result) => { this.privatekey = result; });
   }
 
 }

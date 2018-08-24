@@ -57,30 +57,14 @@ export class NewIdentityComponent implements OnInit {
     if (this.validateName()) {
       this.screenStatus = ScreenStatus.Busy;
       const keyPair: KeyPair = await this._web3Service.getKeyPairFromPrivateKey(this.managementkey);
-      const identityAddress = await this.deployIdentityContract(keyPair);
-      this._vaultService.addIdentity(this.name, identityAddress, keyPair.privateKey);
-      ons.notification.toast('Identity "' + this.name + '" successfuly created', { timeout: 5000 });
-      this._navigator.element.popPage();
-    }
-  }
-
-  private async deployIdentityContract(senderKeyPair: KeyPair) {
-    const trx = this._web3Service.getCreateIdentityTransaction(senderKeyPair.address);
-    if (await this._web3Service.estimateTransactionSuccess(trx)) {
-      const contractAddress = await this._web3Service.web3.eth.accounts.signTransaction(trx, senderKeyPair.privateKey)
-        .then((sgnTrx) => {
-          return this._web3Service.web3.eth.sendSignedTransaction(sgnTrx.rawTransaction);
-        }).then((receipt) => {
-          if ('true' === receipt.status) {
-            console.log(receipt);
-            throw new Error('Could not deploy contract');
-          }
-          return receipt.contractAddress;
-        }).catch((error) => {
-          throw new Error(error);
-        });
-
-      return contractAddress;
+      const identityAddress = await this._web3Service.createIdentity(keyPair);
+      if (!!identityAddress) {
+        this._vaultService.addIdentity(this.name, identityAddress, keyPair.privateKey);
+        ons.notification.toast('Identity "' + this.name + '" successfuly created', { timeout: 5000 });
+        this._navigator.element.popPage();
+      } else {
+        alert('Er is iets misgegaan.');
+      }
     }
   }
 
@@ -88,9 +72,9 @@ export class NewIdentityComponent implements OnInit {
     const isLengthValid = (!!this.name
       && !!this.name.length
       && this.name.length >= 3);
-      if (!isLengthValid) {
-        this._nameError = 'De naam moet minimaal 3 karakters hebben';
-      }
+    if (!isLengthValid) {
+      this._nameError = 'De naam moet minimaal 3 karakters hebben';
+    }
     return isLengthValid;
   }
 

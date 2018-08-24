@@ -19,7 +19,7 @@ import { IssueClaimComponent } from './issue-claim/issue-claim.component';
 import { EventParamsPipe } from './pipes/event-params.pipe';
 import { CurrenciesComponent } from './currencies/currencies.component';
 import { TransferFromIdentityComponent } from './transfer-from-identity/transfer-from-identity.component';
-import { AddtokenComponent } from './addtoken/addtoken.component';
+import { AddtokenComponent } from '@app/scan-result/add-token/add-token.component';
 import { TransferTokenFromKeyComponent } from './transfer-token-from-key/transfer-token-from-key.component';
 import { TransferTokenFromIdentityComponent } from './transfer-token-from-identity/transfer-token-from-identity.component';
 import { ResetComponent } from './reset/reset.component';
@@ -29,9 +29,9 @@ import { KeysPageNavComponent } from './keys-page-nav/keys-page-nav.component';
 import { CurrenciesPageNavComponent } from './currencies-page-nav/currencies-page-nav.component';
 import { IdentitiesPageNavComponent } from './identities-page-nav/identities-page-nav.component';
 import { ScannerService } from './scanner.service';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from '@app/scan-result/login/login.component';
 import { SettingsComponent } from './settings/settings.component';
-import { TransactionComponent } from './transaction/transaction.component';
+import { TransactionComponent } from '@app/scan-result/transaction/transaction.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { ImportidentityComponent } from './importidentity/importidentity.component';
 import { IdentityimportkeyComponent } from './identityimportkey/identityimportkey.component';
@@ -42,6 +42,7 @@ import { WelcomeComponent } from '@app/register/welcome/welcome.component';
 import { NewKeyComponent } from '@app/register/new-key/new-key.component';
 import { NewIdentityComponent } from '@app/register/new-identity/new-identity.component';
 import { KeySelecterComponent } from '@app/utils/key-selecter/key-selecter.component';
+import { ScanComponent } from './scan/scan.component';
 
 
 @NgModule({
@@ -78,7 +79,8 @@ import { KeySelecterComponent } from '@app/utils/key-selecter/key-selecter.compo
     WelcomeComponent,
     NewKeyComponent,
     NewIdentityComponent,
-    KeySelecterComponent
+    KeySelecterComponent,
+    ScanComponent
   ],
   imports: [
     BrowserModule,
@@ -91,11 +93,17 @@ import { KeySelecterComponent } from '@app/utils/key-selecter/key-selecter.compo
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   entryComponents: [
-    HomeComponent,
+    // Registration
     WelcomeComponent,
     NewKeyComponent,
     NewIdentityComponent,
     ImportKeyComponent,
+
+    // Home screen
+    HomeComponent,
+    CurrenciesComponent,
+    ScanComponent,
+    IdentitiesComponent,
 
     // TO BE REDONE
     KeysPageNavComponent,

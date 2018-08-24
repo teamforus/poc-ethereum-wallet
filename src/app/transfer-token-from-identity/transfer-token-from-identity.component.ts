@@ -71,7 +71,7 @@ export class TransferTokenFromIdentityComponent implements OnInit {
   }
 
   scan() {
-    this.scanner.scan((result) => {
+    this.scanner.scanRaw((result) => {
       this.toAddress = result;
     });
   }

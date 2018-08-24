@@ -5,21 +5,21 @@
 
 export const environment = {
   production: true,
-  ethNode: 'ws://54.77.160.67:8546',
+  ethNode: 'ws://10.10.12.85:8546',
   gas: 10000000,
   chainId: 3177,
   libAddrMap: [
     {
       libName: 'IdentityData',
-      address: 'dB1c976DC0c4bfe907473f8Cf9C8D6881aA2BdD8'
+      address: '1Fb06717EE4d5d3F5C715F893a2196105E01CB43'
     },
     {
       libName: 'IdentityLib',
-      address: '74716616837Db1d96F55Fe47118298F75310183a'
+      address: 'd15E447452Ea0eb1623f60667fD9D037bF9A785E'
     },
     {
       libName: 'ClaimHolderLib',
-      address: 'f03A2D9dB737110B6aaf0E552a63711FA2A1f73b'
+      address: 'c9766ebe697B6E03E0CdeB5fF87035752f6Ad3B1'
     }
   ]
 };

@@ -12,13 +12,13 @@ import { TransferFromKeyComponent } from './transfer-from-key/transfer-from-key.
 import { IssueClaimComponent } from './issue-claim/issue-claim.component';
 import { CurrenciesComponent } from './currencies/currencies.component';
 import { TransferFromIdentityComponent } from './transfer-from-identity/transfer-from-identity.component';
-import { AddtokenComponent } from './addtoken/addtoken.component';
 import { TransferTokenFromKeyComponent } from './transfer-token-from-key/transfer-token-from-key.component';
 import { TransferTokenFromIdentityComponent } from './transfer-token-from-identity/transfer-token-from-identity.component';
 import { ResetComponent } from './reset/reset.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: '/identities', pathMatch: 'full' },
+  /* I don't believe any of this is needed anymore as of phonegap?
   { path: 'identities', component: IdentitiesComponent },
   { path: 'identities/new', component: NewidentityComponent },
   { path: 'identities/:address/newkey', component: IdentityaddkeyComponent },
@@ -31,9 +31,8 @@ const routes: Routes = [
   { path: 'keys/new', component: NewkeyComponent },
   // { path: 'keys/import', component: ImportkeyComponent },
   { path: 'currencies', component: CurrenciesComponent },
-  { path: 'currencies/addtoken', component: AddtokenComponent },
   { path: 'keys/:address/transfertoken/:tokenaddress', component: TransferTokenFromKeyComponent },
-  { path: 'reset', component: ResetComponent }
+  { path: 'reset', component: ResetComponent }*/
 ];
 
 @NgModule({

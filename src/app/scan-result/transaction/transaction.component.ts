@@ -1,11 +1,11 @@
-import { Web3Service } from './../web3.service';
-import { ScannerService } from './../scanner.service';
-import { Key } from './../vault/key';
-import { VaultService } from './../vault/vault.service';
+import { Web3Service } from '@app/web3.service';
+import { ScannerService } from '@app/scanner.service';
+import { Key } from '@app/vault/key';
+import { VaultService } from '@app/vault/vault.service';
 import { Component, OnInit, HostListener } from '@angular/core';
-import { Identity as VaultIdentity } from '../vault/identity';
-import * as IdentityContractData from './../../contracts/identity.js';
-import { environment } from '../../environments/environment';
+import { Identity as VaultIdentity } from '@app/vault/identity';
+import * as IdentityContractData from '@contracts/identity.js';
+import { environment } from '@environments/environment';
 import * as ons from 'onsenui';
 
 enum ScreenStatus {
@@ -58,6 +58,8 @@ export class TransactionComponent implements OnInit {
   }
 
   scan() {
+    alert('TODO this will only contain scanning');
+    /*
     this.scanner.scan((result) => {
       const resultObj = JSON.parse(result);
       if ('transaction' === resultObj.type) {
@@ -71,7 +73,7 @@ export class TransactionComponent implements OnInit {
           });
         }
       }
-    });
+    });*/
   }
 
   async send() {

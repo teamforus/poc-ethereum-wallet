@@ -29,6 +29,10 @@ tr.fill {
   text-align: center;
 }
 
+.button-wrapper td {
+  max-width: 0;
+}
+
 tr.button-wrapper button, tr.button-wrapper .button, tr.button-wrapper ons-button {
   margin: 0;
   width: 100%;
@@ -50,9 +54,10 @@ table.content .error {
   padding-bottom: 6px;
 }
 
-tabel.content ons-toolbar::after{
-  height: 14px;
-  content: '&nbsp';
+table.content .toolbar-wrapper {
+  height: 29px;
+  display: block;
+  padding: 0;
 }
 
 input {
@@ -82,7 +87,8 @@ input::placeholder {
 }
 
 ons-toolbar p {
-    margin: 10px;
+    margin: 0 10px;
+    line-height: 44px;
 }
 
 ons-page ons-toolbar p {

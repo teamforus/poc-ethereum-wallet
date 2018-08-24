@@ -164,6 +164,14 @@ export class VaultService {
     }
   }
 
+  getKeyByPrivateKey(privateKey: string): Key {
+    for (const key of this.keys) {
+      if (key.key === privateKey) {
+        return key;
+      }
+    }
+  }
+
   getTokens() {
     return this.tokens;
   }

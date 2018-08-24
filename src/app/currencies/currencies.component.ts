@@ -3,7 +3,6 @@ import { TransferTokenFromIdentityComponent } from './../transfer-token-from-ide
 import { TransferTokenFromKeyComponent } from './../transfer-token-from-key/transfer-token-from-key.component';
 import { TransferFromIdentityComponent } from './../transfer-from-identity/transfer-from-identity.component';
 import { OnsNavigator } from 'ngx-onsenui';
-import { AddtokenComponent } from './../addtoken/addtoken.component';
 import { Web3Service } from './../web3.service';
 import { VaultService } from './../vault/vault.service';
 import { Component, OnInit, HostListener } from '@angular/core';
@@ -144,7 +143,8 @@ export class CurrenciesComponent implements OnInit {
   }
 
   addToken() {
-    this.navigator.element.pushPage(AddtokenComponent);
+    alert('TODO To be deleted');
+    // this.navigator.element.pushPage(AddtokenComponent);
   }
 
 }

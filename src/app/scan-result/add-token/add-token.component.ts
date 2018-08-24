@@ -1,13 +1,13 @@
-import { ScannerService } from './../scanner.service';
+import { ScannerService } from '@app/scanner.service';
 import { OnsNavigator } from 'ngx-onsenui';
-import { VaultService } from './../vault/vault.service';
-import { Web3Service } from './../web3.service';
+import { VaultService } from '@app/vault/vault.service';
+import { Web3Service } from '@app/web3.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ons-page[addtoken]',
-  templateUrl: './addtoken.component.html',
-  styleUrls: ['./addtoken.component.css']
+  selector: 'ons-page[add-token]',
+  templateUrl: './add-token.component.html',
+  styleUrls: ['./add-token.component.css']
 })
 export class AddtokenComponent implements OnInit {
   tokenAddress = '';
@@ -24,7 +24,8 @@ export class AddtokenComponent implements OnInit {
   }
 
   scan() {
-    this.scanner.scan((result) => {
+    alert ('TODO this will only contain scanning');
+    /*this.scanner.scan((result) => {
       let resultObj = null;
       try {
         resultObj = JSON.parse(result);
@@ -33,7 +34,7 @@ export class AddtokenComponent implements OnInit {
       } catch (error) {
         this.tokenAddress = result;
       }
-    });
+    });*/
   }
 
   add() {
