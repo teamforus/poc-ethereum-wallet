@@ -14,6 +14,13 @@
                 <ons-col>{{ClaimStatus[claim.status]}}</ons-col>
             </ons-row>
             <ons-row>
+                <ons-col>Issuer status: </ons-col>
+                <ons-col>
+                  <ons-icon *ngIf="(claim.validSignature | async)" icon="fa-check"></ons-icon>
+                  <ons-icon *ngIf="!(claim.validSignature | async)" icon="exclamation-triangle"></ons-icon>
+                </ons-col>
+            </ons-row>
+            <ons-row>
                 <ons-col>Claim ID: </ons-col>
                 <ons-col>{{claim.id}}</ons-col>
             </ons-row>

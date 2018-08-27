@@ -3,6 +3,7 @@ import { Web3Service } from './../web3.service';
 import * as IdentityContractData from './../../contracts/identity.js';
 import { Claim } from './Claim';
 import { EventEmitter, Output } from '@angular/core';
+import { forEach } from '@angular/router/src/utils/collection';
 
 export class IdentityClaims {
 
@@ -32,8 +33,17 @@ export class IdentityClaims {
           throw new error(error);
         }
 
+
         if ('ClaimRequested' === event.event) {
           const claimId = this.web3Service.web3.utils.soliditySha3(event.returnValues.issuer, event.returnValues.topic);
+
+          const signData = this.web3Service.web3.utils.soliditySha3(
+            identityContract.options.address,
+            event.returnValues.topic,
+            event.returnValues.data
+          );
+          const recoveredKey = this.web3Service.web3.eth.accounts.recover(signData, event.returnValues.signature);
+
           if (!this.claims.has(claimId)) {
             this.claims.set(claimId, {
               id: claimId,
@@ -45,83 +55,53 @@ export class IdentityClaims {
               signature: event.returnValues.signature,
               data: event.returnValues.data,
               uri: event.returnValues.uri,
+              validSignature: this.issuerHasKey(event.returnValues.issuer, recoveredKey)
             });
           }
         }
 
-        if ('ClaimAdded' === event.event) {
-          if (
+        if (event.returnValues.claimId
+            &&
             this.claims.has(event.returnValues.claimId)
             &&
-            this.claims.get(event.returnValues.claimId).status !== ClaimStatus.DataMismatch
-          ) {
+            this.claims.get(event.returnValues.claimId).status !== ClaimStatus.DataMismatch) {
 
-            if (!this.claimValuesMatch(
-              this.claims.get(event.returnValues.claimId),
-              event.returnValues.claimId,
-              event.returnValues.claimRequestId,
-              event.returnValues.topic,
-              event.returnValues.scheme,
-              event.returnValues.issuer,
-              event.returnValues.signature,
-              event.returnValues.data,
-              event.returnValues.uri
-            )) {
-              this.claims.get(event.returnValues.claimId).status = ClaimStatus.DataMismatch;
-            }
+          const claim = this.claims.get(event.returnValues.claimId);
 
-            this.claims.get(event.returnValues.claimId).status = ClaimStatus.Added;
+          if (!this.claimValuesMatch(
+            claim,
+            event.returnValues.claimId,
+            event.returnValues.topic,
+            event.returnValues.scheme,
+            event.returnValues.issuer,
+            event.returnValues.signature,
+            event.returnValues.data,
+            event.returnValues.uri
+          )) {
+            console.log('claimValues don\'t match');
+            claim.status = ClaimStatus.DataMismatch;
           }
-        }
 
-        if ('ClaimRemoved' === event.event) {
-          if (
-            this.claims.has(event.returnValues.claimId)
-            &&
-            this.claims.get(event.returnValues.claimId).status !== ClaimStatus.DataMismatch
-          ) {
+          if ('ClaimAdded' === event.event && claim.status !== ClaimStatus.DataMismatch) {
 
-            if (!this.claimValuesMatch(
-              this.claims.get(event.returnValues.claimId),
-              event.returnValues.claimId,
-              event.returnValues.claimRequestId,
-              event.returnValues.topic,
-              event.returnValues.scheme,
-              event.returnValues.issuer,
-              event.returnValues.signature,
-              event.returnValues.data,
-              event.returnValues.uri
-            )) {
-              this.claims.get(event.returnValues.claimId).status = ClaimStatus.DataMismatch;
-            }
+            // console.log('ClaimAdded');
 
-            this.claims.get(event.returnValues.claimId).status = ClaimStatus.Removed;
+            claim.status = ClaimStatus.Added;
           }
-        }
 
-        if ('ClaimChanged' === event.event) {
-          if (
-            this.claims.has(event.returnValues.claimId)
-            &&
-            this.claims.get(event.returnValues.claimId).status !== ClaimStatus.DataMismatch
-          ) {
+          if ('ClaimRemoved' === event.event && claim.status !== ClaimStatus.DataMismatch) {
 
-            if (!this.claimValuesMatch(
-              this.claims.get(event.returnValues.claimId),
-              event.returnValues.claimId,
-              event.returnValues.claimRequestId,
-              event.returnValues.topic,
-              event.returnValues.scheme,
-              event.returnValues.issuer,
-              event.returnValues.signature,
-              event.returnValues.data,
-              event.returnValues.uri
-            )) {
-              this.claims.get(event.returnValues.claimId).status = ClaimStatus.DataMismatch;
-            }
+            // console.log('ClaimRemoved');
 
-            this.claims.get(event.returnValues.claimId).status = ClaimStatus.Changed;
+            claim.status = ClaimStatus.Removed;
           }
+
+          if ('ClaimChanged' === event.event && claim.status !== ClaimStatus.DataMismatch) {
+
+              // console.log('ClaimChanged');
+
+              claim.status = ClaimStatus.Changed;
+            }
         }
 
         this.claimValues = new Array<Claim>();
@@ -134,6 +114,28 @@ export class IdentityClaims {
 
   } // constructor
 
+  private issuerHasKey(issuerAddress: string, key: string): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      const issuerContract = new this.web3Service.web3.eth.Contract(
+        IdentityContractData.abi,
+        issuerAddress,
+        null
+      );
+
+      const paddedRecoveredKey = this.web3Service.web3.utils.padLeft(key, 64);
+      issuerContract.methods.getKey(paddedRecoveredKey).call().then(issuerKeyData => {
+        const validKey = (
+          issuerKeyData.key.toUpperCase() === paddedRecoveredKey.toUpperCase()
+          &&
+          issuerKeyData.keyType === '1'
+          &&
+          issuerKeyData.purposes.includes('3')
+        );
+        resolve(validKey);
+      });
+    });
+  }
+
   public getClaim(claimId) {
     return this.claims.get(claimId);
   }
@@ -141,7 +143,6 @@ export class IdentityClaims {
   private claimValuesMatch(
     claim: Claim,
     id: number,
-    requestId: number,
     topic: number,
     scheme: number,
     issuer: string,
@@ -149,10 +150,9 @@ export class IdentityClaims {
     data: string,
     uri: string
   ) {
+
     return (
       id === claim.id
-      &&
-      requestId === claim.requestId
       &&
       topic === claim.topic
       &&

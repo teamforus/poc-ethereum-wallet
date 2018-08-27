@@ -10,4 +10,5 @@ export class Claim {
   signature: string;
   data: string;
   uri: string;
+  validSignature: Promise<boolean>;
 }
