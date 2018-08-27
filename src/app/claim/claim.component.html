@@ -52,8 +52,7 @@
                 <ons-col>Uri: </ons-col>
                 <ons-col>{{claim.uri}}</ons-col>
             </ons-row>
-
-            <ons-row>
+            <ons-row *ngIf="claim.status == 0 || claim.status == 3">
                 <ons-col>
                     Management key to use for approval:
                   </ons-col>
@@ -63,12 +62,11 @@
                     </ons-select>
                 </ons-col>
             </ons-row>
-
         </div>
     </ons-card>
 
     <div class="page_buttons">
-        <ons-button *ngIf="0 == claim.status" (click)="approve()">Approve claim</ons-button>
+        <ons-button  *ngIf="claim.status == 0 || claim.status == 3" (click)="approve()">Approve claim</ons-button>
         <ons-button (click)="back()">Back</ons-button>
     </div>
 
