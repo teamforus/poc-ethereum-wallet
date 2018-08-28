@@ -65,7 +65,11 @@
         </div>
     </ons-card>
 
-    <div class="page_buttons">
+    <div *ngIf="screenStatus == ScreenStatus.Busy" class="page_buttons">
+      <ons-progress-circular indeterminate></ons-progress-circular>
+    </div>
+
+    <div *ngIf="screenStatus == ScreenStatus.Start" class="page_buttons">
         <ons-button  *ngIf="claim.status == 0 || claim.status == 3" (click)="approve()">Approve claim</ons-button>
         <ons-button (click)="back()">Back</ons-button>
     </div>
