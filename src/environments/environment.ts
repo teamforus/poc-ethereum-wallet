@@ -21,5 +21,11 @@ export const environment = {
       libName: 'ClaimHolderLib',
       address: 'f03A2D9dB737110B6aaf0E552a63711FA2A1f73b'
     }
-  ]
+  ],
+  ClaimTopicMap: {
+    '123': 'BSN'
+  },
+  ClaimIssuerMap: {
+    '0x8E01d50836F709D97b0e34BaF7d1c306D09F925B': 'BSN validator'
+  }
 };

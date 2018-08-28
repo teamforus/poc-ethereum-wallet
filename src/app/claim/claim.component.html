@@ -1,7 +1,7 @@
 <ons-page id="claim">
 
     <ons-toolbar>
-        <p>Claim {{claimId}}</p>
+        <p>Approve claim</p>
     </ons-toolbar>
 
     <ons-card>
@@ -14,6 +14,10 @@
                 <ons-col>{{ClaimStatus[claim.status]}}</ons-col>
             </ons-row>
             <ons-row>
+                <ons-col>Issuer: </ons-col>
+                <ons-col>{{claim.issuer | claimIssuer}}</ons-col>
+            </ons-row>
+            <ons-row>
                 <ons-col>Issuer status: </ons-col>
                 <ons-col>
                   <ons-icon *ngIf="(claim.validSignature | async)" icon="fa-check"></ons-icon>
@@ -21,20 +25,18 @@
                 </ons-col>
             </ons-row>
             <ons-row>
+                <ons-col>Topic: </ons-col>
+                <ons-col>{{claim.topic | claimTopic}}</ons-col>
+            </ons-row>
+
+<!--
+            <ons-row>
                 <ons-col>Claim ID: </ons-col>
                 <ons-col>{{claim.id}}</ons-col>
             </ons-row>
             <ons-row>
                 <ons-col>Request ID: </ons-col>
                 <ons-col>{{claim.requestId}}</ons-col>
-            </ons-row>
-            <ons-row>
-                <ons-col>Issuer: </ons-col>
-                <ons-col>{{claim.issuer}}</ons-col>
-            </ons-row>
-            <ons-row>
-                <ons-col>Topic: </ons-col>
-                <ons-col>{{claim.topic}}</ons-col>
             </ons-row>
             <ons-row>
                 <ons-col>Scheme: </ons-col>
@@ -52,16 +54,18 @@
                 <ons-col>Uri: </ons-col>
                 <ons-col>{{claim.uri}}</ons-col>
             </ons-row>
-            <ons-row *ngIf="claim.status == 0 || claim.status == 3">
-                <ons-col>
-                    Management key to use for approval:
-                  </ons-col>
-                <ons-col>
-                    <ons-select [(ngModel)]="managementkey">
-                        <option *ngFor="let key of managementkeys" [ngValue]="key.key">{{key.address}}</option>
-                    </ons-select>
-                </ons-col>
-            </ons-row>
+          -->
+        </div>
+    </ons-card>
+
+    <ons-card *ngIf="claim.status == 0 || claim.status == 3">
+        <div class="title">
+            Management key to use for approval
+        </div>
+        <div class="content">
+            <ons-select [(ngModel)]="managementkey">
+                <option *ngFor="let key of managementkeys" [ngValue]="key.key">{{key.address}}</option>
+            </ons-select>
         </div>
     </ons-card>
 
@@ -71,7 +75,7 @@
 
     <div *ngIf="screenStatus == ScreenStatus.Start" class="page_buttons">
         <ons-button  *ngIf="claim.status == 0 || claim.status == 3" (click)="approve()">Approve claim</ons-button>
-        <ons-button (click)="back()">Back</ons-button>
+        <ons-button (click)="back()">Cancel</ons-button>
     </div>
 
 </ons-page>

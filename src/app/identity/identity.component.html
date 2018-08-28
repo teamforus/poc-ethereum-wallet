@@ -37,27 +37,18 @@
                         <ons-col><strong>{{ClaimStatus[claim.status]}}</strong></ons-col>
                     </ons-row>
                     <ons-row>
-                        <ons-col>Claim ID: </ons-col>
-                        <ons-col>{{claim.id}}
-                          <ons-icon *ngIf="(claim.validSignature | async)" icon="fa-check"></ons-icon>
-                          <ons-icon *ngIf="!(claim.validSignature | async)" icon="exclamation-triangle"></ons-icon>
-                        </ons-col>
-                    </ons-row>
-                    <ons-row>
-                        <ons-col>requestId: </ons-col>
-                        <ons-col>{{claim.requestId}}
-                        </ons-col>
-                    </ons-row>
-                    <ons-row>
                         <ons-col>Issuer: </ons-col>
-                        <ons-col>{{claim.issuer}}</ons-col>
+                        <ons-col>{{claim.issuer  | claimIssuer}}
+                            <ons-icon *ngIf="(claim.validSignature | async)" icon="fa-check"></ons-icon>
+                            <ons-icon *ngIf="!(claim.validSignature | async)" icon="exclamation-triangle"></ons-icon>
+                        </ons-col>
                     </ons-row>
                     <ons-row>
                         <ons-col>Topic: </ons-col>
-                        <ons-col>{{claim.topic}}</ons-col>
+                        <ons-col>{{claim.topic | claimTopic}}</ons-col>
                     </ons-row>
                     <ons-row>
-                        <ons-col><ons-button (click)="viewClaim(claim.id)">View this claim</ons-button></ons-col>
+                        <ons-col><ons-button (click)="viewClaim(claim.id)">Approve claim</ons-button></ons-col>
                     </ons-row>
                 </ons-list-item>
             </ons-list>

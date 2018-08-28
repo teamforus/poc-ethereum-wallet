@@ -39,6 +39,8 @@ import { IdentityimportkeyComponent } from './identityimportkey/identityimportke
 import { KeyComponent } from './key/key.component';
 import { TransferAllowanceFromIdentityComponent } from './transfer-allowance-from-identity/transfer-allowance-from-identity.component';
 import { ClaimComponent } from './claim/claim.component';
+import { ClaimTopicPipe } from './pipes/claim-topic.pipe';
+import { ClaimIssuerPipe } from './pipes/claim-issuer.pipe';
 
 
 @NgModule({
@@ -71,7 +73,9 @@ import { ClaimComponent } from './claim/claim.component';
     IdentityimportkeyComponent,
     KeyComponent,
     TransferAllowanceFromIdentityComponent,
-    ClaimComponent
+    ClaimComponent,
+    ClaimTopicPipe,
+    ClaimIssuerPipe
   ],
   imports: [
     BrowserModule,
