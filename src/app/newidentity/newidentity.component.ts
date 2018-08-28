@@ -35,12 +35,14 @@ export class NewidentityComponent implements OnInit {
     this.keys = this.vault.getKeys();
     this.name = '';
     this.managementkey = '';
-    this.screenStatus = ScreenStatus.Start;}
+    this.screenStatus = ScreenStatus.Start;
+  }
 
   @HostListener('window:show', ['$event'])
-  onShow(event) {
+  async onShow(event) {
     if ('newidentity' === event.target.id) {
       this.ngOnInit();
+      await this.web3Service.checkConnection();
     }
   }
 

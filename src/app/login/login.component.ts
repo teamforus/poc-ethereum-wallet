@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
 
   @HostListener('window:show', ['$event'])
-  onShow(event) {
+  async onShow(event) {
     if ('login' === event.target.id) {
       this.identities = this.vault.getIdentities();
       if (this.identities.length > 0) {
@@ -46,6 +46,8 @@ export class LoginComponent implements OnInit {
       }
       this.servicePubKey = '';
       this.serviceId = 0;
+
+      await this.web3Service.checkConnection();
     }
   }
 

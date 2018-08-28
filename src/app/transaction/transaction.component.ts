@@ -37,7 +37,7 @@ export class TransactionComponent implements OnInit {
   ngOnInit() {}
 
   @HostListener('window:show', ['$event'])
-    onShow(event) {
+    async onShow(event) {
       if ('transaction' === event.target.id) {
       this.identities = this.vault.getIdentities();
       if (this.identities.length > 0) {
@@ -45,6 +45,8 @@ export class TransactionComponent implements OnInit {
         this.transactionData = null;
         this.onIdentitySelect();
       }
+
+      await this.web3Service.checkConnection();
     }
   }
 
