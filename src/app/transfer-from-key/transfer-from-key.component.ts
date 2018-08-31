@@ -32,10 +32,14 @@ export class TransferFromKeyComponent implements OnInit {
     const trx = {
       from: this.key.address,
       to: this.toAddress,
-      chainId: this.web3Service.chainId,
       gas: environment.gas,
       value: this.toValue
     };
+
+    if (this.web3Service.chainId) {
+      // @ts-ignore
+      trx.chainId = this.web3Service.chainId;
+    }
 
     const receipt = await this.web3Service.web3.eth.accounts.signTransaction(trx, this.key.key)
     .then((sgnTrx) => {

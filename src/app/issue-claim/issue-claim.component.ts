@@ -61,7 +61,6 @@ export class IssueClaimComponent implements OnInit {
 
     const trx = {
       to: issuerContract.options.address,
-      chainId: this.web3Service.chainId,
       gas: environment.gas,
       data: issuerContract.methods.execute(
         subjectContract.options.address,
@@ -76,6 +75,11 @@ export class IssueClaimComponent implements OnInit {
         ).encodeABI()
       ).encodeABI()
     };
+
+    if (this.web3Service.chainId) {
+      // @ts-ignore
+      trx.chainId = this.web3Service.chainId;
+    }
 
     await this.web3Service.sendSignedTransaction(trx, this.managementkey);
     this.navigator.element.popPage();

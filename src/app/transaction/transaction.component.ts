@@ -88,7 +88,6 @@ export class TransactionComponent implements OnInit {
 
     const trx = {
       to: identityContract.options.address,
-      chainId: this.web3Service.chainId,
       gas: environment.gas,
       data: identityContract.methods.execute(
         this.transactionData.body.to,
@@ -96,6 +95,11 @@ export class TransactionComponent implements OnInit {
         this.transactionData.body.data
       ).encodeABI()
     };
+
+    if (this.web3Service.chainId) {
+      // @ts-ignore
+      trx.chainId = this.web3Service.chainId;
+    }
 
     const receipt = await this.web3Service.sendSignedTransaction(trx, this.vault.getKeyByAddress(this.selectedKey).key);
 

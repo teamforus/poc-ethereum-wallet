@@ -75,10 +75,14 @@ export class NewidentityComponent implements OnInit {
     );
 
     const trx = {
-      chainId: this.web3Service.chainId,
       gas: environment.gas,
       data: deploy._deployData
     };
+
+    if (this.web3Service.chainId) {
+      // @ts-ignore
+      trx.chainId = this.web3Service.chainId;
+    }
 
     const contractAddress = await this.web3Service.web3.eth.accounts.signTransaction(trx, senderAccount.privateKey)
     .then((sgnTrx) => {

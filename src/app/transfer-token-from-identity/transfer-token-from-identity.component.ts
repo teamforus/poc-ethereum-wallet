@@ -52,7 +52,6 @@ export class TransferTokenFromIdentityComponent implements OnInit {
 
     const trx = {
       to: senderContract.options.address,
-      chainId: this.web3Service.chainId,
       gas: environment.gas,
       data: senderContract.methods.execute(
         // @ts-ignore
@@ -65,6 +64,11 @@ export class TransferTokenFromIdentityComponent implements OnInit {
         ).encodeABI()
       ).encodeABI()
     };
+
+    if (this.web3Service.chainId) {
+      // @ts-ignore
+      trx.chainId = this.web3Service.chainId;
+    }
 
     await this.web3Service.sendSignedTransaction(trx, this.vault.getKeyByAddress(this.managementkey).key);
     this.navigator.element.popPage();

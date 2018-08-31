@@ -75,13 +75,17 @@ export class ClaimComponent implements OnInit {
     const trx = {
       from: managmentAccount.address,
       to: identityContract.options.address,
-      chainId: environment.chainId,
       gas: environment.gas,
       data: identityContract.methods.approve(
         this.web3Service.web3.utils.numberToHex(this.claim.requestId),
         true
       ).encodeABI()
     };
+
+    if (environment.chainId) {
+      // @ts-ignore
+      trx.chainId = environment.chainId;
+    }
 
     await this.web3Service.sendSignedTransaction(trx, managmentAccount.key);
     ons.notification.toast('Claim approved');
