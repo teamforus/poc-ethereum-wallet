@@ -28,6 +28,10 @@
                 <ons-col>Topic: </ons-col>
                 <ons-col>{{claim.topic | claimTopic}}</ons-col>
             </ons-row>
+            <ons-row>
+                <ons-col>Data: </ons-col>
+                <ons-col>{{claim.data | hexToUtf8}}</ons-col>
+            </ons-row>
 
 <!--
             <ons-row>

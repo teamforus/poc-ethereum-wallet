@@ -41,6 +41,7 @@ import { TransferAllowanceFromIdentityComponent } from './transfer-allowance-fro
 import { ClaimComponent } from './claim/claim.component';
 import { ClaimTopicPipe } from './pipes/claim-topic.pipe';
 import { ClaimIssuerPipe } from './pipes/claim-issuer.pipe';
+import { HexToUtf8Pipe } from './pipes/hex-to-utf8.pipe';
 
 
 @NgModule({
@@ -75,7 +76,8 @@ import { ClaimIssuerPipe } from './pipes/claim-issuer.pipe';
     TransferAllowanceFromIdentityComponent,
     ClaimComponent,
     ClaimTopicPipe,
-    ClaimIssuerPipe
+    ClaimIssuerPipe,
+    HexToUtf8Pipe
   ],
   imports: [
     BrowserModule,

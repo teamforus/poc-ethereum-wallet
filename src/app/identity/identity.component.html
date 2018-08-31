@@ -48,6 +48,10 @@
                         <ons-col>{{claim.topic | claimTopic}}</ons-col>
                     </ons-row>
                     <ons-row>
+                        <ons-col>Data: </ons-col>
+                        <ons-col>{{claim.data | hexToUtf8}}</ons-col>
+                    </ons-row>
+                    <ons-row *ngIf="claim.status == 0 || claim.status == 3" (click)="approve()">
                         <ons-col><ons-button (click)="viewClaim(claim.id)">Approve claim</ons-button></ons-col>
                     </ons-row>
                 </ons-list-item>
