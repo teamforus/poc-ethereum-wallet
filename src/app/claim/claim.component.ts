@@ -47,6 +47,9 @@ export class ClaimComponent implements OnInit {
     this.identityClaims = this.claimService.getIdentityClaims(this.identity.address);
     this.claim = this.identityClaims.getClaim(this.claimId);
     this.managementkeys = this.vault.getManagementKeys(this.identity.address);
+    if (this.managementkeys.length > 0) {
+      this.managementkey = this.managementkeys[0].address;
+    }
     this.screenStatus = ScreenStatus.Start;
   }
 
@@ -88,7 +91,7 @@ export class ClaimComponent implements OnInit {
     }
 
     await this.web3Service.sendSignedTransaction(trx, managmentAccount.key);
-    ons.notification.toast('Claim approved');
+    ons.notification.toast('Claim approved', {timeout: 5000});
     this.navigator.element.popPage();
 
   }
