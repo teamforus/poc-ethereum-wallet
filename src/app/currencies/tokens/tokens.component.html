@@ -1,0 +1,15 @@
+<ons-page id="tokens">
+  <ons-card *ngFor="let token of _tokens">
+    <div class="title">
+      {{token.name}}
+    </div>
+    <div *ngFor="let identity of _identities">
+      {{identity.address}}: {{token.balances.get(identity.address)}}
+    </div>
+  </ons-card>
+  <ons-card *ngIf="!_tokens || !_tokens.length">
+    <div class="content">
+      <p>U heeft nog geen tokens aan uw identiteit toegevoegd.</p>
+    </div>
+  </ons-card>
+</ons-page>

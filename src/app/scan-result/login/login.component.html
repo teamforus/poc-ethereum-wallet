@@ -31,8 +31,8 @@
     </tr>
     <tr class="form">
       <td class="input-wrapper" colspan="2">
-        <ons-select [(ngModel)]="_selectedIdentity" [disabled]="screenStatus !== ScreenStatus.Start" required>
-          <option *ngFor="let identity of _identities" [value]="identity">
+        <ons-select [(ngModel)]="_selectedAddress" [disabled]="screenStatus !== ScreenStatus.Start" required>
+          <option *ngFor="let identity of _identities" [value]="identity.address">
             {{identity.name}}
           </option>
         </ons-select>

@@ -1,54 +1,60 @@
-import { ScannerService } from '@app/scanner.service';
-import { OnsNavigator } from 'ngx-onsenui';
+import { OnsNavigator, Params } from 'ngx-onsenui';
 import { VaultService } from '@app/vault/vault.service';
 import { Web3Service } from '@app/web3.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { AddTokenRequest } from '@app/scan/scan.component';
+import { Token } from '@app/vault/token';
+import { Voucher } from '@app/vault/voucher';
+import { ScanResult } from '@app/scanner.service';
 
 @Component({
   selector: 'ons-page[add-token]',
   templateUrl: './add-token.component.html',
   styleUrls: ['./add-token.component.css']
 })
-export class AddtokenComponent implements OnInit {
-  tokenAddress = '';
-  allowanceAddress = '';
+export class AddTokenComponent implements OnInit {
+  private _loading = false;
+  private _scanResult: AddTokenRequest;
 
   constructor(
+    private _params: Params,
     public web3Service: Web3Service,
     private vault: VaultService,
-    private navigator: OnsNavigator,
-    private scanner: ScannerService
+    private navigator: OnsNavigator
   ) { }
 
   ngOnInit() {
+    this._scanResult = this._params.data.scanResult;
   }
 
-  scan() {
-    alert ('TODO this will only contain scanning');
-    /*this.scanner.scan((result) => {
-      let resultObj = null;
-      try {
-        resultObj = JSON.parse(result);
-        this.tokenAddress = resultObj.address;
-        this.allowanceAddress = resultObj.owner;
-      } catch (error) {
-        this.tokenAddress = result;
-      }
-    });*/
+  @HostListener('window:show', ['$event'])
+  onShow(event) {
+    if ('add-token' === event.target.id) {
+      this.ngOnInit();
+    }
   }
 
   add() {
-    const token = {
-      address: this.tokenAddress,
-      allowances: new Array<string>()
-    };
-
-    if (this.allowanceAddress) {
-      token.allowances.push(this.allowanceAddress);
+    this._loading = true;
+    if (this._scanResult.isVoucher) {
+      const voucher = new Voucher();
+      voucher.address = this._scanResult.address;
+      voucher.from = this._scanResult.owner;
+      voucher.name = this._scanResult.name;
+      const success = this.vault.addVoucher(voucher);
+      if (success) {
+        this._loading = false;
+        this.navigator.element.popPage();
+      } else {
+        console.error('something went wrong?');
+      }
+    } else {
+      const token = new Token();
+      token.address = this._scanResult.address;
+      this.vault.addToken(token);
+      this._loading = false;
+      this.navigator.element.popPage();
     }
-
-    this.vault.addToken(token);
-    this.navigator.element.popPage();
   }
 
   cancel() {

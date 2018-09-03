@@ -5,6 +5,11 @@
         Info over het importeren van private key
       </td>
     </tr>
+    <tr *ngIf="showDebug">
+      <td class="input-wrapper">
+        <input type="name" [(ngModel)]="privatekey" placeholder="Plaats hier de private key (met 0x prefix)" />
+      </td>
+    </tr>
     <tr class="button-wrapper">
       <td>
         <ons-button (click)="scan()">Scan code</ons-button>
@@ -13,7 +18,6 @@
     <tr *ngIf="hasKey" class="button-wrapper">
       <td>
         <ons-button (click)="importKey()">Inloggen</ons-button>
-
       </td>
     </tr>
   </table>

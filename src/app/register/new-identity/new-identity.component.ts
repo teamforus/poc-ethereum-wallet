@@ -45,8 +45,12 @@ export class NewIdentityComponent implements OnInit {
     }
   }
 
+  private cancel() {
+    this._navigator.element.popPage();
+  }
+
   private canCancel(): boolean {
-    return this._vaultService.getIdentities().length > 1;
+    return true; // this._vaultService.getIdentities().length > 1;
   }
 
   keySelected(key: string) {

@@ -3,6 +3,7 @@ import * as Web3 from 'web3';
 import { environment } from '../environments/environment';
 import { isUndefined } from 'util';
 import * as IdentityContractData from '@contracts/identity.js';
+import * as ERC20ContractData from '@contracts/erc20.js';
 import { Transaction } from 'web3/types';
 
 /**
@@ -69,14 +70,11 @@ export class Web3Service {
     try {
       this.checkConnection();
       const gas = await this.web3.eth.estimateGas(transaction);
-      console.log(gas);
       return (gas > 0);
     } catch (e) {
       console.error(e);
-    } finally {
-      console.log('Oops');
-      return false;
     }
+    return false;
   }
 
   async getCreateIdentityTransaction(sender: string): Promise<Object> {
@@ -107,8 +105,32 @@ export class Web3Service {
     return trx;
   }
 
+  async getErc20AllowanceFrom(tokenOwnerAddress: String, spenderAddress: string, tokenAddress: string): Promise<string> {
+    return await new this.web3.eth.Contract(
+      ERC20ContractData.abi,
+      tokenAddress,
+      null
+    ).methods.allowance(tokenOwnerAddress, spenderAddress).call();
+  }
+
+  async getErc20BalanceOf(address: string, tokenAddress: string): Promise<string> {
+    return 'TODO';
+  }
+
+  async getErc20Name(tokenAddress: string): Promise<string> {
+    return await new this.web3.eth.Contract(
+      ERC20ContractData.abi,
+      tokenAddress,
+      null
+    ).methods.name().call();
+  }
+
   async getKeyPairFromPrivateKey(privateKey: string): Promise<KeyPair> {
     return this.web3.eth.accounts.privateKeyToAccount(privateKey) as KeyPair;
+  }
+
+  isAddressValid(address: string): boolean {
+    return this.web3.utils.isAddress(address);
   }
 
   async sendSignedTransaction(trx: object, privateKey: string) {

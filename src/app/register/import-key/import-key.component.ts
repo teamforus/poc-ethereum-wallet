@@ -1,5 +1,6 @@
 import { ScannerService } from '@app/scanner.service';
 import { OnsNavigator } from 'ngx-onsenui';
+import * as environment from '@environments/environment';
 import { VaultService } from '@app/vault/vault.service';
 import { Web3Service } from '@app/web3.service';
 import { Component, OnInit } from '@angular/core';
@@ -23,13 +24,9 @@ export class ImportKeyComponent implements OnInit {
   ngOnInit() {
   }
 
-  importkey() {
+  importKey() {
     const account = this.web3Service.web3.eth.accounts.privateKeyToAccount(this.privatekey);
     this.vault.addKey(account.privateKey);
-    this.navigator.element.popPage();
-  }
-
-  cancel() {
     this.navigator.element.popPage();
   }
 
@@ -39,6 +36,10 @@ export class ImportKeyComponent implements OnInit {
 
   scan() {
     this.scanner.scanRaw((result) => { this.privatekey = result; });
+  }
+
+  private get showDebug(): boolean {
+    return !environment.environment.production;
   }
 
 }

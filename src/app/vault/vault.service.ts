@@ -4,160 +4,79 @@ import { Identity } from './identity';
 import { Key } from './key';
 import { isString, isObject } from 'util';
 import { Token } from './token';
+import { Voucher } from '@app/vault/voucher';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class VaultService {
-  private readonly STORAGE_KEY_IDENTITIES = 'identities';
   private readonly STORAGE_KEY_KEYS = 'keys';
   private readonly STORAGE_KEY_TOKENS = 'tokens';
+  private readonly STORAGE_KEY_VOUCHERS = 'vouchers';
 
-  private identities: Identity[] = new Array<Identity>();
-  private keys: Key[] = new Array<Key>();
-  private tokens: Token[] = new Array<Token>();
+  private _keys: Key[] = new Array<Key>();
+  private _tokens: Token[] = new Array<Token>();
+  private _vouchers: BehaviorSubject<Voucher[]> = new BehaviorSubject([]);
 
-  constructor(private web3Service: Web3Service) {
-    const identities = <Identity[]> JSON.parse(localStorage.getItem(this.STORAGE_KEY_IDENTITIES));
-    if (identities) {
-      this.identities = identities;
-    }
-    const keys = <Key[]> JSON.parse(localStorage.getItem(this.STORAGE_KEY_KEYS));
+  constructor(
+    private _web3Service: Web3Service
+  ) {
+    const keys = <Key[]>JSON.parse(localStorage.getItem(this.STORAGE_KEY_KEYS));
     if (keys) {
-      this.keys = keys;
+      this._keys = keys;
     }
     const tokens = JSON.parse(localStorage.getItem(this.STORAGE_KEY_TOKENS));
     if (tokens) {
-      this.tokens = tokens;
+      this._tokens = tokens;
     }
-  }
-
-  addIdentity(name: string, identityAddress: string, managementKey: string = null) {
-    for (const identity of this.getIdentities()) {
-      if (identityAddress === identity.address) {
-        throw new Error('An identity with this address already exists');
-      }
+    const vouchers = JSON.parse(localStorage.getItem(this.STORAGE_KEY_VOUCHERS));
+    if (vouchers) {
+      this._vouchers.next(vouchers);
     }
-
-    const newIdentity = new Identity();
-    newIdentity.name = name;
-    newIdentity.address = identityAddress;
-    if (managementKey) {
-      newIdentity.keys.push({
-        address: this.web3Service.web3.eth.accounts.privateKeyToAccount(managementKey).address,
-        key: managementKey,
-        purpose: 1
-      });
-    }
-    this.identities.push(newIdentity);
-
-    this.saveIdentities();
   }
 
   addKey(privateKey: string) {
-    for (const existingKey of this.keys) {
+    for (const existingKey of this._keys) {
       if (privateKey === existingKey.key) {
         throw new Error('The given key already exitsts');
       }
     }
-    this.keys.push({
-      address: this.web3Service.web3.eth.accounts.privateKeyToAccount(privateKey).address,
+    this._keys.push({
+      address: this._web3Service.web3.eth.accounts.privateKeyToAccount(privateKey).address,
       key: privateKey,
-      purpose: 0});
+      purpose: 0
+    });
     this.saveKeys();
   }
 
-  async addKeyToIdentity(identityContract, managmentAccount, toAdd, purpose: number) {
-    for (const identity of this.identities) {
-      if (identityContract.options.address === identity.address) {
-        for (const existingKey of identity.keys) {
-          if (toAdd.privateKey === existingKey.key && purpose === existingKey.purpose) {
-            throw new Error('The given key/purpose already exitst');
-          }
-        }
-
-        let keyAdded = false;
-        try {
-          await this.web3Service.addKeyToIdentity(identityContract, managmentAccount, toAdd, purpose);
-          keyAdded = true;
-        } catch (error) {
-          console.log(error);
-        }
-
-        if (keyAdded) {
-          identity.keys.push({
-            address: toAdd.address,
-            key: toAdd.privateKey,
-            purpose: purpose
-          });
-          this.saveIdentities();
-          return;
-        }
-
-      }
-    }
-    throw new Error('Could not find an identity with this address');
-  }
-
   addToken(token: Token) {
-    this.tokens.push(token);
+    this._tokens.push(token);
     this.saveTokens();
   }
 
+  addVoucher(voucher: Voucher): boolean {
+    try {
+      const vouchers = this._vouchers.getValue();
+      vouchers.push(voucher);
+      this._vouchers.next(vouchers);
+      this.saveVouchers();
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   createKey() {
-    const keyPair: KeyPair = this.web3Service.createKeyPair();
+    const keyPair: KeyPair = this._web3Service.createKeyPair();
     this.addKey(keyPair.privateKey);
   }
 
-  getIdentities(): Identity[] {
-    return this.identities;
-  }
-
   getKeys(): Key[] {
-    return this.keys;
+    return this._keys;
   }
 
-  getIdentity(identityAddress: string|Identity): Identity {
-    for (const identity of this.identities) {
-      if (identityAddress === identity.address) {
-        return identity;
-      }
-    }
-
-    return null;
-  }
-
-  getManagementKeys(identityAddress: string): Key[] {
-    const result = new Array<Key>();
-    const identity = this.getIdentity(identityAddress);
-    for (const key of identity.keys) {
-      if ('1' === key.purpose.toString()) {
-        result.push(key);
-      }
-    }
-    return result;
-  }
-
-  getKeysByPurpose(identity: string|Identity, purpose: number): Array<Key> {
-    const result = new Array<Key>();
-    if (isString(identity)) {
-      identity = this.getIdentity(identity);
-    }
-
-    if (!isObject(identity)) {
-      return result;
-    }
-
-    const purposeStr = purpose.toString();
-    for (const key of (identity as Identity).keys) {
-      if (purposeStr === key.purpose.toString()) {
-        result.push(key);
-      }
-    }
-
-    return result;
-  }
-
-  getKeyByAddress(address: string) {
-    for (const existingKey of this.keys) {
+  getKeyByAddress(address: string): Key {
+    for (const existingKey of this._keys) {
       if (existingKey.address === address) {
         return existingKey;
       }
@@ -165,15 +84,39 @@ export class VaultService {
   }
 
   getKeyByPrivateKey(privateKey: string): Key {
-    for (const key of this.keys) {
+    for (const key of this._keys) {
       if (key.key === privateKey) {
         return key;
       }
     }
   }
 
-  getTokens() {
-    return this.tokens;
+  getTokenByAddress(address: string): Token | false {
+    this.getTokens().forEach(token => {
+      if (token.address === address) {
+        return token;
+      }
+    });
+    return false;
+  }
+
+  getTokens(): Token[] {
+    return this._tokens;
+  }
+
+  getVoucherByAddress(address: string): Voucher | false {
+    const vouchers = this._vouchers.value;
+    let result: Voucher|false = false;
+    for (let i = 0; i < vouchers.length; i++) {
+      if (vouchers[i].address === address) {
+        result = vouchers[i];
+      }
+    }
+    return result;
+  }
+
+  getVouchers(): Observable<Voucher[]> {
+    return this._vouchers.asObservable();
   }
 
   get hasKey(): boolean {
@@ -181,34 +124,26 @@ export class VaultService {
     return !!keys && !!keys.length;
   }
 
-  importIdentityKey(identity, keyAddress, pk, purpose) {
-    identity.keys.push({
-      address: keyAddress,
-      key: pk,
-      purpose: purpose
-    });
-    this.saveIdentities();
-  }
-
   reset() {
-    this.identities = new Array<Identity>();
-    this.keys = new Array<Key>();
-    this.tokens = new Array<Token>();
-    this.saveIdentities();
+    this._keys = new Array<Key>();
+    this._tokens = new Array<Token>();
+    this._vouchers.next([]);
     this.saveKeys();
     this.saveTokens();
-  }
-
-  private saveIdentities() {
-    localStorage.setItem(this.STORAGE_KEY_IDENTITIES, JSON.stringify(this.identities));
+    this.saveVouchers();
   }
 
   private saveKeys() {
-    localStorage.setItem(this.STORAGE_KEY_KEYS, JSON.stringify(this.keys));
+    localStorage.setItem(this.STORAGE_KEY_KEYS, JSON.stringify(this._keys));
   }
 
   private saveTokens() {
-    localStorage.setItem(this.STORAGE_KEY_TOKENS, JSON.stringify(this.tokens));
+    localStorage.setItem(this.STORAGE_KEY_TOKENS, JSON.stringify(this._tokens));
+  }
+
+  private saveVouchers() {
+    const json = this._vouchers.value;
+    localStorage.setItem(this.STORAGE_KEY_VOUCHERS, JSON.stringify(json));
   }
 
 }

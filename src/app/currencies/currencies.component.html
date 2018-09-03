@@ -1,57 +1,13 @@
 <ons-page id="currencies">
-
-    <ons-toolbar>
-        <p>Currencies</p>
-    </ons-toolbar>
-
-    <ons-card>
-        <div class="title">
-            Ether
-        </div>
-        <div class="content">
-            <ons-list>
-                <ons-list-item *ngFor="let ethBalance of ethBalances">
-                    <div>
-                        <div class="title" *ngIf="ethBalance.displayName == null"><strong>{{ethBalance.address | slice:0:12}}...</strong> ({{BalanceType[ethBalance.type]}})</div>
-                        <div class="title" *ngIf="ethBalance.displayName != displayName"><strong>{{ethBalance.displayName}}</strong></div>
-                        <div>balance: {{ethBalance.balance | async | fromWei:'ether'}}</div>
-                        <ons-button *ngIf="ethBalance.type == BalanceType.Key" (click)="transferFromKey(ethBalance.address)">transfer</ons-button>
-                        <ons-button *ngIf="ethBalance.type == BalanceType.Identity" (click)="transferFromIdentity(ethBalance.address)">transfer</ons-button>
-                    </div>
-                </ons-list-item>
-            </ons-list>
-        </div>
-    </ons-card>
-
-    <ons-card *ngFor="let token of tokens">
-        <div class="title">
-            {{token.name | async}}
-            <br/>
-            <small style="font-size: x-small">{{token.address}}</small>
-        </div>
-        <div class="content">
-            <ons-list>
-                <ons-list-header>Balances</ons-list-header>
-                <ons-list-item *ngFor="let balance of token.balances">
-                    <div>
-                        <div class="title" *ngIf="balance.displayName == null"><strong>{{balance.address | slice:0:12}}...</strong> ({{BalanceType[balance.type]}})</div>
-                        <div class="title" *ngIf="balance.displayName != displayName"><strong>{{balance.displayName}}</strong></div>
-                        <div>
-                            <span *ngIf="balance.type == BalanceType.IdentityAllowance">Allowance: </span>
-                            <span *ngIf="balance.type != BalanceType.IdentityAllowance">Balance: </span>
-                            {{balance.balance | async}}
-                        </div>
-                        <ons-button *ngIf="balance.type == BalanceType.Key" (click)="transferTokenFromKey(balance.address, token.address)">transfer</ons-button>
-                        <ons-button *ngIf="balance.type == BalanceType.Identity" (click)="transferTokenFromIdentity(balance.address, token.address)">transfer</ons-button>
-                        <ons-button *ngIf="balance.type == BalanceType.IdentityAllowance" (click)="transferAllowanceFromIdentity(balance.address, balance.spender, token.address)">transfer</ons-button>
-                    </div>
-                </ons-list-item>
-            </ons-list>
-        </div>
-    </ons-card>
-
-    <div class="page_buttons">
-        <ons-button (click)="addToken()">Add token</ons-button>
+  <ons-toolbar>
+    <p>Eigendommen</p>
+  </ons-toolbar>
+  <ons-tabbar position="top" #currenciesTab>
+    <div class="tabbar">
+      <ons-tab label="Tokens" [page]="_tokens"></ons-tab>
+      <ons-tab label="Vouchers" [page]="_vouchers"></ons-tab>
     </div>
+    <td colspan="2" class="tabbar__content">
 
+  </ons-tabbar>
 </ons-page>

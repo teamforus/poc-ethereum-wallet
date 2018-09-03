@@ -1,26 +1,29 @@
 <ons-page id="add-token">
 
-    <ons-toolbar>
-        <p>Add token</p>
-    </ons-toolbar>
-
-    <div>
-        <ons-input style="width: 100%;" placeholder="Token address" [(ngModel)]="tokenAddress"></ons-input>
-    </div>
-
-    <div>
-        <ons-input style="width: 100%;" placeholder="Allowance address" [(ngModel)]="allowanceAddress"></ons-input>
-    </div>
-
-    <div style="text-align: center">
-        <ons-fab (click)="scan()" ripple>
-            <ons-icon icon="fa-qrcode"></ons-icon>
-        </ons-fab>
-    </div>
-
-    <div class="page_buttons">
-        <ons-button (click)="add()">Add</ons-button>
-        <ons-button (click)="cancel()">Cancel</ons-button>
-    </div>
-
+  <table class="content">
+    <tr>
+      <td class="toolbar-wrapper" colspan="2">
+          <ons-toolbar *ngIf="!!_scanResult.isVoucher">
+              <p>Voucher toevoegen</p>
+          </ons-toolbar>
+          <ons-toolbar *ngIf="!_scanResult.isVoucher">
+              <p>Token toevoegen</p>
+          </ons-toolbar>
+      </td>
+    </tr>
+    <tr class="fill">
+      <td colspan="2">
+        <p>U heeft een code gescand voor het toevoegen van waarde aan uw identiteit.</p>
+        <p>Wilt u {{_scanResult.name}} {{_scanResult.isVoucher? ' van ' + _scanResult.owner : ''}} toevoegen aan uw identiteit?</p>
+      </td>
+    </tr>
+    <tr class="button-wrapper">
+      <td>
+        <ons-button (click)="cancel()">Annuleren</ons-button>
+      </td>
+      <td>
+        <ons-button (click)="add()">Toevoegen</ons-button>
+      </td>
+    </tr>
+  </table>
 </ons-page>

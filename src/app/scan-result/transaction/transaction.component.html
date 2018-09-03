@@ -1,34 +1,54 @@
 <ons-page id="transaction">
 
-  <ons-toolbar>
-      <p>Transaction</p>
-  </ons-toolbar>
+  <table class="content">
+    <tr>
+      <td class="toolbar-wrapper" colspan="2">
+        <ons-toolbar>
+          <p>Transactie ondertekenen</p>
+        </ons-toolbar>
+      </td>
+    </tr>
+    <tr class="fill">
+      <td colspan="2">
+        <p>De gescande code bevat een transactie die ondertekent moet worden met uw identiteit.</p>
+        <p>Wilt u deze transactie ondertekenen en uitvoeren?</p>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <p>Als u niet weet wat deze code doet, of als u deze niet heeft aangevraagd, dan kunt u beter annuleren.</p>
+        <p>Ondertekenen kan niet meer teruggedraaid worden.</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="label-wrapper" colspan="2">
+        Met welke identiteit wilt u ondertekenen?
+      </td>
+    </tr>
+    <tr *ngIf="screenStatus === ScreenStatus.Busy">
+      <td colspan="2" class="center">
+        <ons-progress-circular indeterminate></ons-progress-circular>
+      </td>
+    </tr>
+    <key-selector (keySelected)="keySelected($key)"></key-selector>
+    <tr *ngIf="screenStatus === ScreenStatus.Start">
+      <td class="input-wrapper" colspan="2">
+        <ons-select [(ngModel)]="_selectedAddress" [disabled]="screenStatus !== ScreenStatus.Start" required>
+          <option *ngFor="let identity of _identities" [value]="identity.address">
+            {{identity.name}}
+          </option>
+        </ons-select>
+      </td>
+    </tr>
+    <tr *ngIf="screenStatus === ScreenStatus.Start" class="button-wrapper">
+      <td>
+        <ons-button (click)="cancel()">Annuleren</ons-button>
+      </td>
+      <td>
+        <ons-button [disabled]="!_selectedAddress" (click)="send()">Ondertekenen</ons-button>
+      </td>
+    </tr>
+  </table>
 
-
-  <ons-select [(ngModel)]="selectedIdentityAddress" (ngModelChange)="onIdentitySelect()">
-      <option *ngFor="let identity of identities" [value]="identity.address">
-          {{ identity.name }}
-      </option>
-  </ons-select>
-
-  <ons-select [(ngModel)]="selectedKey" [attr.modifier]="selectedKey">
-      <option *ngFor="let key of keys" [value]="key.address">
-          {{ key.address }}
-      </option>
-  </ons-select>
-
-  <div style="text-align: center">
-      <ons-fab (click)="scan()" ripple>
-          <ons-icon icon="fa-qrcode"></ons-icon>
-      </ons-fab>
-  </div>
-
-  <div *ngIf="screenStatus == ScreenStatus.Busy" class="page_buttons">
-    <ons-progress-circular indeterminate></ons-progress-circular>
-  </div>
-
-  <div *ngIf="screenStatus == ScreenStatus.Start" class="page_buttons">
-      <ons-button (click)="send()" [disabled]="transactionData==null">Send</ons-button>
-  </div>
 
 </ons-page>

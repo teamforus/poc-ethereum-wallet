@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   private _identities: VaultIdentity[];
   private _keyAddress: string;
   private _loginRequest: LoginRequest;
-  private _selectedIdentity: VaultIdentity;
+  private _selectedAddress: string;
 
   constructor(
     private _navigator: OnsNavigator,
@@ -35,15 +35,17 @@ export class LoginComponent implements OnInit {
     private _web3Service: Web3Service
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this._identities = this._vault.getIdentities();
+    this._selectedAddress = this._identities[0].address;
+    this._keyAddress = this._vault.getKeys()[0].address;
+    this._loginRequest = this._params.data.scanResult;
+  }
 
   @HostListener('window:show', ['$event'])
   onShow(event) {
     if ('login' === event.target.id) {
-      this._identities = this._vault.getIdentities();
-      this._selectedIdentity = this._identities[0];
-      this._keyAddress = this._vault.getKeys()[0].address;
-      this._loginRequest = this._params.data.scanResult;
+      this.ngOnInit();
     }
   }
 
@@ -52,31 +54,33 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.screenStatus = ScreenStatus.Busy;
-
-    this._web3Service.web3.shh.post({
-      pubKey: this._loginRequest.shhPublicKey,
-      payload: this._web3Service.web3.utils.toHex(JSON.stringify({
-        'request': this._loginRequest.type,
-        'id': this._loginRequest.id,
-        'body': {
-          'address': this._selectedIdentity.address,
-          'key': this._keyAddress,
-          'name': this._selectedIdentity.name
-        }
-      })),
-      ttl: 10,
-      powTime: 10,
-      powTarget: 0.5
-    })
-      .then(hash => {
-        ons.notification.toast('Message successfuly sent', { timeout: 5000 });
-        HomeComponent.GoToHome(this._navigator);
+    const selectedIdentity = this._vault.getIdentity(this._selectedAddress);
+    if (!!selectedIdentity) {
+      this.screenStatus = ScreenStatus.Busy;
+      this._web3Service.web3.shh.post({
+        pubKey: this._loginRequest.shhPublicKey,
+        payload: this._web3Service.web3.utils.toHex(JSON.stringify({
+          'request': this._loginRequest.type,
+          'id': this._loginRequest.id,
+          'body': {
+            'address': selectedIdentity.address,
+            'key': this._keyAddress,
+            'name': selectedIdentity.name
+          }
+        })),
+        ttl: 10,
+        powTime: 10,
+        powTarget: 0.5
       })
-      .catch(err => {
-        ons.notification.toast('Sending message failed', { timeout: 5000 });
-        this.screenStatus = ScreenStatus.Start;
-      });
+        .then(hash => {
+          ons.notification.toast('Message successfuly sent', { timeout: 5000 });
+          HomeComponent.GoToHome(this._navigator);
+        })
+        .catch(err => {
+          ons.notification.toast('Sending message failed', { timeout: 5000 });
+          this.screenStatus = ScreenStatus.Start;
+        });
+    }
   }
 
   onKeySelect(privateKey: string) {

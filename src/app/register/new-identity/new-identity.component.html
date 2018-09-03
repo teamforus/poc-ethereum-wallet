@@ -1,38 +1,38 @@
 <ons-page id="new-identity">
   <table class="content">
     <tr class="fill">
-      <td>
+      <td colspan="2">
         <p>Info over identiteiten</p>
-      </td>
-    </tr>
-    <tr *ngIf="screenStatus === ScreenStatus.Busy" class="fill page_buttons">
-      <td>
-        <ons-progress-circular indeterminate></ons-progress-circular>
       </td>
     </tr>
     <tr *ngIf="screenStatus === ScreenStatus.Start">
 
-      <td class="label">
+      <td class="label" colspan="2">
         Naam
       </td>
     </tr>
     <tr class="error-wrapper" *ngIf="!!_nameError.length">
-      <td class="error">
+      <td class="error" colspan="2">
         {{_nameError}}
       </td>
     </tr>
     <tr>
-      <td class="input-wrapper">
+      <td class="input-wrapper" colspan="2" *ngIf="screenStatus === ScreenStatus.Start">
         <input [(ngModel)]="name" placeholder="Waar ga je deze identiteit bijvoorbeeld voor gebruiken?">
       </td>
     </tr>
-    <app-key-selecter (useTable)="true" (keySelected)="keySelected($event)"></app-key-selecter>
-    <tr class="fill button-wrapper">
+    <app-key-selecter (useTable)="true" (keySelected)="keySelected($event)" *ngIf="screenStatus === ScreenStatus.Start"></app-key-selecter>
+    <tr class="fill button-wrapper" *ngIf="screenStatus === ScreenStatus.Start">
+      <td *ngIf="canCancel()">
+        <ons-button (click)="cancel()">Annuleren</ons-button>
+      </td>
       <td>
         <ons-button (click)="save()">Aanmaken</ons-button>
       </td>
-      <td *ngIf="canCancel()">
-        <ons-button (click)="cancel()">Cancel</ons-button>
+    </tr>
+    <tr *ngIf="screenStatus === ScreenStatus.Busy" class="fill page_buttons">
+      <td colspan="2">
+        <ons-progress-circular indeterminate></ons-progress-circular>
       </td>
     </tr>
   </table>

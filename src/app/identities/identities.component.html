@@ -1,15 +1,25 @@
 <ons-page id="identities">
-    <ons-toolbar>
-      <p>Identities</p>
-    </ons-toolbar>
-
-    <ons-list>
-        <ons-list-item modifier="chevron" tappable *ngFor="let identity of identities" (click)="show(identity.address)">{{identity.name}}</ons-list-item>
-    </ons-list>
-
-    <div class="page_buttons">
-        <ons-button (click)="new()">Create new identity</ons-button>
-        <ons-button (click)="importIdentity()">Import identity</ons-button>
-    </div>
-
+  <table class="content">
+    <tr class="toolbar-wrapper">
+      <td>
+        <ons-toolbar>
+          <p>Mijn identiteiten</p>
+          <div class="right">
+            <ons-toolbar-button icon="ion-cloud" (click)="importIdentity()"></ons-toolbar-button>
+            <ons-toolbar-button icon="ion-person-add" (click)="newIdentity()"></ons-toolbar-button>
+          </div>
+        </ons-toolbar>
+      </td>
+    </tr>
+    <tr class="fill list-wrapper">
+      <td *ngIf="!!identities && identities.length > 0">
+        <ons-list>
+          <ons-list-item modifier="chevron" [attr.data-address]="identity.address" tappable *ngFor="let identity of identities" (click)="show(identity.address)">{{identity.name}}</ons-list-item>
+        </ons-list>
+      </td>
+      <td *ngIf="!identities || !identities.length">
+        <p>Er zijn nog geen identiteiten toegevoegd. <a (click)="newIdentity()">Maak nu je eerste identiteit.</a></p>
+      </td>
+    </tr>
+  </table>
 </ons-page>

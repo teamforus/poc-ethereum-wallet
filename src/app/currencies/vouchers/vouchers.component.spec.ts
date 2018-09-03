@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CurrenciesPageNavComponent } from './currencies-page-nav.component';
+import { VouchersComponent } from '@app/currencies/vouchers/vouchers.component';
 
-describe('CurrenciesPageNavComponent', () => {
-  let component: CurrenciesPageNavComponent;
-  let fixture: ComponentFixture<CurrenciesPageNavComponent>;
+describe('VouchersComponent', () => {
+  let component: VouchersComponent;
+  let fixture: ComponentFixture<VouchersComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CurrenciesPageNavComponent ]
+      declarations: [ VouchersComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CurrenciesPageNavComponent);
+    fixture = TestBed.createComponent(VouchersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

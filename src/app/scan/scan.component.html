@@ -8,23 +8,26 @@
       </td>
     </tr>
     <tr class="fill info">
-      <td colspan="3">
+      <td colspan="4">
         <p>Deze app gebruikt QR-codes om te interacteren met andere diensten en website.</p>
       </td>
     </tr>
     <tr *ngIf="showDebug" class="button-wrapper">
       <td>
-        <ons-button (click)="debugLogin()">Imiteer login</ons-button>
+        <ons-button (click)="debugLogin()">Login</ons-button>
       </td>
       <td>
-        <ons-button (click)="debugAddToken()">Imiteer token</ons-button>
+        <ons-button (click)="debugAddToken()">Token</ons-button>
       </td>
       <td>
-        <ons-button (click)="debugTransaction()">Imiteer transactie</ons-button>
+        <ons-button (click)="debugAddVoucher()">Voucher</ons-button>
+      </td>
+      <td>
+        <ons-button (click)="debugTransaction()">Transactie</ons-button>
       </td>
     </tr>
     <tr class="button-wrapper">
-      <td colspan="3">
+      <td colspan="4">
         <ons-button (click)="scan()">Scan QR-code</ons-button>
       </td>
     </tr>

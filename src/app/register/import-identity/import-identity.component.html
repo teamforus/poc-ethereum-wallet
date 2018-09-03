@@ -1,0 +1,40 @@
+<ons-page id="import-identity">
+  <table class="content">
+    <tr class="toolbar-wrapper">
+      <td colspan="2">
+        <ons-toolbar>
+          <p>Import identity</p>
+        </ons-toolbar>
+      </td>
+    </tr>
+    <tr class="fill">
+      <td class="info" colspan="2">
+        <p>Info over importeren van identiteiten.</p>
+      </td>
+    </tr>
+    <tr>
+      <td class="input-wrapper" colspan="2">
+        <ons-input placeholder="Naam van de identiteit" [(ngModel)]="_name"></ons-input>
+      </td>
+    </tr>
+    <tr *ngIf="showDebug">
+      <td class="input-wrapper" colspan="2">
+        <ons-input placeholder="Adres van de identiteit" [(ngModel)]="_address"></ons-input>
+      </td>
+    </tr>
+    <tr *ngIf="!!_error">
+      <td class="label-wrapper error" colspan="20">
+        {{_error}}
+      </td>
+    </tr>
+    <tr class="button-wrapper">
+      <td>
+        <ons-button (click)="cancel()">Annuleren</ons-button>
+      </td>
+      <td>
+        <ons-button (click)="importIdentity()" *ngIf="!!_address">Importeren</ons-button>
+        <ons-button (click)="scan()" *ngIf="!_address">Scan</ons-button>
+      </td>
+    </tr>
+  </table>
+</ons-page>

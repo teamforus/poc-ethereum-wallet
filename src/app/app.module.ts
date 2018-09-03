@@ -19,21 +19,19 @@ import { IssueClaimComponent } from './issue-claim/issue-claim.component';
 import { EventParamsPipe } from './pipes/event-params.pipe';
 import { CurrenciesComponent } from './currencies/currencies.component';
 import { TransferFromIdentityComponent } from './transfer-from-identity/transfer-from-identity.component';
-import { AddtokenComponent } from '@app/scan-result/add-token/add-token.component';
+import { AddTokenComponent } from '@app/scan-result/add-token/add-token.component';
 import { TransferTokenFromKeyComponent } from './transfer-token-from-key/transfer-token-from-key.component';
 import { TransferTokenFromIdentityComponent } from './transfer-token-from-identity/transfer-token-from-identity.component';
 import { ResetComponent } from './reset/reset.component';
 import { FromWeiPipe } from './pipes/from-wei.pipe';
 import { OnsenModule } from 'ngx-onsenui';
 import { KeysPageNavComponent } from './keys-page-nav/keys-page-nav.component';
-import { CurrenciesPageNavComponent } from './currencies-page-nav/currencies-page-nav.component';
-import { IdentitiesPageNavComponent } from './identities-page-nav/identities-page-nav.component';
 import { ScannerService } from './scanner.service';
 import { LoginComponent } from '@app/scan-result/login/login.component';
 import { SettingsComponent } from './settings/settings.component';
 import { TransactionComponent } from '@app/scan-result/transaction/transaction.component';
 import { QRCodeModule } from 'angularx-qrcode';
-import { ImportidentityComponent } from './importidentity/importidentity.component';
+import { ImportIdentityComponent } from '@app/register/import-identity/import-identity.component';
 import { IdentityimportkeyComponent } from './identityimportkey/identityimportkey.component';
 import { KeyComponent } from './key/key.component';
 import { TransferAllowanceFromIdentityComponent } from './transfer-allowance-from-identity/transfer-allowance-from-identity.component';
@@ -43,6 +41,10 @@ import { NewKeyComponent } from '@app/register/new-key/new-key.component';
 import { NewIdentityComponent } from '@app/register/new-identity/new-identity.component';
 import { KeySelecterComponent } from '@app/utils/key-selecter/key-selecter.component';
 import { ScanComponent } from './scan/scan.component';
+import { TokensComponent } from '@app/currencies/tokens/tokens.component';
+import { VouchersComponent } from '@app/currencies/vouchers/vouchers.component';
+import { VoucherComponent } from '@app/currencies/voucher/voucher.component';
+import { SendVoucherComponent } from '@app/currencies/send-voucher/send-voucher.component';
 
 
 @NgModule({
@@ -60,18 +62,16 @@ import { ScanComponent } from './scan/scan.component';
     EventParamsPipe,
     CurrenciesComponent,
     TransferFromIdentityComponent,
-    AddtokenComponent,
+    AddTokenComponent,
     TransferTokenFromKeyComponent,
     TransferTokenFromIdentityComponent,
     ResetComponent,
     FromWeiPipe,
     KeysPageNavComponent,
-    CurrenciesPageNavComponent,
-    IdentitiesPageNavComponent,
     LoginComponent,
     SettingsComponent,
     TransactionComponent,
-    ImportidentityComponent,
+    ImportIdentityComponent,
     IdentityimportkeyComponent,
     KeyComponent,
     TransferAllowanceFromIdentityComponent,
@@ -80,7 +80,11 @@ import { ScanComponent } from './scan/scan.component';
     NewKeyComponent,
     NewIdentityComponent,
     KeySelecterComponent,
-    ScanComponent
+    ScanComponent,
+    TokensComponent,
+    VouchersComponent,
+    VoucherComponent,
+    SendVoucherComponent
   ],
   imports: [
     BrowserModule,
@@ -98,21 +102,27 @@ import { ScanComponent } from './scan/scan.component';
     NewKeyComponent,
     NewIdentityComponent,
     ImportKeyComponent,
+    ImportIdentityComponent,
 
     // Home screen
     HomeComponent,
-    CurrenciesComponent,
     ScanComponent,
+    AddTokenComponent,
     IdentitiesComponent,
+    IdentityComponent,
+
+    // CURRENCIES
+    TokensComponent,
+    VouchersComponent,
+    VoucherComponent,
+    SendVoucherComponent,
 
     // TO BE REDONE
+    CurrenciesComponent,
     KeysPageNavComponent,
-    CurrenciesPageNavComponent,
-    IdentitiesPageNavComponent,
     LoginComponent,
     SettingsComponent,
     TransactionComponent,
-    ImportidentityComponent,
     IdentityimportkeyComponent,
     KeyComponent,
     TransferAllowanceFromIdentityComponent

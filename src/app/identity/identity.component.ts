@@ -7,6 +7,7 @@ import { Identity } from './../vault/identity';
 import { Component, OnInit } from '@angular/core';
 import { VaultService } from './../vault/vault.service';
 import * as IdentityContractData from './../../contracts/identity.js';
+import { IdentityService } from '@app/identity.service';
 
 @Component({
   selector: 'ons-page[identity]',
@@ -19,15 +20,19 @@ export class IdentityComponent implements OnInit {
   allEvents = [];
 
   constructor(
-    private vault: VaultService,
+    private _identityService: IdentityService,
     private web3Service: Web3Service,
     private params: Params,
     private navigator: OnsNavigator
   ) { }
 
   ngOnInit() {
-    this.identity = this.vault.getIdentity(this.params.data.address);
-
+    const identity = this._identityService.getIdentityByAddress(this.params.data.address);
+    if (!identity) {
+      this.navigator.element.popPage();
+    } else {
+      this.identity = identity as Identity;
+    }
     const identityContract = new this.web3Service.web3.eth.Contract(
       IdentityContractData.abi,
       this.identity.address,

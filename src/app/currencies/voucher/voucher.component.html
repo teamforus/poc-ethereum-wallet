@@ -1,0 +1,22 @@
+<ons-page id="voucher">
+  <table class="content">
+    <tr class="toolbar-wrapper">
+      <td colspan="2">
+        <ons-toolbar>
+          <p>{{_voucher.name}}</p>
+        </ons-toolbar>
+      </td>
+    </tr>
+    <tr *ngFor="let identity of _identities">
+      <td>
+        {{identity.name}}
+      </td>
+      <td>
+        {{_balances.get(identity.address)}}
+      </td>
+    </tr>
+    <tr class="fill">
+      <td colspan="2"></td>
+    </tr>
+  </table>
+</ons-page>

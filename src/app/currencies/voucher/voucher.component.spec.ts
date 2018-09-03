@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ImportidentityComponent } from './importidentity.component';
+import { VoucherComponent } from './voucher.component';
 
-describe('ImportidentityComponent', () => {
-  let component: ImportidentityComponent;
-  let fixture: ComponentFixture<ImportidentityComponent>;
+describe('VoucherComponent', () => {
+  let component: VoucherComponent;
+  let fixture: ComponentFixture<VoucherComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ImportidentityComponent ]
+      declarations: [ VoucherComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ImportidentityComponent);
+    fixture = TestBed.createComponent(VoucherComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

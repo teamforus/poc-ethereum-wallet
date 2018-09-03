@@ -73,6 +73,10 @@ input::placeholder {
   color: #DADADA;
 }
 
+.input-wrapper ons-select, .input-wrapper ons-input {
+  width: 100%;
+}
+
 .page_buttons {
     text-align: center;
 }
@@ -98,4 +102,8 @@ ons-page ons-toolbar p {
 qrcode {
   display: block;
   margin: 10px;
+}
+
+.center {
+  text-align: center;
 }

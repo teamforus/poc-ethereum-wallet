@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IdentitiesPageNavComponent } from './identities-page-nav.component';
+import { ImportIdentityComponent } from '@app/register/import-identity/import-identity.component';
 
-describe('IdentitiesPageNavComponent', () => {
-  let component: IdentitiesPageNavComponent;
-  let fixture: ComponentFixture<IdentitiesPageNavComponent>;
+describe('ImportidentityComponent', () => {
+  let component: ImportIdentityComponent;
+  let fixture: ComponentFixture<ImportIdentityComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IdentitiesPageNavComponent ]
+      declarations: [ ImportIdentityComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IdentitiesPageNavComponent);
+    fixture = TestBed.createComponent(ImportIdentityComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

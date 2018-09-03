@@ -3,6 +3,7 @@ import { Identity } from './../vault/identity';
 import { Params, OnsNavigator } from 'ngx-onsenui';
 import { VaultService } from './../vault/vault.service';
 import { Component, OnInit } from '@angular/core';
+import { IdentityService } from '@app/identity.service';
 
 @Component({
   selector: 'ons-page[identityimportkey]',
@@ -16,14 +17,15 @@ export class IdentityimportkeyComponent implements OnInit {
   purpose = 1;
 
   constructor(
-    private vault: VaultService,
+    private _identityService: IdentityService,
     private params: Params,
-    private navigator: OnsNavigator
+    private navigator: OnsNavigator,
+    private _vaultService: VaultService
   ) { }
 
   ngOnInit() {
-    this.identity = this.vault.getIdentity(this.params.data.address);
-    this.keys = this.vault.getKeys();
+    this.identity = this._identityService.getIdentityByAddress(this.params.data.address) as Identity;
+    this.keys = this._vaultService.getKeys();
   }
 
   cancel() {
@@ -31,7 +33,11 @@ export class IdentityimportkeyComponent implements OnInit {
   }
 
   async addKey() {
-    this.vault.importIdentityKey(this.identity, this.keyAddress, this.vault.getKeyByAddress(this.keyAddress).key, this.purpose);
+    this._identityService.importIdentityKey(
+      this.identity,
+      this.keyAddress,
+      this._vaultService.getKeyByAddress(this.keyAddress).key,
+      this.purpose);
 
     this.navigator.element.popPage();
   }
