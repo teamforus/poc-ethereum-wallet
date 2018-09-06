@@ -1,4 +1,4 @@
-import { ScannerService } from './../../scanner.service';
+import { ScannerService } from '../../scanner/scanner.service';
 import { OnsNavigator } from 'ngx-onsenui';
 import { VaultService } from './../../vault/vault.service';
 import { Component, OnInit } from '@angular/core';

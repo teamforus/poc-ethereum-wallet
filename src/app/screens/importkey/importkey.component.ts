@@ -1,4 +1,4 @@
-import { ScannerService } from './../../scanner.service';
+import { ScannerService } from '../../scanner/scanner.service';
 import { OnsNavigator } from 'ngx-onsenui';
 import { VaultService } from './../../vault/vault.service';
 import { Web3Service } from '../../web3/web3.service';

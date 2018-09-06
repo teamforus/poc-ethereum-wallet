@@ -1,4 +1,4 @@
-import { ScannerService } from './../../scanner.service';
+import { ScannerService } from '../../scanner/scanner.service';
 import { Identity } from './../../vault/identity';
 import { Key } from './../../vault/key';
 import { VaultService } from './../../vault/vault.service';

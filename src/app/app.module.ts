@@ -29,7 +29,7 @@ import { OnsenModule } from 'ngx-onsenui';
 import { KeysPageNavComponent } from './screens/keys-page-nav/keys-page-nav.component';
 import { CurrenciesPageNavComponent } from './screens/currencies-page-nav/currencies-page-nav.component';
 import { IdentitiesPageNavComponent } from './screens/identities-page-nav/identities-page-nav.component';
-import { ScannerService } from './scanner.service';
+import { ScannerService } from './scanner/scanner.service';
 import { LoginComponent } from './screens/login/login.component';
 import { SettingsComponent } from './screens/settings/settings.component';
 import { TransactionComponent } from './screens/transaction/transaction.component';
