@@ -94,14 +94,23 @@ import { HexToUtf8Pipe } from './pipes/hex-to-utf8.pipe';
     CurrenciesComponent,
     IdentitiesPageNavComponent,
     IdentitiesComponent,
+    IdentityComponent,
     LoginComponent,
     SettingsComponent,
     TransactionComponent,
     ImportidentityComponent,
     IdentityimportkeyComponent,
+    NewidentityComponent,
     KeyComponent,
+    NewkeyComponent,
+    ImportkeyComponent,
     TransferAllowanceFromIdentityComponent,
-    ClaimComponent
+    ClaimComponent,
+    AddtokenComponent,
+    TransferFromKeyComponent,
+    TransferFromIdentityComponent,
+    TransferTokenFromKeyComponent,
+    TransferTokenFromIdentityComponent
   ]
 })
 export class AppModule { }
