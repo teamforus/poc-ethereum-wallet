@@ -1,10 +1,10 @@
-import { TransactionComponent } from './transaction/transaction.component';
-import { IdentitiesPageNavComponent } from './identities-page-nav/identities-page-nav.component';
-import { CurrenciesPageNavComponent } from './currencies-page-nav/currencies-page-nav.component';
-import { KeysPageNavComponent } from './keys-page-nav/keys-page-nav.component';
+import { TransactionComponent } from './screens/transaction/transaction.component';
+import { IdentitiesPageNavComponent } from './screens/identities-page-nav/identities-page-nav.component';
+import { CurrenciesPageNavComponent } from './screens/currencies-page-nav/currencies-page-nav.component';
+import { KeysPageNavComponent } from './screens/keys-page-nav/keys-page-nav.component';
 import { Component } from '@angular/core';
-import { LoginComponent } from './login/login.component';
-import { SettingsComponent } from './settings/settings.component';
+import { LoginComponent } from './screens/login/login.component';
+import { SettingsComponent } from './screens/settings/settings.component';
 
 @Component({
   selector: 'app-root',
