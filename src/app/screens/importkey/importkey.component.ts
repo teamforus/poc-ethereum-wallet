@@ -1,7 +1,7 @@
 import { ScannerService } from './../../scanner.service';
 import { OnsNavigator } from 'ngx-onsenui';
 import { VaultService } from './../../vault/vault.service';
-import { Web3Service } from './../../web3.service';
+import { Web3Service } from '../../web3/web3.service';
 import { Component, OnInit } from '@angular/core';
 
 

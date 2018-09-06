@@ -4,7 +4,7 @@ import { TransferTokenFromKeyComponent } from './../transfer-token-from-key/tran
 import { TransferFromIdentityComponent } from './../transfer-from-identity/transfer-from-identity.component';
 import { OnsNavigator } from 'ngx-onsenui';
 import { AddtokenComponent } from './../addtoken/addtoken.component';
-import { Web3Service } from './../../web3.service';
+import { Web3Service } from '../../web3/web3.service';
 import { VaultService } from './../../vault/vault.service';
 import { Component, OnInit, HostListener } from '@angular/core';
 import * as Erc20ContractData from './../../../contracts/erc20.js';

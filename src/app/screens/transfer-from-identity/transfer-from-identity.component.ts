@@ -1,5 +1,5 @@
 import { Key } from './../../vault/key';
-import { Web3Service } from './../../web3.service';
+import { Web3Service } from '../../web3/web3.service';
 import { VaultService } from './../../vault/vault.service';
 import { Identity } from './../../vault/identity';
 import { Component, OnInit } from '@angular/core';

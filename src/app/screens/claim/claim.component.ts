@@ -1,4 +1,4 @@
-import { Web3Service } from './../../web3.service';
+import { Web3Service } from '../../web3/web3.service';
 import { VaultService } from './../../vault/vault.service';
 import { Key } from './../../vault/key';
 import { Claim } from './../../claims/Claim';

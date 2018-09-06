@@ -5,7 +5,7 @@ import { IdentityimportkeyComponent } from './../identityimportkey/identityimpor
 import { IssueClaimComponent } from './../issue-claim/issue-claim.component';
 import { IdentityaddkeyComponent } from './../identityaddkey/identityaddkey.component';
 import { Params, OnsNavigator } from 'ngx-onsenui';
-import { Web3Service } from './../../web3.service';
+import { Web3Service } from '../../web3/web3.service';
 import { Identity } from './../../vault/identity';
 import { Component, OnInit } from '@angular/core';
 import { VaultService } from './../../vault/vault.service';

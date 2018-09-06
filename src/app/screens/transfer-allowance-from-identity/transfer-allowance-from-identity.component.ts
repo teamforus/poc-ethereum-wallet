@@ -2,7 +2,7 @@ import { ScannerService } from './../../scanner.service';
 import { Identity } from './../../vault/identity';
 import { Key } from './../../vault/key';
 import { VaultService } from './../../vault/vault.service';
-import { Web3Service } from './../../web3.service';
+import { Web3Service } from '../../web3/web3.service';
 import { Component, OnInit, HostListener } from '@angular/core';
 import * as Erc20ContractData from './../../../contracts/erc20.js';
 import * as IdentityContractData from './../../../contracts/identity.js';

@@ -2,7 +2,7 @@ import { Params, OnsNavigator } from 'ngx-onsenui';
 import { Key } from './../../vault/key';
 import { Identity } from './../../vault/identity';
 import { VaultService } from './../../vault/vault.service';
-import { Web3Service } from './../../web3.service';
+import { Web3Service } from '../../web3/web3.service';
 import { Component, OnInit } from '@angular/core';
 import * as IdentityContractData from './../../../contracts/identity.js';
 import { environment } from './../../../environments/environment';

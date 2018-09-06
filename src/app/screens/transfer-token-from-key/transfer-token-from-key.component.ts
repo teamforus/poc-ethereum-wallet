@@ -1,6 +1,6 @@
 import { Key } from './../../vault/key';
 import { VaultService } from './../../vault/vault.service';
-import { Web3Service } from './../../web3.service';
+import { Web3Service } from '../../web3/web3.service';
 import { Component, OnInit } from '@angular/core';
 import * as Erc20ContractData from './../../../contracts/erc20.js';
 import { environment } from './../../../environments/environment';

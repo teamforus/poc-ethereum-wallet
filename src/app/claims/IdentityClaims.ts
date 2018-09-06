@@ -1,5 +1,5 @@
 import { ClaimStatus } from './ClaimStatus';
-import { Web3Service } from './../web3.service';
+import { Web3Service } from '../web3/web3.service';
 import * as IdentityContractData from './../../contracts/identity.js';
 import { Claim } from './Claim';
 import { EventEmitter, Output } from '@angular/core';

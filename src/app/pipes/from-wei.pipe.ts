@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Web3Service } from './../web3.service';
+import { Web3Service } from '../web3/web3.service';
 
 @Pipe({
   name: 'fromWei'

@@ -1,4 +1,4 @@
-import { Web3Service } from './../web3.service';
+import { Web3Service } from '../web3/web3.service';
 import { Injectable } from '@angular/core';
 import { Identity } from './identity';
 import { Key } from './key';

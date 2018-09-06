@@ -1,5 +1,5 @@
 import { IdentityClaims } from './IdentityClaims';
-import { Web3Service } from './../web3.service';
+import { Web3Service } from '../web3/web3.service';
 import { Injectable } from '@angular/core';
 
 @Injectable()

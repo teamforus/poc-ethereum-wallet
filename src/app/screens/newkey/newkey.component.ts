@@ -1,6 +1,6 @@
 import { OnsNavigator } from 'ngx-onsenui';
 import { Component, OnInit } from '@angular/core';
-import { Web3Service } from './../../web3.service';
+import { Web3Service } from '../../web3/web3.service';
 import { Router } from '@angular/router';
 import { VaultService } from './../../vault/vault.service';
 
