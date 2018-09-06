@@ -5,7 +5,8 @@
 
 export const environment = {
   production: false,
-  ethNode: 'ws://10.10.12.42:8546',
+  ethNode: 'ws://127.0.0.1:8546',
+  // ethNode: 'ws://10.10.12.42:8546',
   gas: 10000000,
   chainId: 3177,
   libAddrMap: [

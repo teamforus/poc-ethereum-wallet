@@ -8,7 +8,9 @@ export class ClaimTopicPipe implements PipeTransform {
 
   transform(value: string): string {
 
+    // @ts-ignore
     if (environment.ClaimTopicMap[value]) {
+      // @ts-ignore
       return environment.ClaimTopicMap[value];
     }
 
