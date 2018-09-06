@@ -8,7 +8,6 @@ import { IdentitiesComponent } from './screens/identities/identities.component';
 import { NewidentityComponent } from './screens/newidentity/newidentity.component';
 import { IdentityComponent } from './screens/identity/identity.component';
 import { KeysComponent } from './screens/keys/keys.component';
-import { AppRoutingModule } from './/app-routing.module';
 import { VaultService } from './vault/vault.service';
 import { FormsModule } from '@angular/forms';
 import { Web3Service } from './web3/web3.service';
@@ -81,7 +80,6 @@ import { HexToUtf8Pipe } from './pipes/hex-to-utf8.pipe';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     FormsModule,
     OnsenModule,
     QRCodeModule
@@ -91,8 +89,11 @@ import { HexToUtf8Pipe } from './pipes/hex-to-utf8.pipe';
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   entryComponents: [
     KeysPageNavComponent,
+    KeysComponent,
     CurrenciesPageNavComponent,
+    CurrenciesComponent,
     IdentitiesPageNavComponent,
+    IdentitiesComponent,
     LoginComponent,
     SettingsComponent,
     TransactionComponent,
