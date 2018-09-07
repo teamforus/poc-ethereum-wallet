@@ -23,8 +23,8 @@ export class Web3Service {
         ||
         isUndefined(this.web3.eth.net)
         ||
-        !await this.web3.eth.net.isListening())
-      {
+        !await this.web3.eth.net.isListening()
+      ) {
         // @ts-ignore
         this.web3 = new Web3(environment.ethNode);
       }
