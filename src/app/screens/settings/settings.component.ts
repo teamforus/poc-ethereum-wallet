@@ -1,3 +1,4 @@
+import { EthereumService } from './../../ethereum/ethereum.service';
 import { Web3Service } from '../../web3/web3.service';
 import { VaultService } from './../../vault/vault.service';
 import { Component, OnInit } from '@angular/core';
@@ -11,7 +12,8 @@ export class SettingsComponent implements OnInit {
 
   constructor(
     private vault: VaultService,
-    private web3Service: Web3Service
+    public web3Service: Web3Service,
+    private eth: EthereumService
   ) { }
 
   ngOnInit() {
@@ -19,6 +21,7 @@ export class SettingsComponent implements OnInit {
 
   reset() {
     this.vault.reset();
+    this.eth.accounts.clear();
   }
 
 }

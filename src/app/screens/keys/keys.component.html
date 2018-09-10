@@ -1,11 +1,11 @@
 <ons-page id="keys">
 
     <ons-toolbar>
-        <p>Keys</p>
+        <p>Accounts</p>
     </ons-toolbar>
 
     <ons-list>
-        <ons-list-item  modifier="chevron" tappable *ngFor="let key of keys" (click)="show(key.address)">{{key.address}}</ons-list-item>
+        <ons-list-item  modifier="chevron" tappable *ngFor="let account of accounts" (click)="show(account.address)">{{account.address}}</ons-list-item>
     </ons-list>
 
     <div class="page_buttons">

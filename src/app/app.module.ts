@@ -1,3 +1,4 @@
+import { EthereumService } from './ethereum/ethereum.service';
 import { ClaimsService } from './claims/claims.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -84,7 +85,7 @@ import { HexToUtf8Pipe } from './pipes/hex-to-utf8.pipe';
     OnsenModule,
     QRCodeModule
   ],
-  providers: [VaultService, Web3Service, ScannerService, ClaimsService],
+  providers: [VaultService, Web3Service, ScannerService, ClaimsService, EthereumService],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   entryComponents: [

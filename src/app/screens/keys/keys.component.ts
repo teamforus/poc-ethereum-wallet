@@ -1,8 +1,8 @@
+import { Account } from './../../ethereum/account';
+import { EthereumService } from './../../ethereum/ethereum.service';
 import { KeyComponent } from './../key/key.component';
 import { ImportkeyComponent } from './../importkey/importkey.component';
-import { Component, OnInit, HostListener } from '@angular/core';
-import { VaultService } from './../../vault/vault.service';
-import { Key } from './../../vault/key';
+import { Component, OnInit } from '@angular/core';
 import { OnsNavigator } from 'ngx-onsenui';
 import { NewkeyComponent } from './../newkey/newkey.component';
 
@@ -12,20 +12,15 @@ import { NewkeyComponent } from './../newkey/newkey.component';
   styleUrls: ['./keys.component.css']
 })
 export class KeysComponent implements OnInit {
-  keys: Array<Key>;
+  private accounts: Array<Account>;
 
   constructor(
-    private vault: VaultService,
+    private eth: EthereumService,
     private navigator: OnsNavigator
   ) { }
 
-  ngOnInit() {}
-
-  @HostListener('window:show', ['$event'])
-  onShow(event) {
-    if ('keys' === event.target.id) {
-      this.keys = this.vault.getKeys();
-    }
+  async ngOnInit() {
+    this.accounts = await this.eth.accounts.watch();
   }
 
   newKey() {

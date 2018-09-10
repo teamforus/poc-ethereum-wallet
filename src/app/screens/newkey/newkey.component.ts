@@ -1,8 +1,6 @@
 import { OnsNavigator } from 'ngx-onsenui';
 import { Component, OnInit } from '@angular/core';
-import { Web3Service } from '../../web3/web3.service';
-import { Router } from '@angular/router';
-import { VaultService } from './../../vault/vault.service';
+import { EthereumService } from '../../ethereum/ethereum.service';
 
 @Component({
   selector: 'ons-page[newkey]',
@@ -12,8 +10,7 @@ import { VaultService } from './../../vault/vault.service';
 export class NewkeyComponent implements OnInit {
 
   constructor(
-    private web3Service: Web3Service,
-    private vault: VaultService,
+    private eth: EthereumService,
     private navigator: OnsNavigator
   ) { }
 
@@ -21,8 +18,7 @@ export class NewkeyComponent implements OnInit {
   }
 
   generateKey() {
-    const newAccount = this.web3Service.web3.eth.accounts.create();
-    this.vault.addKey(newAccount.privateKey);
+    this.eth.accounts.new();
     this.navigator.element.popPage();
   }
 

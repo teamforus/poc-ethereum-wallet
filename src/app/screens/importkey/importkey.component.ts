@@ -1,7 +1,6 @@
+import { EthereumService } from './../../ethereum/ethereum.service';
 import { ScannerService } from '../../scanner/scanner.service';
 import { OnsNavigator } from 'ngx-onsenui';
-import { VaultService } from './../../vault/vault.service';
-import { Web3Service } from '../../web3/web3.service';
 import { Component, OnInit } from '@angular/core';
 
 
@@ -14,8 +13,7 @@ export class ImportkeyComponent implements OnInit {
   privatekey = '';
 
   constructor(
-    private web3Service: Web3Service,
-    private vault: VaultService,
+    private eth: EthereumService,
     private navigator: OnsNavigator,
     private scanner: ScannerService
   ) { }
@@ -24,8 +22,7 @@ export class ImportkeyComponent implements OnInit {
   }
 
   importkey() {
-    const account = this.web3Service.web3.eth.accounts.privateKeyToAccount(this.privatekey);
-    this.vault.addKey(account.privateKey);
+    this.eth.accounts.import(this.privatekey);
     this.navigator.element.popPage();
   }
 

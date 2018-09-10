@@ -1,6 +1,6 @@
-import { Key } from './../../vault/key';
+import { Address } from './../../ethereum/types';
+import { EthereumService } from './../../ethereum/ethereum.service';
 import { OnsNavigator, Params } from 'ngx-onsenui';
-import { VaultService } from './../../vault/vault.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,16 +9,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./key.component.css']
 })
 export class KeyComponent implements OnInit {
-  key: Key = null;
+  address: Address;
 
   constructor(
-    private vault: VaultService,
+    private eth: EthereumService,
     private navigator: OnsNavigator,
     private params: Params
   ) { }
 
-  ngOnInit() {
-    this.key = this.vault.getKeyByAddress(this.params.data.address);
+  async ngOnInit() {
+    this.address = (await this.eth.accounts.get(this.params.data.address)).getAddress();
   }
 
   back() {
