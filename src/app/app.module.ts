@@ -42,6 +42,7 @@ import { ClaimComponent } from './screens/claim/claim.component';
 import { ClaimTopicPipe } from './pipes/claim-topic.pipe';
 import { ClaimIssuerPipe } from './pipes/claim-issuer.pipe';
 import { HexToUtf8Pipe } from './pipes/hex-to-utf8.pipe';
+import { ShortAddressPipe } from './pipes/short-address.pipe';
 
 
 @NgModule({
@@ -77,7 +78,8 @@ import { HexToUtf8Pipe } from './pipes/hex-to-utf8.pipe';
     ClaimComponent,
     ClaimTopicPipe,
     ClaimIssuerPipe,
-    HexToUtf8Pipe
+    HexToUtf8Pipe,
+    ShortAddressPipe
   ],
   imports: [
     BrowserModule,

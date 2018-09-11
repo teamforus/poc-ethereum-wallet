@@ -1,3 +1,5 @@
+import { Account } from './../../ethereum/account';
+import { EthereumService } from './../../ethereum/ethereum.service';
 import { TransferAllowanceFromIdentityComponent } from './../transfer-allowance-from-identity/transfer-allowance-from-identity.component';
 import { TransferTokenFromIdentityComponent } from './../transfer-token-from-identity/transfer-token-from-identity.component';
 import { TransferTokenFromKeyComponent } from './../transfer-token-from-key/transfer-token-from-key.component';
@@ -23,18 +25,21 @@ enum BalanceType {
   styleUrls: ['./currencies.component.css']
 })
 export class CurrenciesComponent implements OnInit {
+  private accounts: Array<Account>;
+
   BalanceType = BalanceType;
   ethBalances: Balance[] = new Array<Balance>();
   tokens: Token[] = new Array<Token>();
 
   constructor(
+    private eth: EthereumService,
     private vault: VaultService,
     private web3Service: Web3Service,
     private navigator: OnsNavigator
   ) { }
 
-  ngOnInit() {
-
+  async ngOnInit() {
+    this.accounts = await this.eth.accounts.watch();
   }
 
   @HostListener('window:show', ['$event'])

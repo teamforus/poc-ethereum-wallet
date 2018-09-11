@@ -10,14 +10,11 @@
         </div>
         <div class="content">
             <ons-list>
-                <ons-list-item *ngFor="let ethBalance of ethBalances">
+                <ons-list-item  modifier="chevron" tappable *ngFor="let account of accounts" (click)="transferFromKey(account.address)">
                     <div>
-                        <div class="title" *ngIf="ethBalance.displayName == null"><strong>{{ethBalance.address | slice:0:12}}...</strong> ({{BalanceType[ethBalance.type]}})</div>
-                        <div class="title" *ngIf="ethBalance.displayName != displayName"><strong>{{ethBalance.displayName}}</strong></div>
-                        <div>balance: {{ethBalance.balance | async | fromWei:'ether'}}</div>
-                        <ons-button *ngIf="ethBalance.type == BalanceType.Key" (click)="transferFromKey(ethBalance.address)">transfer</ons-button>
-                        <ons-button *ngIf="ethBalance.type == BalanceType.Identity" (click)="transferFromIdentity(ethBalance.address)">transfer</ons-button>
-                    </div>
+                        <div class="title"><strong>{{ account.address | shortAddress }}</strong></div>
+                        <div>balance: {{ account.balance | fromWei:'ether' }}</div>
+                      </div>
                 </ons-list-item>
             </ons-list>
         </div>
