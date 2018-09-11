@@ -1,4 +1,4 @@
-import { Address } from './../../ethereum/types';
+import { Account } from './../../ethereum/account';
 import { EthereumService } from './../../ethereum/ethereum.service';
 import { OnsNavigator, Params } from 'ngx-onsenui';
 import { Component, OnInit } from '@angular/core';
@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./key.component.css']
 })
 export class KeyComponent implements OnInit {
-  address: Address;
+  account: Promise<Account>;
 
   constructor(
     private eth: EthereumService,
@@ -18,7 +18,7 @@ export class KeyComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    this.address = (await this.eth.accounts.get(this.params.data.address)).getAddress();
+    this.account = this.eth.accounts.get(this.params.data.address);
   }
 
   back() {

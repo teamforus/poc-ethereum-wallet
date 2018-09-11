@@ -4,13 +4,19 @@
         <p>Account</p>
     </ons-toolbar>
 
-    <ons-card>
+    <ng-template #loading>
+        <ons-card>
+          Loading account...
+        </ons-card>
+    </ng-template>
+
+    <ons-card *ngIf="account | async as syncAccount; else loading">
         <div class="title">
             Address
         </div>
         <div class="content">
-            {{ address }}
-            <qrcode [qrdata]="address" [size]="128" [level]="'M'"></qrcode>
+            {{ syncAccount.address }}
+            <qrcode [qrdata]="syncAccount.address" [size]="128" [level]="'M'"></qrcode>
         </div>
     </ons-card>
 
