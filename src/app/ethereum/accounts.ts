@@ -1,5 +1,5 @@
 import { WatchList } from './../Watcher/watchList';
-import { Address, SignData, Signature } from './types';
+import { Address, SignData, Signature, PrivateKey } from './types';
 import { Keyring } from './keyring';
 import { Account } from './account';
 
@@ -35,7 +35,7 @@ export class Accounts {
     return account;
   }
 
-  import(pk: string): Promise<Account> {
+  import(pk: PrivateKey): Promise<Account> {
     return new Promise(async (resolve, reject) => {
       const web3Account = this.web3.eth.accounts.privateKeyToAccount(pk);
 
