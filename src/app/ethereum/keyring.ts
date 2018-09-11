@@ -18,7 +18,10 @@ export class Keyring {
     return new Promise((resolve, reject) => {
       this.storage.get(
         (value) => { resolve(value); },
-        (error) => { reject(error); },
+        (error) => {
+          // TODO: log error
+          resolve(null);
+        },
         address
       );
     });
