@@ -11,13 +11,16 @@ import { VaultService } from './../../vault/vault.service';
 import { Component, OnInit, HostListener } from '@angular/core';
 import * as Erc20ContractData from './../../../contracts/erc20.js';
 import { TransferFromKeyComponent } from './../transfer-from-key/transfer-from-key.component';
+import { Erc20Token } from '../../ethereum/erc20token';
 
+/*
 enum BalanceType {
   Key,
   Identity,
   KeyAllowance,
   IdentityAllowance
 }
+*/
 
 @Component({
   selector: 'ons-page[currencies]',
@@ -26,22 +29,24 @@ enum BalanceType {
 })
 export class CurrenciesComponent implements OnInit {
   private accounts: Array<Account>;
+  private tokens: Array<Erc20Token>;
 
-  BalanceType = BalanceType;
+  // BalanceType = BalanceType;
   ethBalances: Balance[] = new Array<Balance>();
-  tokens: Token[] = new Array<Token>();
 
   constructor(
     private eth: EthereumService,
-    private vault: VaultService,
-    private web3Service: Web3Service,
+    // private vault: VaultService,
+    // private web3Service: Web3Service,
     private navigator: OnsNavigator
   ) { }
 
   async ngOnInit() {
     this.accounts = await this.eth.accounts.watch();
+    this.tokens = this.eth.tokens.watch();
   }
 
+  /*
   @HostListener('window:show', ['$event'])
   async onShow(event) {
     if ('currencies' === event.target.id) {
@@ -119,6 +124,7 @@ export class CurrenciesComponent implements OnInit {
       }
     }
   }
+  */
 
   transferFromKey(address) {
     this.navigator.element.pushPage(TransferFromKeyComponent, {data: {address: address}});
